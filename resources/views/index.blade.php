@@ -33,28 +33,32 @@
     @include('components.header')
     <!-- end header -->
     <!-- start section -->
-    @include('components.slider')
+    @include('components.sliderbg')
     <!-- end section -->
     <!-- start section -->
-    @include('components.banner')
+    @include('components.bannerslider')
     <!-- end section -->
     <!-- start section -->
-    @include('components.product')
-    <!-- end section -->
+    @include('components.category')
     <!-- start section -->
     @include('components.slider_move')
     <!-- end section -->
-    <!-- start section -->
-    @include('components.explore')
+    @include('components.tema')
+    {{-- @include('components.product') --}}
     <!-- end section -->
     <!-- start section -->
-    @include('components.product_tiny')
+    @include('components.whyus')
+    @include('components.catalog')
+    {{-- @include('components.explore') --}}
     <!-- end section -->
     <!-- start section -->
-    @include('components.article')
+    {{-- @include('components.product_tiny') --}}
     <!-- end section -->
     <!-- start section -->
-    @include('components.box_payment')
+    {{-- @include('components.article') --}}
+    <!-- end section -->
+    <!-- start section -->
+    {{-- @include('components.box_payment') --}}
     <!-- end section -->
     <!-- start footer -->
     @include('components.footer')
@@ -63,7 +67,7 @@
 
     <!-- end cookie message -->
     <!-- start sticky elements -->
-    @include('components.sticky_element')
+    {{-- @include('components.sticky_element') --}}
     <!-- end sticky elements -->
     <!-- start scroll progress -->
     <div class="scroll-progress d-none d-xxl-block">

@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-12 breadcrumb breadcrumb-style-01 d-flex justify-content-center">
                     <ul>
-                        <li><a href="demo-decor-store.html">Home</a></li>
+                        <li><a href="{{ route('landing-page') }}">Home</a></li>
                         <li>Contact us</li>
                     </ul>
                 </div>
@@ -89,34 +89,10 @@
                         <h2 class="fw-600 alt-font text-white mb-30px fancy-text-style-4 ls-minus-1px">Say
                             <span data-fancy-text='{ "effect": "rotate", "string": ["hello!", "hallå!", "salve!"] }'></span>
                         </h2>
-                        <form action="email-templates/contact-form.php" method="post">
-                            <div class="position-relative form-group mb-10px">
-                                <span class="form-icon text-white"><i class="bi bi-person icon-small"></i></span>
-                                <input
-                                    class="fw-300 ps-0 border-radius-0px bg-transparent border-color-transparent-white-light placeholder-medium-gray form-control required"
-                                    type="text" name="name" placeholder="Your name*">
-                            </div>
-                            <div class="position-relative form-group mb-10px">
-                                <span class="form-icon text-white"><i class="bi bi-envelope icon-small"></i></span>
-                                <input
-                                    class="fw-300 ps-0 border-radius-0px bg-transparent border-color-transparent-white-light placeholder-medium-gray form-control required"
-                                    type="email" name="email" placeholder="Your email address*">
-                            </div>
-                            <div class="position-relative form-group form-textarea mt-10px">
-                                <textarea
-                                    class="fw-300 ps-0 border-radius-0px bg-transparent border-color-transparent-white-light placeholder-medium-gray form-control"
-                                    name="comment" placeholder="Your message" rows="3"></textarea>
-                                <span class="form-icon text-white"><i class="bi bi-chat-square-dots icon-small"></i></span>
-                                <input type="hidden" name="redirect" value="">
-                                <button
-                                    class="btn btn-white btn-large fw-600 btn-switch-text btn-box-shadow btn-round-edge submit mt-30px"
-                                    type="submit">
-                                    <span>
-                                        <span class="btn-double-text" data-text="Send message">Send message</span>
-                                    </span>
-                                </button>
-                                <div class="form-results mt-20px d-none"></div>
-                            </div>
+                        <form action="https://wa.me/628568780192" method="GET" target="_blank">
+                            <textarea name="text" rows="4" required class="form-control mb-3"
+                                placeholder="Tulis nama dan pesanmu di sini..."></textarea>
+                            <button type="submit" class="btn btn-success">Kirim via WhatsApp</button>
                         </form>
                     </div>
                 </div>

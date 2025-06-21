@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-12 breadcrumb breadcrumb-style-01 d-flex justify-content-center">
                     <ul>
-                        <li><a href="demo-decor-store.html">Home</a></li>
+                        <li><a href="{{ route('landing-page') }}">Home</a></li>
                         <li>About us</li>
                     </ul>
                 </div>
