@@ -1,6 +1,6 @@
 <header class="header-with-topbar" style="position: relative; z-index: 10; background-color: white;">
     <!-- start header top bar -->
-    <div
+    {{-- <div
         class="header-top-bar top-bar-light bg-white disable-fixed border-bottom border-color-transparent-dark-very-light">
         <div class="container-fluid">
             <div class="row h-45px align-items-center m-0">
@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- end header top bar -->
     <!-- start navigation -->
     <nav class="navbar navbar-expand-lg header-light bg-white disable-fixed" data-header-hover="light">

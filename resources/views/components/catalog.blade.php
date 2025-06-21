@@ -13,7 +13,7 @@
                 </a>
             </div>
             <div class="col-md-4 text-center">
-                <img src="{{ asset('redesign/images/KITCHEN.webp') }}" alt="Preview Katalog"
+                <img src="{{ asset('redesign/images/mobil.jpeg') }}" alt="Preview Katalog"
                     class="img-fluid rounded-4 shadow">
             </div>
         </div>

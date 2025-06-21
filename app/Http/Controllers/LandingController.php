@@ -78,4 +78,10 @@ class LandingController extends Controller
         $contact = Contact::orderBy('id', 'desc')->first();
         return view('frontend.page.blog', compact('blogs','contact'));
     }
+    public function event() {
+        $events = blog::orderBy('created_at','desc')->paginate(12);
+        // dd($events);
+        $contact = Contact::orderBy('id', 'desc')->first();
+        return view('frontend.page.event', compact('events','contact'));
+    }
 }
