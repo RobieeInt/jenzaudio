@@ -6,20 +6,21 @@
         </div>
         <div class="row g-4">
             <!-- Category: Custom Audio System -->
-            <div class="col-md-4">
-                <a href="{{ route('event') }}" class="text-decoration-none text-dark">
-                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
-                        <img src="{{ asset('redesign/images/mobil.jpeg') }}" class="card-img-top"
-                            alt="Custom Audio System">
-                        <div class="card-body">
-                            <h5 class="fw-bold">Custom Audio System</h5>
-                            <p class="mb-0 text-muted">Rasakan pengalaman audio mobil yang powerful dan jernih dengan
-                                instalasi profesional.</p>
+            @foreach ($category as $item)
+                <div class="col-md-4">
+                    <a href="{{ route('categorydetail', ['slug' => $item->slug]) }}"
+                        class="text-decoration-none text-dark">
+                        <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                            <img src="{{ asset($item->image) }}" class="card-img-top" alt="Aksesoris Interior">
+                            <div class="card-body">
+                                <h5 class="fw-bold">{{ $item->name }}</h5>
+                                <p class="mb-0 text-muted">{{ Str::limit($item->description, 80) }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <!-- Category: Aksesoris Interior -->
+                    </a>
+                </div>
+            @endforeach
+            {{-- <!-- Category: Aksesoris Interior -->
             <div class="col-md-4">
                 <a href="{{ route('event') }}" class="text-decoration-none text-dark">
                     <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
@@ -46,7 +47,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

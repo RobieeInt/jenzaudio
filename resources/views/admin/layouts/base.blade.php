@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stream | @yield('title')</title>
+    <title>Jenz Audio | @yield('title')</title>
     <meta id="base_url" content="{{ url('') }}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"

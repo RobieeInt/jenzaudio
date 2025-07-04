@@ -2,14 +2,14 @@
 <html class="no-js" lang="en">
 
 <head>
-    <title>GGM Redesign Web</title>
+    <title>Jenz Audio</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="ThemeZaa">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta name="description" content="GGM">
     <!-- favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('redesign/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('redesign/images/favicon.jpg') }}">
     <link rel="apple-touch-icon" href="{{ asset('redesign/images/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('redesign/images/apple-touch-icon-72x72.png') }}">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('redesign/images/apple-touch-icon-114x114.png') }}">
@@ -43,7 +43,7 @@
     <!-- start section -->
     @include('components.slider_move')
     <!-- end section -->
-    @include('components.tema')
+    {{-- @include('components.tema') --}}
     @include('components.product')
     @include('components.marketplace')
     <!-- end section -->
@@ -85,6 +85,11 @@
     </a>
 
     <style>
+        /* body {
+            background-color: black !important;
+            color: white;
+        } */
+
         .whatsapp-float {
             position: fixed;
             bottom: 20px;

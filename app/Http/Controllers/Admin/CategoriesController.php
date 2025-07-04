@@ -16,7 +16,7 @@ class CategoriesController extends Controller
         // return view('admin.categories.index');
 
 
-    // $users = User::query();
+        // $users = User::query();
         // $data = ProductCategories::query();
         // order by status desc
         $data = ProductCategories::orderBy('status', 'desc')->get();
@@ -52,6 +52,7 @@ class CategoriesController extends Controller
             // dd($data);
     }
 
+
     public function create() {
         return view('admin.categories.create');
     }
@@ -62,7 +63,7 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => 'required|unique:product_categories,name',
             'description' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg,ico',
+            'image' => 'required|image|mimes:png,jpg,jpeg,ico,webp,svg',
             'status' => 'required',
         ]);
 

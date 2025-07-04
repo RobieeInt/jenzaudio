@@ -34,6 +34,7 @@ Route::get('/productdetail/{slug}', [LandingController::class, 'productdetail'])
 Route::get('/event', [LandingController::class, 'event'])->name('event');
 Route::get('/blog', [LandingController::class, 'blog'])->name('blog');
 Route::get('/blogdetail/{slug}', [LandingController::class, 'blogdetail'])->name('blogdetail');
+Route::get('/category/{slug}', [LandingController::class, 'categorydetail'])->name('categorydetail');
 
 Route::get('/quickview/{id}', [LandingController::class, 'quickview'])->name('quickView');
 Route::get('/about', [LandingController::class, 'about'])->name('about');

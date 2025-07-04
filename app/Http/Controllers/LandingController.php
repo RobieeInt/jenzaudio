@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Instagram;
+use App\Models\ProductCategories;
 use App\Models\Testimoni;
 use Illuminate\Http\Request;
 
@@ -25,8 +26,10 @@ class LandingController extends Controller
         //contact
         $contact = Contact::orderBy('id', 'desc')->first();
 
+        $category = ProductCategories::orderBy('id', 'desc')->take(10)->get();
+
         // dd($productsPopular);
-        return view('index', compact('products','productsPopular','instagrams','testimonials','blogs','contact'));
+        return view('index', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category'));
     }
 
     //quickview
@@ -83,5 +86,25 @@ class LandingController extends Controller
         // dd($events);
         $contact = Contact::orderBy('id', 'desc')->first();
         return view('frontend.page.event', compact('events','contact'));
+    }
+
+
+    public function categoryDetail($slug) {
+        // Ambil data kategori berdasarkan slug
+        $category = ProductCategories::where('slug', $slug)->firstOrFail();
+
+        // Ambil semua produk yang punya category_id sesuai kategori tersebut
+        // $products = Product::with(['galleries', 'category'])
+        //             ->where('category_id', $category->id)
+        //             ->get();
+
+        $products = Product::with(['galleries', 'category'])
+            ->where('category_id', $category->id)
+            ->paginate(6); // atau berapa item per halaman yang lo mau
+
+        // Cek hasilnya
+        // dd($products);
+
+        return view('frontend.page.category', compact('category', 'products'));
     }
 }

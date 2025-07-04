@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 
 <head>
-    <title>GGM Redesign Web</title>
+    <title>Jenz Audio</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="ThemeZaa">
@@ -34,7 +34,7 @@
     @include('components.footer')
     <!-- end footer -->
     <!-- start cookie message -->
-    <div id="cookies-model" class="cookie-message bg-dark-gray border-radius-8px">
+    {{-- <div id="cookies-model" class="cookie-message bg-dark-gray border-radius-8px">
         <div class="cookie-description fs-14 text-white mb-20px lh-22">We use cookies to enhance your browsing
             experience, serve personalized ads or content, and analyze our traffic. By clicking "Allow cookies" you
             consent to our use of cookies. </div>
@@ -54,7 +54,7 @@
                 </span>
             </a>
         </div>
-    </div>
+    </div> --}}
     <!-- end cookie message -->
     <!-- start scroll progress -->
     <div class="scroll-progress d-none d-xxl-block">
@@ -69,6 +69,8 @@
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCA56KqSJ11nQUw_tXgXyNMiPmQeM7EaSA&callback=initMap"></script>
     <script type="text/javascript" src="{{ asset('redesign/js/main.js') }}"></script>
+
+    @stack('scripts')
 </body>
 
 </html>

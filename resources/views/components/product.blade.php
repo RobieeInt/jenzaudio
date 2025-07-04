@@ -16,7 +16,51 @@
                                     data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":150, "staggervalue": 150, "easing": "easeOutQuad" }'>
                                     <li class="grid-sizer"></li>
 
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    @foreach ($productsPopular as $item)
+                                        <li class="grid-item">
+                                            <div class="shop-box pb-25px">
+                                                <div class="shop-image">
+                                                    <a href="#">
+                                                        <img src="{{ Storage::url($item->galleries->first()?->image) }}"
+                                                            alt="{{ $item->short_description }}" />
+                                                        <div
+                                                            class="product-overlay bg-gradient-extra-midium-gray-transparent">
+                                                        </div>
+                                                    </a>
+                                                    <div class="shop-hover d-flex justify-content-center">
+                                                        <a href="#"
+                                                            class="bg-white w-45px h-45px text-dark-gray d-flex flex-column align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-medium-bottom"
+                                                            data-bs-toggle="tooltip" title="Add to wishlist">
+                                                            <i class="feather icon-feather-heart fs-15"></i>
+                                                        </a>
+                                                        <a href="#"
+                                                            class="bg-white w-45px h-45px text-dark-gray d-flex flex-column align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-medium-bottom"
+                                                            data-bs-toggle="tooltip" title="Add to cart">
+                                                            <i class="feather icon-feather-shopping-bag fs-15"></i>
+                                                        </a>
+                                                        <a href="#"
+                                                            class="bg-white w-45px h-45px text-dark-gray d-flex flex-column align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-medium-bottom"
+                                                            data-bs-toggle="tooltip" title="Quick shop">
+                                                            <i class="feather icon-feather-eye fs-15"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="shop-footer text-center pt-20px">
+                                                    <a href="#"
+                                                        class="text-dark-gray fs-17 alt-font fw-600">{{ $item->name }}</a>
+                                                    <div class="fw-500 fs-15 lh-normal">
+                                                        @if ($item->old_price)
+                                                            <del>Rp
+                                                                {{ number_format($item->old_price, 0, ',', '.') }}</del>
+                                                        @endif
+                                                        Rp {{ number_format($item->price, 0, ',', '.') }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+
+                                    {{-- @for ($i = 1; $i <= 10; $i++)
                                         <li class="grid-item">
                                             <div class="shop-box pb-25px">
                                                 <div class="shop-image">
@@ -53,7 +97,7 @@
                                                 </div>
                                             </div>
                                         </li>
-                                    @endfor
+                                    @endfor --}}
 
                                 </ul>
                             </div>

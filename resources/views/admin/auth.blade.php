@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stream | Log in</title>
+    <title>Jenz | Log in</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -20,12 +20,12 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ route('admin.login') }}"><b>GGM</b><br>Griya Gemilang Mandiri</a>
+            <a href="{{ route('admin.login') }}"><b>Jenz Audio</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg"></p>
 
                 {{-- alert here --}}
                 @if ($errors->any())
