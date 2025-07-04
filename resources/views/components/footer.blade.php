@@ -7,7 +7,7 @@
                     <a href="{{ route('landing-page') }}" class="footer-logo mb-15px d-inline-block"><img
                             src="images/demo-decor-store-logo-white.png"
                             data-at2x="images/demo-decor-store-logo-white@2x.png" alt=""></a>
-                    <p class="w-80 sm-w-100">Lorem ipsum amet adipiscing elit to eiusmod ad tempor.</p>
+                    <p class="w-80 sm-w-100">Jenz Audio Tuning Your Drive with Perfect Sound .</p>
                     <div class="elements-social social-icon-style-02 mt-15px">
                         <ul class="small-icon light">
                             <li><a class="facebook" href="https://www.facebook.com/" target="_blank"><i
@@ -26,10 +26,10 @@
                 <div class="col-6 col-lg-2 col-sm-4 xs-mb-30px order-sm-3 order-lg-2">
                     <span class="fs-16 alt-font fw-500 d-block text-white mb-5px">Categories</span>
                     <ul>
-                        <li><a href="demo-decor-store-shop.html">Bed room</a></li>
-                        <li><a href="demo-decor-store-shop.html">Living room</a></li>
-                        <li><a href="demo-decor-store-shop.html">Lightning</a></li>
-                        <li><a href="demo-decor-store-shop.html">Fabrics sofa</a></li>
+                        <li><a href="demo-decor-store-shop.html">Head Unit</a></li>
+                        <li><a href="demo-decor-store-shop.html">Paket Audio</a></li>
+                        <li><a href="demo-decor-store-shop.html">Peredam</a></li>
+                        <li><a href="demo-decor-store-shop.html">Kaca Film</a></li>
                     </ul>
                 </div>
                 <!-- end footer column -->
@@ -45,7 +45,7 @@
                 </div>
                 <!-- end footer column -->
                 <!-- start footer column -->
-                <div class="col-6 col-lg-2 col-sm-4 xs-mb-30px order-sm-3 order-lg-2">
+                {{-- <div class="col-6 col-lg-2 col-sm-4 xs-mb-30px order-sm-3 order-lg-2">
                     <span class="fs-16 alt-font fw-500 d-block text-white mb-5px">Account</span>
                     <ul>
                         <li><a href="demo-decor-store-account.html">My account</a></li>
@@ -53,7 +53,7 @@
                         <li><a href="demo-decor-store-checkout.html">Checkout</a></li>
                         <li><a href="#">My wishlists</a></li>
                     </ul>
-                </div>
+                </div> --}}
                 <!-- end footer column -->
                 <!-- start footer column -->
                 <div class="col-lg-3 col-sm-6 ps-20px sm-ps-15px md-mb-50px xs-mb-0 order-sm-2 order-lg-5">
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-6 col-xl-2 col-md-3 col-sm-5 text-center text-xl-start order-1 order-xl-2">
                         <span class="lh-26 alt-font d-block">Need support?</span>
-                        <a href="tel:12345678910" class="fs-16 text-white fw-500">+1 234 567 8910</a>
+                        <a href="tel:12345678910" class="fs-16 text-white fw-500">+62 812 9593 8803</a>
                     </div>
                     <div class="col-6 col-xl-2 col-md-3 col-sm-5 text-center text-xl-start order-2 order-xl-3">
                         <span class="lh-26 alt-font d-block">Customer care</span>
