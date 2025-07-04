@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-6 col-xl-2 col-md-3 col-sm-5 text-center text-xl-start order-2 order-xl-3">
                         <span class="lh-26 alt-font d-block">Customer care</span>
-                        <a href="mailto:info@domain.com" class="fs-16 text-white fw-500">info@domain.com</a>
+                        <a href="mailto:info@jenzaudiogs.com" class="fs-16 text-white fw-500">info@jenzaudiogs.com</a>
                     </div>
                 </div>
             </div>
