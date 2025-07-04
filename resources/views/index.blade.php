@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="ThemeZaa">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="GGM">
+    <meta name="description"
+        content="Jenz Audio adalah spesialis audio mobil yang siap bantu kamu wujudkan kualitas suara impian di kendaraan kesayangan. Kami menyediakan layanan custom audio, instalasi sistem audio mobil, serta menjual berbagai perangkat dan aksesoris audio berkualitas tinggi untuk kamu para car enthusiast.">
     <!-- favicon icon -->
     <link rel="shortcut icon" href="{{ asset('redesign/images/favicon.jpg') }}">
     <link rel="apple-touch-icon" href="{{ asset('redesign/images/apple-touch-icon-57x57.png') }}">
