@@ -222,7 +222,7 @@ class ProductController extends Controller
     public function uploadImage(Request $request) {
         //file max 3mb
         $request->validate([
-            'file' => 'required|image|mimes:png,jpg,jpeg|max:5072',
+            'file' => 'required|image|mimes:png,jpg,jpeg,webp|max:5072',
         ]);
         // dd($request);
         $image = $request->file('file');

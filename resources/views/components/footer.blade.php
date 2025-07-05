@@ -57,23 +57,32 @@
                 <!-- end footer column -->
                 <!-- start footer column -->
                 <div class="col-lg-3 col-sm-6 ps-20px sm-ps-15px md-mb-50px xs-mb-0 order-sm-2 order-lg-5">
-                    <span class="fs-16 alt-font fw-500 d-block text-white mb-5px">Newsletter</span>
-                    <div class="mb-20px">Get everything you need succeed!</div>
+                    <span class="fs-16 alt-font fw-500 d-block text-white mb-5px">Chat via WhatsApp</span>
+                    <div class="mb-20px">Tulis pesanmu dan langsung terhubung dengan tim Jenz Audio!</div>
+
                     <div class="d-inline-block w-100 newsletter-style-02 position-relative mb-15px">
-                        <form action="email-templates/subscribe-newsletter.php" method="post"
-                            class="position-relative w-100">
-                            <input
+                        <div class="position-relative w-100">
+                            <input id="waMessageInput"
                                 class="bg-blue-tangaroa border-color-transparent-white-light w-100 form-control pe-50px ps-20px lg-ps-15px required"
-                                type="email" name="email" placeholder="Enter your email" />
-                            <input type="hidden" name="redirect" value="">
-                            <button class="btn pe-20px submit" aria-label="submit"><i
-                                    class="icon feather icon-feather-mail icon-small text-white"></i></button>
-                            <div
-                                class="form-results border-radius-4px pt-5px pb-5px ps-15px pe-15px fs-14 lh-22 mt-10px w-100 text-center position-absolute d-none">
-                            </div>
-                        </form>
+                                type="text" placeholder="Tulis pesan di sini..." />
+
+                            <button type="button" class="btn pe-20px submit position-absolute top-0 end-0 h-100"
+                                aria-label="submit"
+                                onclick="
+                var msg = document.getElementById('waMessageInput').value;
+                if (!msg.trim()) {
+                    alert('Pesan tidak boleh kosong!');
+                    return;
+                }
+                var phone = '{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '628123456789') }}';
+                var waUrl = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
+                window.open(waUrl, '_blank');
+            ">
+                                <i class="icon feather icon-feather-mail icon-small text-white"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="footer-card">
+                    {{-- <div class="footer-card">
                         <a href="#" class="d-inline-block me-5px align-middle"><img
                                 src="https://placehold.co/55x20" alt=""></a>
                         <a href="#" class="d-inline-block me-5px align-middle"><img
@@ -82,7 +91,7 @@
                                 src="https://placehold.co/55x20" alt=""></a>
                         <a href="#" class="d-inline-block me-5px align-middle"><img
                                 src="https://placehold.co/55x20" alt=""></a>
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- end footer column -->
             </div>

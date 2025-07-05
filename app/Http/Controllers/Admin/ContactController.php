@@ -45,7 +45,7 @@ class ContactController extends Controller
             'phone' => 'required|string',
             'email' => 'required|string',
             'linkvideo' => 'required|string',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048'
         ]);
 
         //resize dimension 598x633

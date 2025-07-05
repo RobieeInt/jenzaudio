@@ -30,21 +30,27 @@
                     data-anime='{ "translateX": [0, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 150, "easing": "easeOutQuad" }'>
                     <div
                         class="position-relative d-md-flex flex-column align-items-center justify-content-center w-165px h-165px border-radius-100">
-                        <img src="https://placehold.co/164x164" class="position-absolute top-50 translate-middle-y"
-                            alt="">
+                        <img src="{{ asset('redesign/images/about/1.webp') }}"
+                            class="position-absolute top-50 translate-middle-y" alt="">
                         <img src="images/demo-decor-store-about-02.png" class="animation-rotation" alt="">
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-7 col-sm-8"
                     data-anime='{ "translateX": [0, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                    <span class="text-uppercase fs-13 ls-2px fw-600 mb-5px d-block">Decor store story</span>
+                    <span class="text-uppercase fs-13 ls-2px fw-600 mb-5px d-block">Jenz Audio</span>
                     <h3 class="text-dark-gray alt-font fw-700 mb-0">Commitment to quality product.</h3>
                 </div>
                 <div class="col-lg-5 md-mt-30px last-paragraph-no-margin"
                     data-anime='{ "translateX": [0, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the
-                        industry's standard dummy text ever since the lorem ipsum is simply dummy text of the printing and
-                        typesetting.</p>
+                    <p>Jenz Audio adalah bengkel spesialis audio mobil yang menghadirkan solusi suara terbaik untuk
+                        pengalaman berkendara Anda. Kami melayani instalasi audio custom, penjualan perangkat audio mobil
+                        berkualitas, serta aksesoris pelengkap dengan standar profesional namun tetap ramah bagi semua
+                        kalangan.
+
+                        Dengan tim berpengalaman dan semangat inovasi, kami percaya bahwa setiap mobil layak mendapatkan
+                        sistem suara yang bukan hanya enak didengar, tapi juga merepresentasikan gaya dan karakter
+                        pemiliknya. Dari penggemar bass berat hingga pecinta suara detail, kami siap bantu mewujudkannya.
+                    </p>
                 </div>
             </div>
         </div>
@@ -52,15 +58,15 @@
             <div class="row align-items-center">
                 <div class="col-md-3 text-center p-4 md-p-15px" data-bottom-top="transform: translateY(-80px)"
                     data-top-bottom="transform: translateY(80px)">
-                    <img class="w-100" src="https://placehold.co/500x610" alt="">
+                    <img class="w-100" src="{{ asset('redesign/images/about/2.webp') }}" alt="">
                 </div>
                 <div class="col-md-6 text-center" data-bottom-top="transform: translateY(80px)"
                     data-top-bottom="transform: translateY(-80px)">
-                    <img class="w-100" src="https://placehold.co/1000x611" alt="">
+                    <img class="w-100" src="{{ asset('redesign/images/about/panjang.webp') }}" alt="">
                 </div>
                 <div class="col-md-3 text-center p-4 md-p-15px" data-bottom-top="transform: translateY(-80px)"
                     data-top-bottom="transform: translateY(80px)">
-                    <img class="w-100" src="https://placehold.co/500x610" alt="">
+                    <img class="w-100" src="{{ asset('redesign/images/about/3.webp') }}" alt="">
                 </div>
             </div>
         </div>
@@ -85,8 +91,9 @@
                                 01</h1>
                         </div>
                         <div class="feature-box-content last-paragraph-no-margin pt-30 lg-pt-22 xs-pt-40px">
-                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Business founded</span>
-                            <p>Lorem ipsum is simply text the printing typesetting standard dummy.</p>
+                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Berdiri Sejak 2015</span>
+                            <p>Jenz Audio telah dipercaya sejak 2015 sebagai spesialis audio mobil untuk berbagai kebutuhan
+                                — dari harian hingga kompetisi.</p>
                             <span class="w-60px h-2px bg-dark-gray mt-20px d-inline-block"></span>
                         </div>
                     </div>
@@ -101,8 +108,9 @@
                                 02</h1>
                         </div>
                         <div class="feature-box-content last-paragraph-no-margin pt-30 lg-pt-22 xs-pt-40px">
-                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Build new office</span>
-                            <p>Lorem ipsum is simply text the printing typesetting standard dummy.</p>
+                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Custom Audio System</span>
+                            <p>Kami merancang sistem audio mobil sesuai karakter dan selera suara Anda — SQ, SQL, SPL, atau
+                                OEM upgrade.</p>
                             <span class="w-60px h-2px bg-dark-gray mt-20px d-inline-block"></span>
                         </div>
                     </div>
@@ -117,8 +125,10 @@
                                 03</h1>
                         </div>
                         <div class="feature-box-content last-paragraph-no-margin pt-30 lg-pt-22 xs-pt-40px">
-                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Relocates headquarter</span>
-                            <p>Lorem ipsum is simply text the printing typesetting standard dummy.</p>
+                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Instalasi & Tuning
+                                Profesional</span>
+                            <p>Semua pekerjaan kami ditangani langsung oleh tim berpengalaman dengan hasil rapi, presisi,
+                                dan aman untuk mobil Anda.</p>
                             <span class="w-60px h-2px bg-dark-gray mt-20px d-inline-block"></span>
                         </div>
                     </div>
@@ -133,8 +143,9 @@
                                 04</h1>
                         </div>
                         <div class="feature-box-content last-paragraph-no-margin pt-30 lg-pt-22 xs-pt-40px">
-                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Revenues of millions</span>
-                            <p>Lorem ipsum is simply text the printing typesetting standard dummy.</p>
+                            <span class="text-dark-gray fs-18 d-inline-block fw-600 mb-5px">Konsultasi Audio Gratis</span>
+                            <p>Baru mulai upgrade audio mobil? Tim kami siap bantu arahkan pilihan terbaik sesuai kebutuhan
+                                dan budget Anda.</p>
                             <span class="w-60px h-2px bg-dark-gray mt-20px d-inline-block"></span>
                         </div>
                     </div>
@@ -149,8 +160,8 @@
                         <div
                             class="col-md-6 p-20px border-end border-color-transparent-dark-very-light text-center ls-minus-05px align-items-center d-flex justify-content-center sm-border-end-0 sm-pb-0 sm-mb-10px">
                             <i class="bi bi-emoji-smile text-dark-gray icon-extra-medium me-10px"></i>
-                            <span class="text-dark-gray fs-18 text-start fw-500 xs-lh-28">Join the <span
-                                    class="fw-800">10000+</span> people trusting us.</span>
+                            <span class="text-dark-gray fs-18 text-start fw-500 xs-lh-28">Jenz Audio <span
+                                    class="fw-800">10000+</span> Dipercaya oleh Ribuan Penggemar Audio Mobil</span>
                         </div>
                         <div
                             class="col-md-6 p-20px sm-pt-0 text-center ls-minus-05px align-items-center d-flex justify-content-center">
@@ -165,7 +176,8 @@
     </section>
     <!-- end section -->
     <!-- start section -->
-    <section data-parallax-background-ratio="0.5" style="background-image: url(https://placehold.co/1920x1100)">
+    <section data-parallax-background-ratio="0.5"
+        style="background-image: url({{ asset('redesign/images/banneraudio.webp') }})">
         <div class="opacity-light bg-base-color"></div>
         <div class="container">
             <div class="row align-items-center justify-content-end"
@@ -175,33 +187,32 @@
                         <div class="swiper slider-one-slide text-slider-style-01 magic-cursor"
                             data-slider-options='{ "slidesPerView": 1, "loop": true, "pagination": { "el": ".slider-one-slide-pagination", "clickable": true }, "autoplay": { "delay": 4000, "disableOnInteraction": false }, "navigation": { "nextEl": ".slider-one-slide-next-1", "prevEl": ".slider-one-slide-prev-1" }, "keyboard": { "enabled": true, "onlyInViewport": true }, "effect": "slide" }'>
                             <div class="swiper-wrapper mb-10px">
-                                <!-- start text slider item -->
+                                <!-- 1. Kustomisasi Audio Mobil -->
                                 <div class="swiper-slide last-paragraph-no-margin">
-                                    <div class="alt-font text-uppercase fs-13 fw-600 mb-5px ls-2px">World class designers
+                                    <div class="alt-font text-uppercase fs-13 fw-600 mb-5px ls-2px">Kustomisasi Profesional
                                     </div>
-                                    <h3 class="alt-font text-dark-gray fw-700 ls-minus-1px">Exclusive design</h3>
-                                    <p class="w-90 lg-w-100">Lorem ipsum dolor sit amet consectetur adipiscing elit do
-                                        eiusmod tempor incididunt ut labore et dolore magna ut enim veniam.</p>
+                                    <h3 class="alt-font text-dark-gray fw-700 ls-minus-1px">Desain Audio Eksklusif</h3>
+                                    <p class="w-90 lg-w-100">Kami menghadirkan desain instalasi audio mobil yang tidak
+                                        hanya powerful, tetapi juga estetik, sesuai gaya dan kebutuhan Anda.</p>
                                 </div>
-                                <!-- end text slider item -->
-                                <!-- start text slider item -->
+
+                                <!-- 2. Pembayaran Aman dan Mudah -->
                                 <div class="swiper-slide">
-                                    <div class="alt-font text-uppercase fs-13 fw-600 mb-5px ls-2px">100% secure method
-                                    </div>
-                                    <h3 class="alt-font text-dark-gray fw-700 ls-minus-1px">Secure payment</h3>
-                                    <p class="w-90 lg-w-100">Lorem ipsum dolor sit amet consectetur adipiscing elit do
-                                        eiusmod tempor incididunt ut labore et dolore magna ut enim veniam.</p>
+                                    <div class="alt-font text-uppercase fs-13 fw-600 mb-5px ls-2px">Transaksi Aman</div>
+                                    <h3 class="alt-font text-dark-gray fw-700 ls-minus-1px">Pembayaran Fleksibel</h3>
+                                    <p class="w-90 lg-w-100">Dapatkan kemudahan pembayaran melalui berbagai metode. Proses
+                                        cepat, aman, dan transparan untuk semua transaksi Anda di Jenz Audio.</p>
                                 </div>
-                                <!-- end text slider item -->
-                                <!-- start text slider item -->
+
+                                <!-- 3. Layanan Konsultasi & Support -->
                                 <div class="swiper-slide">
-                                    <div class="alt-font text-uppercase fs-13 fw-600 mb-5px ls-2px">24/7 support center
+                                    <div class="alt-font text-uppercase fs-13 fw-600 mb-5px ls-2px">Konsultasi Audio Mobil
                                     </div>
-                                    <h3 class="alt-font text-dark-gray fw-700 ls-minus-1px">Online support</h3>
-                                    <p class="w-90 lg-w-100">Lorem ipsum dolor sit amet consectetur adipiscing elit do
-                                        eiusmod tempor incididunt ut labore et dolore magna ut enim veniam.</p>
+                                    <h3 class="alt-font text-dark-gray fw-700 ls-minus-1px">Bantuan Teknis & Rekomendasi
+                                    </h3>
+                                    <p class="w-90 lg-w-100">Tim kami siap membantu Anda memilih perangkat audio terbaik
+                                        serta solusi instalasi yang sesuai dengan mobil dan selera Anda.</p>
                                 </div>
-                                <!-- end text slider item -->
                             </div>
                             <div class="d-flex">
                                 <!-- start slider navigation -->
@@ -223,7 +234,7 @@
     </section>
     <!-- end section -->
     <!-- start section -->
-    <section>
+    {{-- <section>
         <div class="container">
             <div class="row justify-content-center mb-40px sm-mb-30px">
                 <div class="col-lg-5 text-center"
@@ -356,6 +367,6 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- end section -->
 @endsection

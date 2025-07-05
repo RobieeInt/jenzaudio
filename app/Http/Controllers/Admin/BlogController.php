@@ -56,7 +56,7 @@ class BlogController extends Controller
         $request->validate([
             'title' => 'required|string',
             'content' => 'required|string',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'
+            'image' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048'
         ]);
 
         $data['slug'] = Str::slug($request->title);

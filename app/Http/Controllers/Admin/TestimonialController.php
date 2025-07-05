@@ -36,7 +36,7 @@ class TestimonialController extends Controller
         $request->validate([
             'name' => 'required',
             'profession' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg,ico',
+            'image' => 'required|image|mimes:png,jpg,jpeg,ico,webp',
             'star' => 'required',
         ]);
 
@@ -63,7 +63,7 @@ class TestimonialController extends Controller
         $data['star'] = $request->star;
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'required|image|mimes:png,jpg,jpeg,ico',
+                'image' => 'required|image|mimes:png,jpg,jpeg,ico,webp',
             ]);
             $data['image'] = $request->file('image')->store('assets/testimonial', 'public');
         }

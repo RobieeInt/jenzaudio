@@ -27,7 +27,8 @@
                 <div class="collapse navbar-collapse justify-content-center bg-black" id="navbarNav">
                     <ul class="navbar-nav alt-font text-white">
                         <li class="nav-item"><a href="{{ route('landing-page') }}" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="{{ route('blog') }}" class="nav-link">Event</a></li>
+                        <li class="nav-item"><a href="{{ route('event') }}" class="nav-link">Event</a></li>
+                        <li class="nav-item"><a href="{{ route('blog') }}" class="nav-link">blog</a></li>
                         {{-- <li class="nav-item"><a href="{{ route('blog') }}" class="nav-link">Blog</a></li> --}}
                         <li class="nav-item"><a href="{{ route('about') }}" class="nav-link">About</a></li>
                         <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>

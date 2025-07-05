@@ -41,7 +41,7 @@ class InstagramController extends Controller
         $data = $request->except('_token');
         $request->validate([
             'link' => 'required',
-            'image' => 'required|image|mimes:png,jpg,jpeg,ico',
+            'image' => 'required|image|mimes:png,jpg,jpeg,ico,webp',
         ]);
 
         // $data['image'] = $request->file('image')->store('assets/instagram', 'public');
@@ -78,7 +78,7 @@ class InstagramController extends Controller
 
         if ($request->hasFile('image')) {
             $request->validate([
-                'image' => 'required|image|mimes:png,jpg,jpeg,ico',
+                'image' => 'required|image|mimes:png,jpg,jpeg,ico,webp',
             ]);
              //get data old image and delete
             $oldImage = Instagram::findOrFail($id);
