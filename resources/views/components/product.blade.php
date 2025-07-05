@@ -27,33 +27,39 @@
                                                             class="product-overlay bg-gradient-extra-midium-gray-transparent">
                                                         </div>
                                                     </a>
-                                                    <div class="shop-hover d-flex justify-content-center">
-                                                        <a href="#"
-                                                            class="bg-white w-45px h-45px text-dark-gray d-flex flex-column align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-medium-bottom"
-                                                            data-bs-toggle="tooltip" title="Add to wishlist">
-                                                            <i class="feather icon-feather-heart fs-15"></i>
-                                                        </a>
-                                                        <a href="#"
-                                                            class="bg-white w-45px h-45px text-dark-gray d-flex flex-column align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-medium-bottom"
-                                                            data-bs-toggle="tooltip" title="Add to cart">
-                                                            <i class="feather icon-feather-shopping-bag fs-15"></i>
-                                                        </a>
-                                                        <a href="#"
-                                                            class="bg-white w-45px h-45px text-dark-gray d-flex flex-column align-items-center justify-content-center rounded-circle ms-5px me-5px box-shadow-medium-bottom"
-                                                            data-bs-toggle="tooltip" title="Quick shop">
-                                                            <i class="feather icon-feather-eye fs-15"></i>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                                 <div class="shop-footer text-center pt-20px">
                                                     <a href="#"
                                                         class="text-dark-gray fs-17 alt-font fw-600">{{ $item->name }}</a>
                                                     <div class="fw-500 fs-15 lh-normal">
-                                                        @if ($item->old_price)
-                                                            <del>Rp
-                                                                {{ number_format($item->old_price, 0, ',', '.') }}</del>
-                                                        @endif
-                                                        Rp {{ number_format($item->price, 0, ',', '.') }}
+                                                        @php
+                                                            $productName = $item->name ?? 'Produk';
+                                                            $price = 'Rp ' . number_format($item->price, 0, ',', '.');
+                                                            $oldPrice = $item->old_price
+                                                                ? ' (Harga sebelumnya: Rp ' .
+                                                                    number_format($item->old_price, 0, ',', '.') .
+                                                                    ')'
+                                                                : '';
+                                                            $whatsappMessage = "Halo, saya tertarik dengan produk *$productName* Bisa Minta Info nya?";
+                                                            $phone = preg_replace(
+                                                                '/[^0-9]/',
+                                                                '',
+                                                                $contact->phone ?? '628123456789',
+                                                            );
+                                                            $waUrl =
+                                                                'https://wa.me/' .
+                                                                $phone .
+                                                                '?text=' .
+                                                                urlencode($whatsappMessage);
+                                                        @endphp
+
+                                                        <a href="{{ $waUrl }}" target="_blank"
+                                                            class="btn btn-sm border border-success text-success bg-white"
+                                                            style="transition: all 0.2s ease-in-out;"
+                                                            onmouseover="this.style.backgroundColor='#d4edda'; this.style.color='black';"
+                                                            onmouseout="this.style.backgroundColor='white'; this.style.color='#198754';">
+                                                            Chat via WhatsApp
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
