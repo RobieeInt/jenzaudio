@@ -26,10 +26,13 @@
                 <div class="col-6 col-lg-2 col-sm-4 xs-mb-30px order-sm-3 order-lg-2">
                     <span class="fs-16 alt-font fw-500 d-block text-white mb-5px">Categories</span>
                     <ul>
-                        <li><a href="demo-decor-store-shop.html">Head Unit</a></li>
-                        <li><a href="demo-decor-store-shop.html">Paket Audio</a></li>
-                        <li><a href="demo-decor-store-shop.html">Peredam</a></li>
-                        <li><a href="demo-decor-store-shop.html">Kaca Film</a></li>
+                        @foreach ($categoryfooter as $item)
+                            <li>
+                                <a href="{{ route('categorydetail', ['slug' => $item->slug]) }}">
+                                    {{ $item->name }}
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <!-- end footer column -->

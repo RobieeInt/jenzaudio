@@ -31,8 +31,13 @@ class LandingController extends Controller
                     ->take(10)
                     ->get();
 
+                $categoryfooter = ProductCategories::where('status', 1)
+                    ->orderBy('id', 'desc')
+                    ->take(10)
+                    ->get();
+
         // dd($productsPopular);
-        return view('index', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category'));
+        return view('index', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category','categoryfooter'));
     }
 
     //quickview
@@ -54,17 +59,24 @@ class LandingController extends Controller
     //aboutus
     public function about() {
         // return view('frontend.page.aboutus');
+                $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
 
         $contact = Contact::orderBy('id', 'desc')->first();
-        return view('frontend.page.about', compact('contact'));
+        return view('frontend.page.about', compact('contact', 'categoryfooter'));
     }
 
     //contactus
     public function contact() {
         //get data contact
-        $contact = Contact::orderBy('id', 'desc')->first();
+        $contact = Contact::orderBy('id', 'desc')->first();        $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
         // dd($contact);
-        return view('frontend.page.contact', compact('contact'));
+        return view('frontend.page.contact', compact('contact', 'categoryfooter'));
     }
 
     //blogdetail
@@ -82,13 +94,21 @@ class LandingController extends Controller
         $blogs = Blog::orderBy('created_at','desc')->paginate(12);
         // dd($blogs);
         $contact = Contact::orderBy('id', 'desc')->first();
-        return view('frontend.page.blog', compact('blogs','contact'));
+                $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
+        return view('frontend.page.blog', compact('blogs','contact', 'categoryfooter'));
     }
     public function event() {
         $events = blog::orderBy('created_at','desc')->paginate(12);
         // dd($events);
         $contact = Contact::orderBy('id', 'desc')->first();
-        return view('frontend.page.event', compact('events','contact'));
+                $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
+        return view('frontend.page.event', compact('events','contact', 'categoryfooter'));
     }
 
 
@@ -101,6 +121,11 @@ class LandingController extends Controller
         //             ->where('category_id', $category->id)
         //             ->get();
 
+        $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
+
         $products = Product::with(['galleries', 'category'])
             ->where('category_id', $category->id)
             ->paginate(6); // atau berapa item per halaman yang lo mau
@@ -108,6 +133,6 @@ class LandingController extends Controller
         // Cek hasilnya
         // dd($products);
 
-        return view('frontend.page.category', compact('category', 'products'));
+        return view('frontend.page.category', compact('category', 'products', 'categoryfooter'));
     }
 }
