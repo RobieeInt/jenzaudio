@@ -70,8 +70,15 @@ class CategoriesController extends Controller
         $data['slug'] = Str::slug($request->name);
 
         // Simpan langsung ke public/assets/product_categories
-        $filename = Str::random(20) . '.' . $request->file('image')->getClientOriginalExtension();
-        $request->file('image')->move(public_path('assets/product_categories'), $filename);
+        $filename = Str::random(10) . '.' . $request->file('image')->getClientOriginalExtension();
+        $destinationPath = public_path('assets/product_categories');
+
+        // Pastikan foldernya ada
+        if (!file_exists($destinationPath)) {
+            mkdir($destinationPath, 0755, true);
+        }
+
+        $request->file('image')->move($destinationPath, $filename);
         $data['image'] = 'assets/product_categories/' . $filename;
 
         ProductCategories::create($data);
