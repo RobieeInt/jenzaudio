@@ -55,8 +55,32 @@
                                         <p class="mt-2 text-muted">
                                             {{ Str::limit(strip_tags($item->short_description), 60) }}
                                         </p>
-                                        <div class="fw-600 text-dark mt-2">
-                                            Rp {{ number_format($item->price, 0, ',', '.') }}
+                                        <div class="fw-500 fs-15 lh-normal">
+                                            @php
+                                                $productName = $item->name ?? 'Produk';
+                                                $price = 'Rp ' . number_format($item->price, 0, ',', '.');
+                                                $oldPrice = $item->old_price
+                                                    ? ' (Harga sebelumnya: Rp ' .
+                                                        number_format($item->old_price, 0, ',', '.') .
+                                                        ')'
+                                                    : '';
+                                                $whatsappMessage = "Halo, saya tertarik dengan produk *$productName* Bisa Minta Info nya?";
+                                                $phone = preg_replace(
+                                                    '/[^0-9]/',
+                                                    '',
+                                                    $contact->phone ?? '628568780192',
+                                                );
+                                                $waUrl =
+                                                    'https://wa.me/' . $phone . '?text=' . urlencode($whatsappMessage);
+                                            @endphp
+
+                                            <a href="{{ $waUrl }}" target="_blank"
+                                                class="btn btn-sm border border-success text-success bg-white"
+                                                style="transition: all 0.2s ease-in-out;"
+                                                onmouseover="this.style.backgroundColor='#d4edda'; this.style.color='black';"
+                                                onmouseout="this.style.backgroundColor='white'; this.style.color='#198754';">
+                                                Chat via WhatsApp
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
