@@ -53,7 +53,11 @@ class LandingController extends Controller
         $randomProducts = Product::with(['galleries', 'category'])->where('status', '1')->inRandomOrder()->take(6)->get();
         // dd($product);
         $contact = Contact::orderBy('id', 'desc')->first();
-        return view('frontend.page.productdetail', compact('product', 'randomProducts','contact'));
+                        $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
+        return view('frontend.page.productdetail', compact('product', 'randomProducts','contact', 'categoryfooter'));
     }
 
     //aboutus

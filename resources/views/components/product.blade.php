@@ -20,7 +20,7 @@
                                         <li class="grid-item">
                                             <div class="shop-box pb-25px">
                                                 <div class="shop-image">
-                                                    <a href="#">
+                                                    <a href="{{ route('productDetail', ['slug' => $item->slug]) }}">
                                                         <img src="{{ Storage::url($item->galleries->first()?->image) }}"
                                                             alt="{{ $item->short_description }}" />
                                                         <div
@@ -44,7 +44,7 @@
                                                             $phone = preg_replace(
                                                                 '/[^0-9]/',
                                                                 '',
-                                                                $contact->phone ?? '628123456789',
+                                                                $contact->phone ?? '628568780192',
                                                             );
                                                             $waUrl =
                                                                 'https://wa.me/' .

@@ -51,7 +51,7 @@
                         <i class="feather icon-feather-message-circle d-inline-block text-base-color me-10px"></i>
                         Chat via WhatsApp
                     </span>
-                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '628123456789') }}"
+                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '628568780192') }}"
                         target="_blank" class="d-inline-block">
                         {{ $contact->phone ?? '+62 812-3456-789' }}
                     </a>

@@ -104,7 +104,7 @@
                         <div><span class="text-dark-gray fw-500">SKU: </span>{{ $product->code }}</div>
                     </div>
 
-                    <div class="product-price mb-10px">
+                    {{-- <div class="product-price mb-10px">
                         <span class="text-dark-gray fs-28 xs-fs-24 fw-700 ls-minus-1px">
                             @if ($product->old_price)
                                 <del class="text-medium-gray me-10px fw-500">Rp
@@ -112,7 +112,7 @@
                             @endif
                             Rp {{ number_format($product->price, 0, ',', '.') }}
                         </span>
-                    </div>
+                    </div> --}}
 
                     <p>{!! $product->description !!}</p>
 

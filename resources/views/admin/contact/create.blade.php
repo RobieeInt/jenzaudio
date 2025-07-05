@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('title', 'Create Category')
+@section('title', 'Create Contact')
 
 @section('content')
     <div class="row">
@@ -18,7 +18,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Create Kategori</h3>
+                    <h3 class="card-title">Create Contact</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
