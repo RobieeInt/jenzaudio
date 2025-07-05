@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductCategories;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\File;
 
 class CategoriesController extends Controller
 {
@@ -110,35 +111,46 @@ class CategoriesController extends Controller
         return view('admin.categories.edit', compact('data'));
     }
 
-    public function update(Request $request, $id) {
-        $data = $request->except('_token');
-        // dd($data);
-        $request->validate([
-            'name' => 'required|unique:product_categories,name,' . $id,
-            'description' => 'required',
-            // 'image' => 'image|mimes:png,jpg,jpeg,ico',
-            'status' => 'required',
-        ]);
+  public function update(Request $request, $id) {
+    $request->validate([
+        'name' => 'required|unique:product_categories,name,' . $id,
+        'description' => 'required',
+        'status' => 'required',
+        'image' => 'nullable|image|mimes:png,jpg,jpeg,ico,webp,svg',
+    ]);
 
-        //slug from name change space with -
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-        // $data['image'] = $request->file('image')->store('assets/product_categories', 'public');
-        if ($request->hasFile('image')) {
-            //get data old image and delete
-            $old_image = ProductCategories::findOrFail($id);
-            Storage::disk('public')->delete($old_image->image);
-            //upload new image
-            $data['image'] = $request->file('image')->store('assets/product_categories', 'public');
-        } else {
-            unset($data['image']);
+    $data = $request->all();
+    $data['slug'] = Str::slug($request->name);
+
+    $item = ProductCategories::findOrFail($id);
+
+    // Jika ada gambar baru
+    if ($request->hasFile('image')) {
+        // Hapus gambar lama
+        if ($item->image && File::exists(public_path($item->image))) {
+            File::delete(public_path($item->image));
         }
 
-        // dd($data);
-        $item = ProductCategories::findOrFail($id);
-        $item->update($data);
-        return redirect()->route('admin.categories')->with('success', $item->name . ' Data berhasil diupdate');
+        // Generate nama random
+        $filename = Str::random(20) . '.' . $request->file('image')->getClientOriginalExtension();
+        $destinationPath = public_path('assets/product_categories');
+
+        // Pastikan foldernya ada
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+
+        // Pindahkan file ke folder publik
+        $request->file('image')->move($destinationPath, $filename);
+        $data['image'] = 'assets/product_categories/' . $filename;
+    } else {
+        unset($data['image']);
     }
+
+    $item->update($data);
+
+    return redirect()->route('admin.categories')->with('success', $item->name . ' berhasil diperbarui');
+}
 
     //getCategory
     public function getCategory(Request $request) {
