@@ -26,7 +26,10 @@ class LandingController extends Controller
         //contact
         $contact = Contact::orderBy('id', 'desc')->first();
 
-        $category = ProductCategories::orderBy('id', 'desc')->take(10)->get();
+        $category = ProductCategories::where('status', 1)
+                    ->orderBy('id', 'desc')
+                    ->take(10)
+                    ->get();
 
         // dd($productsPopular);
         return view('index', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category'));
