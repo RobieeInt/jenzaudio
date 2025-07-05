@@ -59,7 +59,7 @@ class CategoriesController extends Controller
 
     public function store(Request $request) {
         $data = $request->except('_token');
-        // dd($data);
+
         $request->validate([
             'name' => 'required|unique:product_categories,name',
             'description' => 'required',
@@ -67,13 +67,15 @@ class CategoriesController extends Controller
             'status' => 'required',
         ]);
 
-        //slug from name change space with -
-        $data = $request->all();
         $data['slug'] = Str::slug($request->name);
-        $data['image'] = $request->file('image')->store('assets/product_categories', 'public');
 
-        // dd($data);
+        // Simpan langsung ke public/assets/product_categories
+        $filename = Str::random(20) . '.' . $request->file('image')->getClientOriginalExtension();
+        $request->file('image')->move(public_path('assets/product_categories'), $filename);
+        $data['image'] = 'assets/product_categories/' . $filename;
+
         ProductCategories::create($data);
+
         return redirect()->route('admin.categories')->with('success', 'Kategori "' . $data['name'] . '" berhasil disimpan');
     }
 

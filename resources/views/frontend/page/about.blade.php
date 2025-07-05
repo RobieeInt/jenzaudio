@@ -73,7 +73,7 @@
         <!-- start marquees -->
         <div
             class="marquees-text alt-font fw-700 fs-200 lg-fs-150 md-fs-130 ls-minus-5px text-base-color text-nowrap position-absolute top-50 lg-mt-5 md-mt-15 sm-mt-22 right-100px text-center z-index-minus-1 d-none d-md-inline-block">
-            classic products</div>
+            Jenz Audio</div>
         <!-- end marquees -->
     </section>
     <!-- end section -->
