@@ -63,6 +63,71 @@
         </a>
     </div>
     <!-- end scroll progress -->
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/628568780192?text=Halo%2C%20saya%20mau%20tanya%20dong" class="whatsapp-float" target="_blank"
+        aria-label="Chat via WhatsApp">
+        <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50" height="50">
+        <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratiss</span>
+    </a>
+
+    <style>
+        /* body {
+            background-color: black !important;
+            color: white;
+        } */
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background-color: #25D366;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float img {
+            display: block;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 60px;
+            background-color: #25D366;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.3s ease;
+            font-size: 14px;
+            pointer-events: none;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 576px) {
+            .whatsapp-tooltip {
+                display: none;
+            }
+        }
+    </style>
+
     <!-- javascript libraries -->
     <script type="text/javascript" src="{{ asset('redesign/js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('redesign/js/vendors.min.js') }}"></script>

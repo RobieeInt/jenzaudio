@@ -134,9 +134,8 @@ class LandingController extends Controller
             ->where('category_id', $category->id)
             ->paginate(6); // atau berapa item per halaman yang lo mau
 
-        // Cek hasilnya
-        // dd($products);
+        $contact = Contact::orderBy('id', 'desc')->first();
 
-        return view('frontend.page.category', compact('category', 'products', 'categoryfooter'));
+        return view('frontend.page.category', compact('category', 'products', 'categoryfooter', 'contact'));
     }
 }
