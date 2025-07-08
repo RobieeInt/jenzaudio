@@ -26,8 +26,7 @@
         data-bs-interval="2000">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="{{ asset('redesign/images/banneraudio.webp') }}" class="d-block w-100 banner-img"
-                    alt="Banner 1">
+                <img src="{{ asset('redesign/images/newaudio.webp') }}" class="d-block w-100 banner-img" alt="Banner 1">
             </div>
             {{-- <div class="carousel-item">
                 <img src="{{ asset('redesign/images/bannerdetailing.png') }}" class="d-block w-100 banner-img"
