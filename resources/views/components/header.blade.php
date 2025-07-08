@@ -61,4 +61,12 @@
     .navbar-nav .nav-link:hover {
         color: #f8f9fa !important;
     }
+
+    .navbar-toggler-line {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background-color: white;
+        margin: 4px 0;
+    }
 </style>
