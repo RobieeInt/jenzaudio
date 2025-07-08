@@ -16,10 +16,13 @@
         <div>
             <h1 style="font-size: 2.5rem; font-weight: bold;">Jenz Audio</h1>
             <p style="font-size: 1rem; max-width: 90vw; margin: 0 auto;">
-                Jenz Audio adalah bengkel modifikasi mobil yang bikin kendaraan kamu tampil beda dan makin keren.
-                Dari instalasi sistem audio premium, pemasangan aksesoris interior dan eksterior, hingga custom lampu
-                dan sound setup –
-                kami bantu wujudkan gaya mobil impian kamu dengan detail dan kualitas terbaik.
+                Jenz Audio adalah solusi lengkap untuk kamu yang ingin mempercantik dan memaksimalkan kenyamanan mobil.
+                Kami menyediakan berbagai layanan mulai dari penggantian head unit, pemasangan aksesoris interior &
+                eksterior, paket audio mobil, peredam suara, sarung jok, karpet dasar, hingga pemasangan alarm dan kaca
+                film.
+
+                Dengan pendekatan yang detail, produk berkualitas, dan tim berpengalaman, kami hadir untuk bantu
+                wujudkan mobil yang tidak hanya enak dilihat, tapi juga nyaman dikendarai.
             </p>
         </div>
     </article>

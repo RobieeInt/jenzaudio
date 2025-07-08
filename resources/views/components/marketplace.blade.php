@@ -7,7 +7,7 @@
         <div class="row g-4 justify-content-center">
             <!-- Tokopedia -->
             <div class="col-md-4">
-                <a href="https://www.tokopedia.com/" target="_blank" class="text-decoration-none">
+                <a href="https://tokopedia.link/x5b7C1NcPUb" target="_blank" class="text-decoration-none">
                     <div
                         class="border rounded-4 p-4 h-100 text-center d-flex align-items-center gap-3 justify-content-center shadow-sm">
                         <img src="{{ asset('redesign/images/tokopedia.png') }}" alt="Tokopedia" width="60">
@@ -32,7 +32,7 @@
                 </a>
             </div>
             <!-- Lazada -->
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <a href="https://www.lazada.co.id/" target="_blank" class="text-decoration-none">
                     <div
                         class="border rounded-4 p-4 h-100 text-center d-flex align-items-center gap-3 justify-content-center shadow-sm">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </a>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>
