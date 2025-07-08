@@ -51,7 +51,7 @@
                         <i class="feather icon-feather-message-circle d-inline-block text-base-color me-10px"></i>
                         Chat via WhatsApp
                     </span>
-                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '628568780192') }}"
+                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '6281617000097') }}"
                         target="_blank" class="d-inline-block">
                         {{ $contact->phone ?? '+62 812-3456-789' }}
                     </a>
@@ -94,7 +94,7 @@
                             <span
                                 data-fancy-text='{ "effect": "rotate", "string": ["Konsul!", "Tanya!", "Gasin!"] }'></span>
                         </h2>
-                        <form action="https://wa.me/628568780192" method="GET" target="_blank">
+                        <form action="https://wa.me/6281617000097" method="GET" target="_blank">
                             <textarea name="text" rows="4" required class="form-control mb-3"
                                 placeholder="Tulis nama dan pesanmu di sini..."></textarea>
                             <button type="submit" class="btn btn-success">Kirim via WhatsApp</button>

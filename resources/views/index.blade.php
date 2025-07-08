@@ -79,8 +79,8 @@
     </div>
     <!-- end scroll progress -->
     <!-- Sticky WhatsApp Button -->
-    <a href="https://wa.me/628568780192?text=Halo%2C%20saya%20mau%20tanya%20dong" class="whatsapp-float" target="_blank"
-        aria-label="Chat via WhatsApp">
+    <a href="https://wa.me/6281617000097?text=Halo%2C%20saya%20mau%20tanya%20dong" class="whatsapp-float"
+        target="_blank" aria-label="Chat via WhatsApp">
         <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50" height="50">
         <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratiss</span>
     </a>

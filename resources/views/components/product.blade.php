@@ -44,7 +44,7 @@
                                                             $phone = preg_replace(
                                                                 '/[^0-9]/',
                                                                 '',
-                                                                $contact->phone ?? '628568780192',
+                                                                $contact->phone ?? '6281617000097',
                                                             );
                                                             $waUrl =
                                                                 'https://wa.me/' .

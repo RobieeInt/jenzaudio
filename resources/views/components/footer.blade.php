@@ -77,7 +77,7 @@
                     alert('Pesan tidak boleh kosong!');
                     return;
                 }
-                var phone = '{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '628568780192') }}';
+                var phone = '{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '6281617000097') }}';
                 var waUrl = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(msg);
                 window.open(waUrl, '_blank');
             ">
