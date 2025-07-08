@@ -16,7 +16,7 @@ class LandingController extends Controller
         //get product with galleries and category where deleted_at null
         $products = Product::with(['galleries', 'category'])->where('status', '1')->get();
         //productspopular get 3 items where popular = 1 and with highest star
-        $productsPopular = Product::with(['galleries', 'category'])->where('status', '1')->where('popular', '1')->orderBy('star', 'desc')->take(3)->get();
+        $productsPopular = Product::with(['galleries', 'category'])->where('status', '1')->where('popular', '1')->orderBy('star', 'desc')->take(10)->get();
         //instagram
         $instagrams = Instagram::orderBy('id', 'desc')->take(10)->get();
         //$testimoni
