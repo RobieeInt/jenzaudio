@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-6 col-xl-2 col-md-3 col-sm-5 text-center text-xl-start order-1 order-xl-2">
                         <span class="lh-26 alt-font d-block">Need support?</span>
-                        <a href="tel:12345678910" class="fs-16 text-white fw-500">+62 812 9593 8803</a>
+                        <a href="tel:12345678910" class="fs-16 text-white fw-500">+62 816 1700 0097</a>
                     </div>
                     <div class="col-6 col-xl-2 col-md-3 col-sm-5 text-center text-xl-start order-2 order-xl-3">
                         <span class="lh-26 alt-font d-block">Customer care</span>
