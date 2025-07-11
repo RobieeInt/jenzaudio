@@ -251,6 +251,19 @@
             });
         });
     </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-D9GHSSH4L4');
+    </script>
     <script type="text/javascript" src="{{ asset('redesign/js/main.js') }}"></script>
 </body>
 
