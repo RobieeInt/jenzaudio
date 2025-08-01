@@ -38,6 +38,7 @@
     <!-- end section -->
     <!-- start section -->
     @include('components.bannerslider')
+    @include('components.packageslider')
     <!-- end section -->
     <!-- start section -->
     @include('components.category')
