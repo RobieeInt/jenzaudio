@@ -10,7 +10,7 @@
     <meta name="description"
         content="Jenz Audio adalah spesialis audio mobil yang siap bantu kamu wujudkan kualitas suara impian di kendaraan kesayangan. Kami menyediakan layanan custom audio, instalasi sistem audio mobil, serta menjual berbagai perangkat dan aksesoris audio berkualitas tinggi untuk kamu para car enthusiast.">
     <!-- favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('redesign/images/favicon.jpg') }}">
+    <link rel="shortcut icon" href="{{ asset('redesign/images/jenzlogo.jpeg') }}">
     <link rel="apple-touch-icon" href="{{ asset('redesign/images/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('redesign/images/apple-touch-icon-72x72.png') }}">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('redesign/images/apple-touch-icon-114x114.png') }}">
@@ -254,8 +254,7 @@
     </script>
 
     <!-- Google tag (gtag.js) -->
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-611713340"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -264,7 +263,7 @@
         }
         gtag('js', new Date());
 
-        gtag('config', 'AW-611713340');
+        gtag('config', 'G-D9GHSSH4L4');
     </script>
     <script type="text/javascript" src="{{ asset('redesign/js/main.js') }}"></script>
 </body>

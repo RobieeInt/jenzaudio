@@ -37,7 +37,7 @@ class LandingController extends Controller
                     ->get();
 
         // dd($productsPopular);
-        return view('index', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category','categoryfooter'));
+        return view('index2', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category','categoryfooter'));
     }
 
     //quickview
