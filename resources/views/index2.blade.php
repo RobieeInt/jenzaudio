@@ -105,6 +105,16 @@
             }
         }
     </style>
+
+    <!-- Event snippet for Klik keluar conversion page -->
+    <script>
+        gtag('event', 'conversion', {
+            'send_to': 'AW-611713340/nq18CJKI8ssbELyC2KMC',
+            'value': 1.0,
+            'currency': 'IDR'
+        });
+    </script>
+
 </head>
 
 <body class="bg-zinc-950 text-white" data-mobile-nav-style="classic">
