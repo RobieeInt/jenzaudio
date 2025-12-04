@@ -16,9 +16,13 @@
             <a href="#services" class="text-zinc-300 hover:text-amber-500 transition">Layanan</a>
             <a href="#portfolio" class="text-zinc-300 hover:text-amber-500 transition">Portfolio</a>
             <a href="#pricing" class="text-zinc-300 hover:text-amber-500 transition">Harga</a>
-            <a href="#contact"
-                class="rounded-lg bg-amber-500 px-5 py-2 text-zinc-900 font-semibold hover:bg-amber-400 transition">
+            <a href="https://api.whatsapp.com/send/?phone=6281617000097&text=Halo%2C+saya+mau+tanya+dong&type=phone_number&app_absent=0"
+                target="_blank"
+                class="rounded-lg bg-amber-500 px-5 py-2 text-zinc-900 font-semibold hover:bg-amber-400 transition flex items-center">
                 Hubungi Kami
+                <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
             </a>
         </div>
 
@@ -48,9 +52,13 @@
 
         <a href="#pricing" @click="open=false" class="block py-2 text-zinc-300 hover:text-amber-400">Harga</a>
 
-        <a href="#contact" @click="open=false"
-            class="block rounded-lg bg-amber-500 px-5 py-2 text-center font-semibold text-zinc-900 hover:bg-amber-400">
+        <a href="https://api.whatsapp.com/send/?phone=6281617000097&text=Halo%2C+saya+mau+tanya+dong&type=phone_number&app_absent=0"
+            target="_blank"
+            class="rounded-lg bg-amber-500 px-5 py-2 text-zinc-900 font-semibold hover:bg-amber-400 transition flex items-center">
             Hubungi Kami
+            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
         </a>
     </div>
 </nav>

@@ -88,7 +88,8 @@
                                 d="M12 2a7 7 0 00-7 7c0 4.4 5 9.4 6.4 10.8a1 1 0 001.2 0C14 18.4 19 13.4 19 9a7 7 0 00-7-7z" />
                             <circle cx="12" cy="9" r="2.5" />
                         </svg>
-                        <span>Jl. Audio Specialist No. 123, Jakarta Selatan</span>
+                        <span>Ruko Bavaria, Jl. Boulevard Raya Gading Serpong No.56,
+                            Kelapa Dua, Tangerang Regency, Banten 15810</span>
                     </li>
 
                     <li class="flex items-center text-sm text-zinc-400">
@@ -97,7 +98,7 @@
                             <path
                                 d="M3 5a2 2 0 012-2h2.2a1 1 0 01.96.73l1.1 4.08a1 1 0 01-.27.97l-1.6 1.6a12 12 0 005.4 5.4l1.6-1.6a1 1 0 01.97-.27l4.08 1.1a1 1 0 01.73.96V19a2 2 0 01-2 2h-1A16 16 0 013 6V5z" />
                         </svg>
-                        <span>+62 812-3456-7890</span>
+                        <span>+62 816‑1700‑0097</span>
                     </li>
 
                     <li class="flex items-center text-sm text-zinc-400">

@@ -31,7 +31,8 @@
                 </p>
 
                 <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                    <button @click="scrollTo('#contact')"
+                    <a href="https://api.whatsapp.com/send/?phone=6281617000097&text=Halo%2C+saya+mau+tanya+dong&type=phone_number&app_absent=0"
+                        target="_blank"
                         class="group bg-amber-500 px-8 py-6 text-lg font-semibold text-zinc-900 transition-all hover:bg-amber-400 hover:scale-105 flex items-center">
                         Konsultasi Gratis
                         <svg class="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none"
@@ -39,7 +40,7 @@
                             stroke-linejoin="round">
                             <path d="M9 18l6-6-6-6" />
                         </svg>
-                    </button>
+                    </a>
 
                     <button @click="scrollTo('#services')"
                         class="border-2 border-zinc-400 bg-transparent px-8 py-6 text-lg font-semibold text-white transition-all hover:bg-white hover:text-zinc-900">
