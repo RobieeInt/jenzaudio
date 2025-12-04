@@ -68,7 +68,7 @@
                         <p class="mb-3 line-clamp-2 text-sm text-zinc-400">
                             <span x-text="product.description"></span>
                         </p>
-
+                        {{--
                         <div class="mb-3">
                             <span class="text-2xl font-bold text-amber-500">
                                 Rp <span x-text="formatPrice(product.price)"></span>
@@ -78,7 +78,7 @@
                                     Rp <span x-text="formatPrice(product.originalPrice)"></span>
                                 </span>
                             </template>
-                        </div>
+                        </div> --}}
 
                         <template x-if="product.features && product.features.length">
                             <ul class="mb-4 space-y-1 text-xs text-zinc-500">

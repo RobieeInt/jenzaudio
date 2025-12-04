@@ -24,7 +24,7 @@
                             poster="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920"
                             @ended="onEnd">
                             {{-- ganti src ke file lu sendiri --}}
-                            <source src="{{ asset('redesign/video/progress.mp4') }}" type="video/mp4" />
+                            <source src="{{ asset('redesign/video/location.mp4') }}" type="video/mp4" />
                             Browser Anda tidak mendukung video tag.
                         </video>
                     </div>
