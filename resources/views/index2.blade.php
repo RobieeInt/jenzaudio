@@ -145,6 +145,12 @@
         gtag('js', new Date());
         gtag('config', 'G-D9GHSSH4L4');
     </script>
+    <script>
+        gtag('config', 'AW-611713340/OfR6CMzc7ssbELyC2KMC', {
+            'phone_conversion_number': '6281617000097'
+        });
+    </script>
+
 
     {{-- Kalau ada JS khusus landing, taruh di app.js atau file sendiri --}}
 </body>
