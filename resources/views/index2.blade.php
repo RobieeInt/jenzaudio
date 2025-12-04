@@ -106,14 +106,25 @@
         }
     </style>
 
-    <!-- Event snippet for Klik keluar conversion page -->
+    <!-- Event snippet for Klik keluar conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
     <script>
-        gtag('event', 'conversion', {
-            'send_to': 'AW-611713340/nq18CJKI8ssbELyC2KMC',
-            'value': 1.0,
-            'currency': 'IDR'
-        });
+        function gtag_report_conversion(url) {
+            var callback = function() {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-611713340/nq18CJKI8ssbELyC2KMC',
+                'value': 1.0,
+                'currency': 'IDR',
+                'event_callback': callback
+            });
+            return false;
+        }
     </script>
+
 
 </head>
 
