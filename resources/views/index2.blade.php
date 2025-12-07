@@ -125,6 +125,19 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         }
     </script>
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-D9GHSSH4L4');
+    </script>
+
 
 </head>
 
