@@ -10,16 +10,15 @@
     <meta name="description"
         content="Jenz Audio adalah spesialis audio mobil yang siap bantu kamu wujudkan kualitas suara impian di kendaraan kesayangan. Kami menyediakan layanan custom audio, instalasi sistem audio mobil, serta menjual berbagai perangkat dan aksesoris audio berkualitas tinggi untuk kamu para car enthusiast.">
 
-    {{-- Favicon lama tetap boleh dipakai --}}
+    {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('redesign/images/jenzlogobg.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('redesign/images/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('redesign/images/apple-touch-icon-72x72.png') }}">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('redesign/images/apple-touch-icon-114x114.png') }}">
 
-    {{-- KALAU PAKAI TAILWIND/VITE --}}
+    {{-- Tailwind / Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- CSS kecil dari React app.css yang sifatnya global (scrollbar, selection) --}}
     <style>
         html {
             scroll-behavior: smooth;
@@ -53,7 +52,6 @@
             margin: 0;
         }
 
-        /* WhatsApp float bisa tetap dipakai */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -106,26 +104,7 @@
         }
     </style>
 
-    <!-- Event snippet for Klik keluar conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-    <script>
-        function gtag_report_conversion(url) {
-            var callback = function() {
-                if (typeof(url) != 'undefined') {
-                    window.location = url;
-                }
-            };
-            gtag('event', 'conversion', {
-                'send_to': 'AW-611713340/nq18CJKI8ssbELyC2KMC',
-                'value': 1.0,
-                'currency': 'IDR',
-                'event_callback': callback
-            });
-            return false;
-        }
-    </script>
-
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) - GA4 + Google Ads -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -135,18 +114,41 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         }
         gtag('js', new Date());
 
+        // GA4
         gtag('config', 'G-D9GHSSH4L4');
+
+        // Google Ads base tag
+        gtag('config', 'AW-611713340');
+
+        // Optional: phone conversion config
+        gtag('config', 'AW-611713340/OfR6CMzc7ssbELyC2KMC', {
+            'phone_conversion_number': '6281617000097'
+        });
     </script>
 
+    <!-- Event snippet for Klik keluar conversion -->
+    <script>
+        function gtag_report_conversion(url) {
+            var callback = function() {
+                if (typeof(url) !== 'undefined') {
+                    window.location = url;
+                }
+            };
 
+            gtag('event', 'conversion', {
+                'send_to': 'AW-611713340/nq18CJKI8ssbELyC2KMC',
+                'value': 1.0,
+                'currency': 'IDR',
+                'event_callback': callback
+            });
+
+            return false;
+        }
+    </script>
 </head>
 
 <body class="bg-zinc-950 text-white" data-mobile-nav-style="classic">
-    {{-- KALAU MAU HEADER LAMA, BISA TETAP PAKAI INI / BIKIN HEADER BARU --}}
-    {{-- @include('components.header') --}}
-
     <div class="min-h-screen bg-zinc-950">
-        {{-- Ini mapping dari React: <Hero /> <About /> <Video /> dst --}}
         @include('landing.navbar')
         @include('landing.hero')
         @include('landing.about')
@@ -161,32 +163,14 @@ In your html page, add the snippet and call gtag_report_conversion when someone 
         @include('landing.footer')
     </div>
 
-    {{-- Sticky WhatsApp Button --}}
+    {{-- Sticky WhatsApp Button + conversion click --}}
     <a href="https://wa.me/6281617000097?text=Halo%2C%20saya%20mau%20tanya%20dong" class="whatsapp-float"
-        target="_blank" aria-label="Chat via WhatsApp">
+        target="_blank" aria-label="Chat via WhatsApp" onclick="return gtag_report_conversion(this.href);">
         <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50" height="50">
         <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratiss</span>
     </a>
 
-    {{-- GA / tracking tetap boleh --}}
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-D9GHSSH4L4');
-    </script>
-    <script>
-        gtag('config', 'AW-611713340/OfR6CMzc7ssbELyC2KMC', {
-            'phone_conversion_number': '6281617000097'
-        });
-    </script>
-
-
-    {{-- Kalau ada JS khusus landing, taruh di app.js atau file sendiri --}}
+    {{-- JS lain kalau ada, via Vite --}}
 </body>
 
 </html>
