@@ -112,7 +112,7 @@
         [
             'icon' => 'Clock',
             'title' => 'Jam Operasional',
-            'content' => $contact->operational_hours ?? 'Senin - Sabtu: 09.00 - 18.00 WIB',
+            'content' => $contact->operational_hours ?? 'Setiap Hari: 09.00 - 18.00 WIB',
         ],
     ];
 @endphp
