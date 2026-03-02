@@ -167,7 +167,7 @@
     <a href="https://wa.me/6281617000097?text=Halo%2C%20saya%20mau%20tanya%20dong" class="whatsapp-float"
         target="_blank" aria-label="Chat via WhatsApp" onclick="return gtag_report_conversion(this.href);">
         <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50" height="50">
-        <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratiss</span>
+        <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratis</span>
     </a>
 
     {{-- JS lain kalau ada, via Vite --}}
