@@ -32,9 +32,8 @@
                         class="fs-17 fw-600 d-block w-90 sm-w-100 text-base-color border-bottom border-color-base-color pb-15px mb-15px"><i
                             class="feather icon-feather-map-pin d-inline-block text-base-color me-10px"></i>Workshop</span>
                     <div>
-                        <p class="w-100 m-0">Ruko Bavaria, Jl. Boulevard Raya Gading Serpong No.56, <br> Kelapa Dua,
-                            Tangerang
-                            Regency, Banten 15810</p>
+                        <p class="w-100 m-0">Ruko Bavaria Grande No 11 Gading serpong Tangerang, Kelapa Dua, Tangerang
+                            Regency, Banten 15831</p>
                     </div>
                 </div>
                 <div class="col md-mb-35px">
