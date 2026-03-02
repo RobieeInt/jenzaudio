@@ -88,8 +88,8 @@
                                 d="M12 2a7 7 0 00-7 7c0 4.4 5 9.4 6.4 10.8a1 1 0 001.2 0C14 18.4 19 13.4 19 9a7 7 0 00-7-7z" />
                             <circle cx="12" cy="9" r="2.5" />
                         </svg>
-                        <span>Ruko Bavaria, Jl. Boulevard Raya Gading Serpong No.56,
-                            Kelapa Dua, Tangerang Regency, Banten 15810</span>
+                        <span>Ruko Bavaria Grande No 11 Gading serpong Tangerang, Kelapa Dua, Tangerang Regency, Banten
+                            15831</span>
                     </li>
 
                     <li class="flex items-center text-sm text-zinc-400">
