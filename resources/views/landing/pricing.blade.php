@@ -89,15 +89,15 @@
 
     // Kalau nanti mau ambil dari DB, tinggal ganti ini.
     $pricingData = [
-        [
-            'id' => 1,
-            'name' => 'Paket Basic',
-            'description' => 'Cocok untuk upgrade audio harian dengan budget hemat.',
-            'price' => 1500000,
-            'period' => 'Install sekali, tuning dasar.',
-            'popular' => false,
-            'features' => ['Upgrade speaker depan', 'Instalasi rapi & aman', 'Konsultasi setup audio'],
-        ],
+        // [
+        //     'id' => 1,
+        //     'name' => 'Paket Basic',
+        //     'description' => 'Cocok untuk upgrade audio harian dengan budget hemat.',
+        //     'price' => 1500000,
+        //     'period' => 'Install sekali, tuning dasar.',
+        //     'popular' => false,
+        //     'features' => ['Upgrade speaker depan', 'Instalasi rapi & aman', 'Konsultasi setup audio'],
+        // ],
         [
             'id' => 2,
             'name' => 'Paket Signature',
