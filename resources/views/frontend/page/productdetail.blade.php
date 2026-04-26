@@ -385,6 +385,8 @@
             }
         }
     </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
 </body>
 
 </html>

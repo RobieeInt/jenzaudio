@@ -353,6 +353,8 @@
         <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50" height="50">
         <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratis</span>
     </a>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
 </body>
 
 </html>
