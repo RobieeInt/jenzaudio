@@ -168,7 +168,7 @@
                         </span>
                     </div>
 
-                    <div class="max-w-3xl">
+                    <div class="max-w-3xl mt-5">
                         <span
                             class="mb-4 inline-flex rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-sm font-semibold text-amber-500">
                             {{ $product->category->name ?? 'Produk Audio Mobil' }}
