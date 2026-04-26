@@ -26,9 +26,11 @@
         {{-- Products Grid --}}
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <template x-for="(product, index) in filteredProducts()" :key="product.id">
-                <div class="group relative flex h-full flex-col overflow-hidden border border-zinc-800 bg-zinc-950 transform transition-all duration-500 hover:scale-105 hover:border-amber-500"
+                <div class="group relative flex h-full cursor-pointer flex-col overflow-hidden border border-zinc-800 bg-zinc-950 transform transition-all duration-500 hover:scale-105 hover:border-amber-500"
                     :class="isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'"
-                    :style="{ 'transition-delay': (index * 50) + 'ms' }">
+                    :style="{ 'transition-delay': (index * 50) + 'ms' }"
+                    @click="goToDetail(product.slug)">
+
                     {{-- Badge --}}
                     <template x-if="product.badge">
                         <div
@@ -65,9 +67,11 @@
                         <h3 class="mb-1 line-clamp-2 text-lg font-semibold text-white">
                             <span x-text="product.name"></span>
                         </h3>
+
                         <p class="mb-3 line-clamp-2 text-sm text-zinc-400">
                             <span x-text="product.description"></span>
                         </p>
+
                         {{--
                         <div class="mb-3">
                             <span class="text-2xl font-bold text-amber-500">
@@ -78,7 +82,8 @@
                                     Rp <span x-text="formatPrice(product.originalPrice)"></span>
                                 </span>
                             </template>
-                        </div> --}}
+                        </div>
+                        --}}
 
                         <template x-if="product.features && product.features.length">
                             <ul class="mb-4 space-y-1 text-xs text-zinc-500">
@@ -94,10 +99,10 @@
                         <div class="mt-auto pt-2">
                             <button type="button"
                                 class="flex w-full items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-amber-500 hover:text-zinc-900"
-                                @click="openWhatsApp(product.name)">
+                                @click.stop="openWhatsApp(product.name)">
                                 {{-- Cart icon --}}
-                                <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
+                                <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
                                     <circle cx="9" cy="21" r="1"></circle>
                                     <circle cx="20" cy="21" r="1"></circle>
                                     <path d="M1 1h4l2.68 12.39A2 2 0 0 0 9.62 15h9.76a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -140,7 +145,6 @@
                 'category' => $item->category->name ?? 'Lainnya',
                 'badge' => $item->badge_label ?? null,
                 'description' => $item->short_description ?? '',
-                // kalau punya field features sendiri boleh ganti ini
                 'features' => $item->features ? explode('|', $item->features) : [],
             ];
         })
@@ -157,6 +161,7 @@
             products: @json($productsData),
             categories: @json($productCategories),
             waPhone: @json($waPhone),
+            productDetailBaseUrl: @json(url('/productdetail')),
 
             isVisible: false,
             selectedCategory: 'All',
@@ -182,17 +187,26 @@
                 if (this.selectedCategory === 'All') {
                     return this.products;
                 }
+
                 return this.products.filter(p => p.category === this.selectedCategory);
             },
 
             formatPrice(value) {
                 if (!value) return '0';
+
                 return Number(value).toLocaleString('id-ID');
+            },
+
+            goToDetail(slug) {
+                if (!slug) return;
+
+                window.location.href = this.productDetailBaseUrl + '/' + slug;
             },
 
             openWhatsApp(productName) {
                 const message = 'Halo, saya tertarik dengan produk ' + productName + '. Bisa info lebih lanjut?';
                 const url = 'https://wa.me/' + this.waPhone + '?text=' + encodeURIComponent(message);
+
                 window.open(url, '_blank');
             },
         }
