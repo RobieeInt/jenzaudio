@@ -127,7 +127,7 @@ class LandingController extends Controller
 
         $categoryfooter = ProductCategories::where('status', 1)
             ->orderBy('id', 'desc')
-            ->take(10)
+            ->take(30)
             ->get();
 
         $products = Product::with(['galleries', 'category'])

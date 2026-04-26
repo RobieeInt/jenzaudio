@@ -270,9 +270,63 @@
                         </div>
 
                         {{-- Pagination --}}
-                        <div class="mt-12">
-                            {{ $products->links() }}
-                        </div>
+                       {{-- Pagination --}}
+@if ($products->hasPages())
+    <div class="mt-14 flex flex-col items-center gap-4">
+        <p class="text-sm text-zinc-500">
+            Menampilkan
+            <span class="font-semibold text-zinc-300">{{ $products->firstItem() }}</span>
+            -
+            <span class="font-semibold text-zinc-300">{{ $products->lastItem() }}</span>
+            dari
+            <span class="font-semibold text-zinc-300">{{ $products->total() }}</span>
+            produk
+        </p>
+
+        <nav class="flex flex-wrap items-center justify-center gap-2">
+            {{-- Previous --}}
+            @if ($products->onFirstPage())
+                <span
+                    class="inline-flex h-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 text-sm font-semibold text-zinc-700">
+                    Prev
+                </span>
+            @else
+                <a href="{{ $products->previousPageUrl() }}"
+                    class="inline-flex h-11 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 text-sm font-semibold text-zinc-300 transition hover:border-amber-500 hover:text-amber-500">
+                    Prev
+                </a>
+            @endif
+
+            {{-- Page Numbers --}}
+            @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                @if ($page == $products->currentPage())
+                    <span
+                        class="inline-flex h-11 min-w-11 items-center justify-center rounded-xl bg-amber-500 px-4 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/25">
+                        {{ $page }}
+                    </span>
+                @else
+                    <a href="{{ $url }}"
+                        class="inline-flex h-11 min-w-11 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 text-sm font-semibold text-zinc-300 transition hover:border-amber-500 hover:text-amber-500">
+                        {{ $page }}
+                    </a>
+                @endif
+            @endforeach
+
+            {{-- Next --}}
+            @if ($products->hasMorePages())
+                <a href="{{ $products->nextPageUrl() }}"
+                    class="inline-flex h-11 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-950 px-4 text-sm font-semibold text-zinc-300 transition hover:border-amber-500 hover:text-amber-500">
+                    Next
+                </a>
+            @else
+                <span
+                    class="inline-flex h-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-950 px-4 text-sm font-semibold text-zinc-700">
+                    Next
+                </span>
+            @endif
+        </nav>
+    </div>
+@endif
                     @else
                         <div class="rounded-2xl border border-zinc-800 bg-zinc-950 px-6 py-16 text-center">
                             <p class="text-xl font-semibold text-white">
