@@ -7,13 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="author" content="Jenz Audio">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="{{ Str::limit(strip_tags($product->short_description ?? $product->description ?? 'Detail produk Jenz Audio'), 150) }}">
+    <meta name="description"
+        content="{{ Str::limit(strip_tags($product->short_description ?? $product->description ?? 'Detail produk Jenz Audio'), 150) }}">
 
+    {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('redesign/images/jenzlogobg.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('redesign/images/apple-touch-icon-57x57.png') }}">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('redesign/images/apple-touch-icon-72x72.png') }}">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('redesign/images/apple-touch-icon-114x114.png') }}">
 
+    {{-- Tailwind / Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
@@ -43,12 +46,6 @@
             color: #18181b;
         }
 
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -67,6 +64,10 @@
 
         .whatsapp-float:hover {
             transform: scale(1.1);
+        }
+
+        .whatsapp-float img {
+            display: block;
         }
 
         .whatsapp-tooltip {
@@ -97,6 +98,7 @@
         }
     </style>
 
+    {{-- Google tag --}}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -106,8 +108,10 @@
         }
 
         gtag('js', new Date());
+
         gtag('config', 'G-D9GHSSH4L4');
         gtag('config', 'AW-611713340');
+
         gtag('config', 'AW-611713340/OfR6CMzc7ssbELyC2KMC', {
             'phone_conversion_number': '6281617000097'
         });
@@ -115,7 +119,7 @@
         function gtag_report_conversion(url) {
             var callback = function() {
                 if (typeof(url) !== 'undefined') {
-                    window.location = url;
+                    window.open(url, '_blank');
                 }
             };
 
@@ -144,22 +148,27 @@
 
         <main x-data="productDetailPage()">
 
-            {{-- Hero / Page Title --}}
+            {{-- Hero --}}
             <section class="relative overflow-hidden bg-zinc-950 px-4 pb-16 pt-32">
                 <div class="absolute inset-0 bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950"></div>
-                <div class="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-500/10 blur-3xl"></div>
+                <div
+                    class="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-amber-500/10 blur-3xl">
+                </div>
 
                 <div class="relative mx-auto max-w-7xl">
                     <div class="mb-8 flex flex-wrap items-center gap-2 text-sm text-zinc-400">
                         <a href="{{ route('landing-page') }}" class="transition hover:text-amber-500">
-                            Home
+                            {{-- Home --}}
                         </a>
                         <span>/</span>
-                        <span class="text-zinc-300">Detail Produk</span>
+                        <span class="text-zinc-300">
+                            {{-- Detail Produk --}}
+                        </span>
                     </div>
 
                     <div class="max-w-3xl">
-                        <span class="mb-4 inline-flex rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-sm font-semibold text-amber-500">
+                        <span
+                            class="mb-4 inline-flex rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-sm font-semibold text-amber-500">
                             {{ $product->category->name ?? 'Produk Audio Mobil' }}
                         </span>
 
@@ -180,14 +189,15 @@
                     <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
 
                         {{-- Gallery --}}
-                        <div class="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 shadow-2xl shadow-black/30">
+                        <div
+                            class="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 shadow-2xl shadow-black/30">
                             <div class="relative aspect-square overflow-hidden bg-zinc-900">
-                                <img :src="activeImage"
-                                    alt="{{ $product->name }}"
+                                <img :src="activeImage" alt="{{ $product->name }}"
                                     class="h-full w-full object-cover transition-all duration-500">
 
                                 @if (!empty($product->badge_label))
-                                    <div class="absolute right-4 top-4 rounded-full bg-amber-500 px-4 py-2 text-xs font-bold text-zinc-950">
+                                    <div
+                                        class="absolute right-4 top-4 rounded-full bg-amber-500 px-4 py-2 text-xs font-bold text-zinc-950">
                                         {{ $product->badge_label }}
                                     </div>
                                 @endif
@@ -197,27 +207,28 @@
                                 @forelse ($galleryImages as $gallery)
                                     <button type="button"
                                         class="aspect-square overflow-hidden rounded-lg border transition hover:border-amber-500"
-                                        :class="activeImage === '{{ Storage::url($gallery->image) }}' ? 'border-amber-500' : 'border-zinc-800'"
+                                        :class="activeImage === '{{ Storage::url($gallery->image) }}' ?
+                                            'border-amber-500' : 'border-zinc-800'"
                                         @click="activeImage = '{{ Storage::url($gallery->image) }}'">
-                                        <img src="{{ Storage::url($gallery->image) }}"
-                                            alt="{{ $product->name }}"
+                                        <img src="{{ Storage::url($gallery->image) }}" alt="{{ $product->name }}"
                                             class="h-full w-full object-cover">
                                     </button>
                                 @empty
                                     <button type="button"
                                         class="aspect-square overflow-hidden rounded-lg border border-amber-500">
-                                        <img src="{{ $fallbackImage }}"
-                                            alt="{{ $product->name }}"
+                                        <img src="{{ $fallbackImage }}" alt="{{ $product->name }}"
                                             class="h-full w-full object-cover">
                                     </button>
                                 @endforelse
                             </div>
                         </div>
 
-                        {{-- Info --}}
-                        <div class="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 shadow-2xl shadow-black/30 md:p-8">
+                        {{-- Product Info --}}
+                        <div
+                            class="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 shadow-2xl shadow-black/30 md:p-8">
                             <div class="mb-4 flex flex-wrap items-center gap-3">
-                                <span class="rounded-full border border-zinc-700 px-4 py-1 text-xs font-semibold text-zinc-300">
+                                <span
+                                    class="rounded-full border border-zinc-700 px-4 py-1 text-xs font-semibold text-zinc-300">
                                     {{ $product->brand->name ?? 'Jenz Audio' }}
                                 </span>
 
@@ -235,7 +246,8 @@
                                     @for ($i = 0; $i < 5; $i++)
                                         <svg class="h-4 w-4 {{ $i < ($product->star ?? 5) ? 'text-amber-500' : 'text-zinc-700' }}"
                                             viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M12 2l2.9 5.9L21 9.3l-4.5 4.4L17.8 21 12 18.2 6.2 21l1.3-7.3L3 9.3l6.1-1.4L12 2z" />
+                                            <path
+                                                d="M12 2l2.9 5.9L21 9.3l-4.5 4.4L17.8 21 12 18.2 6.2 21l1.3-7.3L3 9.3l6.1-1.4L12 2z" />
                                         </svg>
                                     @endfor
                                 </div>
@@ -271,59 +283,44 @@
                                 </div>
                             @endif
 
+                            {{-- CTA WhatsApp --}}
                             <div class="mb-8">
-                                <label class="mb-3 block text-sm font-semibold text-zinc-300">
-                                    Jumlah
-                                </label>
+                                <button type="button"
+                                    class="flex h-16 w-full items-center justify-center rounded-xl bg-amber-500 px-8 text-base font-extrabold text-zinc-950 shadow-lg shadow-amber-500/25 transition hover:scale-[1.02] hover:bg-amber-400 md:text-lg"
+                                    @click="openWhatsApp">
+                                    Chat Dulu via WhatsApp
+                                </button>
 
-                                <div class="flex flex-col gap-4 sm:flex-row">
-                                    <div class="flex h-12 w-full overflow-hidden rounded-md border border-zinc-700 bg-zinc-900 sm:w-36">
-                                        <button type="button"
-                                            class="flex w-12 items-center justify-center text-xl text-white transition hover:bg-zinc-800"
-                                            @click="decreaseQty">
-                                            -
-                                        </button>
-
-                                        <input type="number"
-                                            min="1"
-                                            x-model="qty"
-                                            class="w-full border-0 bg-zinc-900 text-center text-white outline-none focus:ring-0">
-
-                                        <button type="button"
-                                            class="flex w-12 items-center justify-center text-xl text-white transition hover:bg-zinc-800"
-                                            @click="increaseQty">
-                                            +
-                                        </button>
-                                    </div>
-
-                                    <button type="button"
-                                        class="flex h-12 flex-1 items-center justify-center rounded-md bg-amber-500 px-6 text-sm font-bold text-zinc-950 transition hover:bg-amber-400"
-                                        @click="openWhatsApp">
-                                        Pesan via WhatsApp
-                                    </button>
-                                </div>
+                                <p class="mt-3 text-center text-sm text-zinc-500">
+                                    Konsultasi gratis dulu, biar pilihan audio mobilnya pas dan gak asal beli kayak
+                                    tebak-tebakan nasib.
+                                </p>
                             </div>
 
+                            {{-- Store-Oriented Info --}}
                             <div class="grid gap-4 sm:grid-cols-2">
-                                <div class="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
-                                    <div class="mb-1 text-sm font-bold text-white">
-                                        Estimasi Pengerjaan
+                                <div class="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+                                    <div class="mb-2 text-sm font-bold text-white">
+                                        Datang ke Toko, Dengerin Langsung
                                     </div>
-                                    <p class="text-sm text-zinc-400">
-                                        2–5 hari kerja tergantung produk dan pemasangan.
+                                    <p class="text-sm leading-relaxed text-zinc-400">
+                                        Lebih enak cek langsung kualitas suara, cocokkan kebutuhan mobil, dan diskusi
+                                        setting audio yang paling pas.
                                     </p>
                                 </div>
 
-                                <div class="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
-                                    <div class="mb-1 text-sm font-bold text-white">
-                                        Konsultasi Gratis
+                                <div class="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+                                    <div class="mb-2 text-sm font-bold text-white">
+                                        Chat Dulu Biar Gak Salah Pilih
                                     </div>
-                                    <p class="text-sm text-zinc-400">
-                                        Tanya dulu sebelum beli biar gak asal checkout kayak manusia kalap diskon.
+                                    <p class="text-sm leading-relaxed text-zinc-400">
+                                        Kirim tipe mobil dan kebutuhan audio kamu. Tim Jenz Audio bantu arahin sebelum
+                                        kamu datang ke toko.
                                     </p>
                                 </div>
                             </div>
 
+                            {{-- Meta --}}
                             <div class="mt-8 border-t border-zinc-800 pt-6 text-sm text-zinc-400">
                                 @if (!empty($product->category))
                                     <div class="mb-2">
@@ -355,12 +352,12 @@
         @include('landing.footer')
     </div>
 
+    {{-- Sticky WhatsApp Button --}}
     <a href="https://wa.me/{{ $waPhone }}?text=Halo%2C%20saya%20mau%20tanya%20dong"
-        class="whatsapp-float"
-        target="_blank"
-        aria-label="Chat via WhatsApp"
+        class="whatsapp-float" target="_blank" aria-label="Chat via WhatsApp"
         onclick="return gtag_report_conversion(this.href);">
-        <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50" height="50">
+        <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50"
+            height="50">
         <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratis</span>
     </a>
 
@@ -368,27 +365,12 @@
         function productDetailPage() {
             return {
                 activeImage: @json($mainImage),
-                qty: 1,
                 waPhone: @json($waPhone),
                 productName: @json($product->name),
 
-                increaseQty() {
-                    this.qty = parseInt(this.qty || 1) + 1;
-                },
-
-                decreaseQty() {
-                    const currentQty = parseInt(this.qty || 1);
-
-                    if (currentQty > 1) {
-                        this.qty = currentQty - 1;
-                    }
-                },
-
                 openWhatsApp() {
-                    const qty = parseInt(this.qty || 1);
-
                     const message =
-                        `Halo, saya ingin tanya produk:\n\n📦 *${this.productName}*\n🔢 Jumlah: *${qty}*\n\nMohon info lebih lanjut ya.`;
+                        `Halo Jenz Audio, saya tertarik dengan produk:\n\n📦 *${this.productName}*\n\nSaya mau konsultasi dulu dan rencana datang ke toko. Bisa dibantu infonya?`;
 
                     const waUrl = `https://wa.me/${this.waPhone}?text=${encodeURIComponent(message)}`;
 
