@@ -160,7 +160,9 @@
                         <a href="{{ route('landing-page') }}" class="transition hover:text-amber-500">
                             {{-- Home --}}
                         </a>
-                        <span>/</span>
+                        <span>
+                            {{-- / --}}
+                        </span>
                         <span class="text-zinc-300">
                             {{-- Detail Produk --}}
                         </span>
