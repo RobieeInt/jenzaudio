@@ -132,7 +132,7 @@ class LandingController extends Controller
 
         $products = Product::with(['galleries', 'category'])
             ->where('category_id', $category->id)
-            ->paginate(6); // atau berapa item per halaman yang lo mau
+            ->paginate(30); // atau berapa item per halaman yang lo mau
 
         $contact = Contact::orderBy('id', 'desc')->first();
 
