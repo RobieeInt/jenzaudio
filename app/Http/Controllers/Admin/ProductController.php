@@ -14,7 +14,7 @@ use Intervention\Image\Facades\Image;
 class ProductController extends Controller
 {
     public function index() {
-        $data = Product::orderBy('status', 'desc')->get();
+        $data = Product::orderBy('created_at', 'desc')->get();
         if (request()->ajax()) {
             // return DataTables::of($data)
             //     ->addColumn('action', function ($data) {
