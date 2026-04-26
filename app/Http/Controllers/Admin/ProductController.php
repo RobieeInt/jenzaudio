@@ -15,7 +15,7 @@ class ProductController extends Controller
 {
     public function index() {
         $data = Product::orderBy('created_at', 'desc')->get();
-        dd($data->pluck('id', 'created_at')->take(10));
+
         if (request()->ajax()) {
             // return DataTables::of($data)
             //     ->addColumn('action', function ($data) {
