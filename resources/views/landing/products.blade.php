@@ -19,7 +19,8 @@
                     :class="selectedCategory === category ?
                         'bg-amber-500 text-zinc-900 scale-105 shadow-lg shadow-amber-500/30' :
                         'bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:scale-105'"
-                    @click="selectedCategory = category" x-text="category"></button>
+                    @click="selectedCategory = category" x-text="category">
+                </button>
             </template>
         </div>
 
@@ -54,8 +55,8 @@
                             <span class="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-400">
                                 <span x-text="product.brand"></span>
                             </span>
+
                             <div class="flex items-center text-xs text-zinc-400">
-                                {{-- Star icon --}}
                                 <svg class="mr-1 h-4 w-4 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
                                     <path
                                         d="M12 2l2.9 5.9L21 9.3l-4.5 4.4L17.8 21 12 18.2 6.2 21l1.3-7.3L3 9.3l6.1-1.4L12 2z" />
@@ -72,19 +73,6 @@
                             <span x-text="product.description"></span>
                         </p>
 
-                        {{--
-                        <div class="mb-3">
-                            <span class="text-2xl font-bold text-amber-500">
-                                Rp <span x-text="formatPrice(product.price)"></span>
-                            </span>
-                            <template x-if="product.originalPrice">
-                                <span class="ml-2 text-sm text-zinc-500 line-through">
-                                    Rp <span x-text="formatPrice(product.originalPrice)"></span>
-                                </span>
-                            </template>
-                        </div>
-                        --}}
-
                         <template x-if="product.features && product.features.length">
                             <ul class="mb-4 space-y-1 text-xs text-zinc-500">
                                 <template x-for="(feature, idx) in product.features.slice(0, 3)" :key="idx">
@@ -100,7 +88,6 @@
                             <button type="button"
                                 class="flex w-full items-center justify-center rounded-md bg-zinc-800 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-amber-500 hover:text-zinc-900"
                                 @click.stop="openWhatsApp(product.name)">
-                                {{-- Cart icon --}}
                                 <svg class="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2">
                                     <circle cx="9" cy="21" r="1"></circle>
@@ -115,6 +102,15 @@
             </template>
         </div>
 
+        {{-- Button lihat semua kategori --}}
+        <div class="mt-12 text-center" x-show="selectedCategory !== 'All' && selectedCategorySlug()" x-cloak>
+            <button type="button"
+                class="inline-flex items-center justify-center rounded-xl border border-amber-500 bg-amber-500 px-8 py-4 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/25 transition hover:scale-105 hover:bg-amber-400"
+                @click="goToCategory(selectedCategorySlug())">
+                Lihat Semua Produk Kategori Ini
+            </button>
+        </div>
+
         {{-- Empty state --}}
         <div class="py-16 text-center" x-show="filteredProducts().length === 0">
             <p class="text-xl text-zinc-500">Tidak ada produk di kategori ini.</p>
@@ -123,14 +119,12 @@
 </section>
 
 @php
-    // nomor WA
     $waPhone = preg_replace('/[^0-9]/', '', $contact->phone ?? '6281617000097');
 
     $collection = isset($productsPopular) ? collect($productsPopular) : collect();
 
     $productsData = $collection
         ->map(function ($item) {
-            /** @var \App\Models\Product $item */
             $image = $item->galleries->first()?->image ?? null;
 
             return [
@@ -143,6 +137,7 @@
                 'brand' => $item->brand->name ?? 'Jenz Audio',
                 'rating' => $item->rating ?? 4.9,
                 'category' => $item->category->name ?? 'Lainnya',
+                'categorySlug' => $item->category->slug ?? null,
                 'badge' => $item->badge_label ?? null,
                 'description' => $item->short_description ?? '',
                 'features' => $item->features ? explode('|', $item->features) : [],
@@ -162,6 +157,7 @@
             categories: @json($productCategories),
             waPhone: @json($waPhone),
             productDetailBaseUrl: @json(url('/productdetail')),
+            categoryBaseUrl: @json(url('/category')),
 
             isVisible: false,
             selectedCategory: 'All',
@@ -191,10 +187,16 @@
                 return this.products.filter(p => p.category === this.selectedCategory);
             },
 
-            formatPrice(value) {
-                if (!value) return '0';
+            selectedCategorySlug() {
+                const found = this.products.find(p => p.category === this.selectedCategory);
 
-                return Number(value).toLocaleString('id-ID');
+                return found ? found.categorySlug : null;
+            },
+
+            goToCategory(slug) {
+                if (!slug) return;
+
+                window.location.href = this.categoryBaseUrl + '/' + slug;
             },
 
             goToDetail(slug) {
