@@ -260,19 +260,33 @@ class ProductController extends Controller
     }
 
     //deleteImage
-    public function deleteImage (Request $request){
-        //get image name
-        $image = ProductGalleries::where('id',$request->id)->first();
-        $product_id = $image->product_id;
-        //delete image
-        unlink(public_path('storage/'.$image->image));
-        //delete image from database
-        ProductGalleries::where('id',$request->id)->delete();
+public function deleteImage(Request $request)
+{
+    // get image
+    $image = ProductGalleries::where('id', $request->id)->first();
 
-        //return to product
-        return redirect()->route('admin.product.edit',$product_id)->with('success-delete', 'Foto berhasil dihapus');
-
+    if (!$image) {
+        return redirect()->back()->with('error', 'Foto tidak ditemukan');
     }
+
+    $product_id = $image->product_id;
+
+    // path image
+    $path = public_path('storage/' . $image->image);
+
+    // cek file exists dulu
+    if (file_exists($path)) {
+        unlink($path);
+    }
+
+    // delete database
+    $image->delete();
+
+    // return
+    return redirect()
+        ->route('admin.product.edit', $product_id)
+        ->with('success-delete', 'Foto berhasil dihapus');
+}
 
     //setDefault
     public function setDefault (Request $request){
