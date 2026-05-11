@@ -13,8 +13,10 @@
     {{-- Favicon --}}
     <link rel="shortcut icon" href="{{ asset('redesign/images/jenzlogobg.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('redesign/images/apple-touch-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('redesign/images/apple-touch-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('redesign/images/apple-touch-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72"
+        href="{{ asset('redesign/images/apple-touch-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114"
+        href="{{ asset('redesign/images/apple-touch-icon-114x114.png') }}">
 
     {{-- Tailwind / Vite --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -104,15 +106,8 @@
         }
     </style>
 
-    <!-- Google tag (gtag.js) - GA4 + Google Ads -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D9GHSSH4L4"></script>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-TN38PVT5');</script>
-<!-- End Google Tag Manager -->
 
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -120,44 +115,70 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         function gtag() {
             dataLayer.push(arguments);
         }
+
         gtag('js', new Date());
 
         // GA4
         gtag('config', 'G-D9GHSSH4L4');
 
-        // Google Ads base tag
+        // Google Ads
         gtag('config', 'AW-611713340');
-
-        // Optional: phone conversion config
-        gtag('config', 'AW-611713340/OfR6CMzc7ssbELyC2KMC', {
-            'phone_conversion_number': '6281617000097'
-        });
     </script>
 
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
 
-    <!-- Event snippet for Klik keluar conversion -->
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TN38PVT5');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Ads Conversion -->
     <script>
         function gtag_report_conversion(url) {
-            var callback = function() {
-                if (typeof(url) !== 'undefined') {
-                    window.location = url;
-                }
-            };
 
             gtag('event', 'conversion', {
                 'send_to': 'AW-611713340/nq18CJKI8ssbELyC2KMC',
                 'value': 1.0,
-                'currency': 'IDR',
-                'event_callback': callback
+                'currency': 'IDR'
             });
+
+            window.open(url, '_blank');
 
             return false;
         }
     </script>
+
 </head>
 
 <body class="bg-zinc-950 text-white" data-mobile-nav-style="classic">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TN38PVT5"
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div class="min-h-screen bg-zinc-950">
+
         @include('landing.navbar')
         @include('landing.hero')
         @include('landing.about')
@@ -170,20 +191,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         @include('landing.faq')
         @include('landing.contact')
         @include('landing.footer')
+
     </div>
 
-    {{-- Sticky WhatsApp Button + conversion click --}}
-    <a href="https://wa.me/6281617000097?text=Halo%2C%20saya%20mau%20tanya%20dong" class="whatsapp-float"
-        target="_blank" aria-label="Chat via WhatsApp" onclick="return gtag_report_conversion(this.href);">
-        <img src="{{ asset('redesign/images/whatsappicon.webp') }}" alt="WhatsApp" width="50" height="50">
-        <span class="whatsapp-tooltip">Konsultasiin dulu yu Gratis</span>
+    {{-- Sticky WhatsApp Button --}}
+    <a href="https://wa.me/6281617000097?text=Halo%2C%20saya%20mau%20tanya%20dong"
+        class="whatsapp-float"
+        target="_blank"
+        aria-label="Chat via WhatsApp"
+        onclick="return gtag_report_conversion(this.href);">
+
+        <img src="{{ asset('redesign/images/whatsappicon.webp') }}"
+            alt="WhatsApp"
+            width="50"
+            height="50">
+
+        <span class="whatsapp-tooltip">
+            Konsultasiin dulu yu Gratis
+        </span>
+
     </a>
 
-    {{-- JS lain kalau ada, via Vite --}}
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TN38PVT5"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 </body>
 
 </html>
