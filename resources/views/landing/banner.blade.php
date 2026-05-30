@@ -253,6 +253,17 @@
         autoTimer = setInterval(function () {
             jenzGoTo(current + 1);
         }, 4000);
+
+        // swipe support
+        var sliderEl = document.querySelector('.jenz-slider-wrap');
+        var touchStartX = 0;
+        sliderEl.addEventListener('touchstart', function (e) {
+            touchStartX = e.changedTouches[0].clientX;
+        }, { passive: true });
+        sliderEl.addEventListener('touchend', function (e) {
+            var diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) jenzGoTo(current + (diff > 0 ? 1 : -1));
+        }, { passive: true });
     }
 
     if (document.readyState === 'loading') {
