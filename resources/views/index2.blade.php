@@ -195,6 +195,9 @@
 
     </div>
 
+    {{-- Popup Banner --}}
+    @include('landing.banner')
+
     {{-- Sticky WhatsApp Button --}}
     <a href="https://wa.me/6281617000097?text=Halo%2C%20saya%20mau%20tanya%20dong"
         class="whatsapp-float"

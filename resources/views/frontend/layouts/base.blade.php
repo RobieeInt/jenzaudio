@@ -128,6 +128,9 @@
         }
     </style>
 
+    {{-- Popup Banner --}}
+    @include('landing.banner')
+
     <!-- javascript libraries -->
     <script type="text/javascript" src="{{ asset('redesign/js/jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('redesign/js/vendors.min.js') }}"></script>
