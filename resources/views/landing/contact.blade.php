@@ -1,4 +1,4 @@
-<section id="contact" class="bg-zinc-900 py-20 px-4" x-data="contactSection()" x-ref="section" x-init="init()">
+<section id="contact" class="bg-zinc-900 py-20 px-4 overflow-hidden" x-data="contactSection()" x-ref="section" x-init="init()">
     <div class="mx-auto max-w-7xl">
         {{-- Heading --}}
         <div class="mb-16 transform text-center transition-all duration-1000"

@@ -22,8 +22,9 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <style>
-        html {
+        html, body {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
         ::-webkit-scrollbar {
