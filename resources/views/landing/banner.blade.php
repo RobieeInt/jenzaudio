@@ -201,7 +201,7 @@
         slides.forEach(function (_, i) {
             var btn = document.createElement('button');
             btn.className = 'jenz-dot' + (i === 0 ? ' active' : '');
-            btn.onclick = function () { jenzGoTo(i); };
+            btn.onclick = function () { jenzGoTo(i, true); };
             container.appendChild(btn);
         });
     }
@@ -217,13 +217,14 @@
         document.getElementById('jenz-cta').href = 'https://wa.me/6281617000097?text=' + waText;
     }
 
-    window.jenzGoTo = function (index) {
+    window.jenzGoTo = function (index, manual) {
+        if (manual) { clearInterval(autoTimer); autoTimer = null; }
         current = (index + slides.length) % slides.length;
         updateUI();
     };
 
     window.jenzSlide = function (dir) {
-        jenzGoTo(current + dir);
+        jenzGoTo(current + dir, true);
     };
 
     window.jenzBannerClose = function () {
@@ -262,7 +263,7 @@
         }, { passive: true });
         sliderEl.addEventListener('touchend', function (e) {
             var diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 40) jenzGoTo(current + (diff > 0 ? 1 : -1));
+            if (Math.abs(diff) > 40) jenzGoTo(current + (diff > 0 ? 1 : -1), true);
         }, { passive: true });
     }
 
