@@ -166,7 +166,7 @@
 
 </head>
 
-<body class="bg-zinc-950 text-white" data-mobile-nav-style="classic">
+<body class="bg-zinc-950 text-white overflow-x-hidden" data-mobile-nav-style="classic">
 
     <!-- Google Tag Manager (noscript) -->
     <noscript>
