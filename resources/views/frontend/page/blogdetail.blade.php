@@ -1,540 +1,258 @@
-@extends('frontend.layouts.base')
+@extends('frontend.layouts.landing')
 
-@section('title', 'About Us')
+@section('title', $blog->title . ' | Jenz Audio')
+@section('meta_description', $blog->meta_description ?: Str::limit(strip_tags($blog->description), 160))
+
+@push('head')
+    <meta name="keywords" content="{{ $blog->meta_keyword ?: $blog->tags }}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="{{ $blog->title }} | Jenz Audio">
+    <meta property="og:description" content="{{ $blog->meta_description ?: Str::limit(strip_tags($blog->description), 160) }}">
+    <meta property="og:image" content="{{ asset('storage/' . $blog->image) }}">
+    <meta property="og:url" content="{{ route('blogdetail', $blog->slug) }}">
+    <link rel="canonical" href="{{ route('blogdetail', $blog->slug) }}">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "{{ $blog->title }}",
+        "image": "{{ asset('storage/' . $blog->image) }}",
+        "author": {"@type": "Person","name": "{{ $blog->author }}"},
+        "publisher": {"@type": "Organization","name": "Jenz Audio"},
+        "datePublished": "{{ $blog->created_at->toIso8601String() }}",
+        "description": "{{ Str::limit(strip_tags($blog->description), 160) }}"
+    }
+    </script>
+@endpush
 
 @section('content')
-    <!-- Start blog details section -->
-    <section class="blog__details--section section--padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="blog__details--wrapper">
-                        <div class="entry__blog">
-                            <div class="blog__post--header mb-30">
-                                <h2 class="post__header--title mb-15">{{ $blog->title }}
-                                </h2>
-                                <p class="blog__post--meta">Posted by : {{ $blog->author }} / On :
-                                    {{ $blog->created_at->isoFormat('dddd, D MMMM Y') }} / Tags :
-                                    <a class="blog__post--meta__link" href="blog-details.html">{{ $blog->tags }}</a>
-                                </p>
-                            </div>
-                            <div class="blog__thumbnail mb-30">
-                                <img class="blog__thumbnail--img border-radius-10"
-                                    src="{{ asset('storage/' . $blog->image) }}" alt="blog-img">
-                            </div>
-                            <div class="blog__details--content">
-                                <h3 class="blog__details--content__subtitle mb-25">{{ $blog->description }}</h3>
-                                <p class="blog__details--content__desc mb-20">{!! $blog->content !!}</p>
-                                {{-- <p class="blog__details--content__desc mb-30"> Vel ipsa officiis nobis eveniet omnis
-                                    consequuntur neque quasi, in, optio rerum suscipit totam odio. Alias necessitatibus
-                                    nulla accusantium voluptatem ipsum voluptatum, vero in impedit nobis cupiditate ea,
-                                    dicta eos facilis eaque optio laudantium non neque itaque? Possimus officia aut
-                                    accusamus illum, adipisci, nihil numquam minus eum fugit, beatae minima facilis magni.
-                                </p>
-                                <blockquote class="blockquote__content bg__gray--color mb-30">
-                                    <p class="blockquote__content--desc">Quisque semper nunc vitae erat pellentesque, ac
-                                        placerat arcu consectetur. In venenatis elit ac ultrices convallis. Duis est nisi,
-                                        tincidunt ac urna sed, cursus blandit lectus. In ullamcorper sit amet ligula ut
-                                        eleifend. Proin dictum tempor ligula, ac feugiat metus. Sed finibus tortor eu
-                                        scelerisque scelerisque.</p>
-                                </blockquote>
-                                <p class="blog__details--content__desc">Lorem ipsum dolor sit amet, consectetur adipisicing
-                                    elit. Voluptatibus sapiente omnis sunt labore mollitia, quaerat incidunt sequi, ut alias
-                                    accusamus nostrum magni fugit facilis dignissimos illum repellendus et numquam adipisci
-                                    quos. Eos omnis maiores beatae cum a consequatur magnam sequi neque, at numquam qui
-                                    ipsam unde veritatis voluptates quam dicta! Ipsam, mollitia illo fuga vel culpa
-                                    reprehenderit quisquam maxime nesciunt. Sunt quaerat inventore aspernatur quibusdam
-                                    corrupti numquam mollitia exercitationem rem alias consectetur hic iusto dignissimos
-                                    nostrum odio, cumque impedit.</p> --}}
-                            </div>
-                        </div>
-                        <div class="blog__tags--social__media d-flex align-items-center justify-content-between">
-                            <div class="blog__tags--media d-flex align-items-center">
-                                <label class="blog__tags--media__title"> Tags :</label>
-                                <ul class="d-flex">
-                                    <?php
-                                    $tags = $blog->tags; // String containing tags separated by commas
-                                    $tagArray = explode(',', $tags); // Split the string into an array
-                                    
-                                    foreach ($tagArray as $tag) {
-                                        echo '<li class="blog__tags--media__list"><a class="blog__tags--media__link" href="blog-details.html">' . $tag . '</a></li>';
-                                    }
-                                    ?>
-                                </ul>
-                            </div>
-                            <div class="blog__social--media d-flex align-items-center">
-                                <label class="blog__social--media__title">Social Share :</label>
-                                <ul class="d-flex">
-                                    <li class="blog__social--media__list">
-                                        <a class="blog__social--media__link" target="_blank"
-                                            href="https://www.facebook.com">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="7.667" height="16.524"
-                                                viewBox="0 0 7.667 16.524">
-                                                <path data-name="Path 237"
-                                                    d="M967.495,353.678h-2.3v8.253h-3.437v-8.253H960.13V350.77h1.624v-1.888a4.087,4.087,0,0,1,.264-1.492,2.9,2.9,0,0,1,1.039-1.379,3.626,3.626,0,0,1,2.153-.6l2.549.019v2.833h-1.851a.732.732,0,0,0-.472.151.8.8,0,0,0-.246.642v1.719H967.8Z"
-                                                    transform="translate(-960.13 -345.407)" fill="currentColor"></path>
-                                            </svg>
-                                            <span class="visually-hidden">Facebook</span>
-                                        </a>
-                                    </li>
-                                    <li class="blog__social--media__list">
-                                        <a class="blog__social--media__link" target="_blank" href="https://twitter.com">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16.489" height="13.384"
-                                                viewBox="0 0 16.489 13.384">
-                                                <path data-name="Path 303"
-                                                    d="M966.025,1144.2v.433a9.783,9.783,0,0,1-.621,3.388,10.1,10.1,0,0,1-1.845,3.087,9.153,9.153,0,0,1-3.012,2.259,9.825,9.825,0,0,1-4.122.866,9.632,9.632,0,0,1-2.748-.4,9.346,9.346,0,0,1-2.447-1.11q.4.038.809.038a6.723,6.723,0,0,0,2.24-.376,7.022,7.022,0,0,0,1.958-1.054,3.379,3.379,0,0,1-1.958-.687,3.259,3.259,0,0,1-1.186-1.666,3.364,3.364,0,0,0,.621.056,3.488,3.488,0,0,0,.885-.113,3.267,3.267,0,0,1-1.374-.631,3.356,3.356,0,0,1-.969-1.186,3.524,3.524,0,0,1-.367-1.5v-.057a3.172,3.172,0,0,0,1.544.433,3.407,3.407,0,0,1-1.1-1.214,3.308,3.308,0,0,1-.4-1.609,3.362,3.362,0,0,1,.452-1.694,9.652,9.652,0,0,0,6.964,3.538,3.911,3.911,0,0,1-.075-.772,3.293,3.293,0,0,1,.452-1.694,3.409,3.409,0,0,1,1.233-1.233,3.257,3.257,0,0,1,1.685-.461,3.351,3.351,0,0,1,2.466,1.073,6.572,6.572,0,0,0,2.146-.828,3.272,3.272,0,0,1-.574,1.083,3.477,3.477,0,0,1-.913.8,6.869,6.869,0,0,0,1.958-.546A7.074,7.074,0,0,1,966.025,1144.2Z"
-                                                    transform="translate(-951.23 -1140.849)" fill="currentColor"></path>
-                                            </svg>
-                                            <span class="visually-hidden">Twitter</span>
-                                        </a>
-                                    </li>
-                                    <li class="blog__social--media__list">
-                                        <a class="blog__social--media__link" target="_blank" href="https://www.skype.com">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16.482" height="16.481"
-                                                viewBox="0 0 16.482 16.481">
-                                                <path data-name="Path 284"
-                                                    d="M879,926.615a4.479,4.479,0,0,1,.622-2.317,4.666,4.666,0,0,1,1.676-1.677,4.482,4.482,0,0,1,2.317-.622,4.577,4.577,0,0,1,2.43.678,7.58,7.58,0,0,1,5.048.961,7.561,7.561,0,0,1,3.786,6.593,8,8,0,0,1-.094,1.206,4.676,4.676,0,0,1,.7,2.411,4.53,4.53,0,0,1-.622,2.326,4.62,4.62,0,0,1-1.686,1.686,4.626,4.626,0,0,1-4.756-.075,7.7,7.7,0,0,1-1.187.094,7.623,7.623,0,0,1-7.647-7.647,7.46,7.46,0,0,1,.094-1.187A4.424,4.424,0,0,1,879,926.615Zm4.107,1.714a2.473,2.473,0,0,0,.282,1.234,2.41,2.41,0,0,0,.782.829,5.091,5.091,0,0,0,1.215.565,15.981,15.981,0,0,0,1.582.424q.678.151.979.235a3.091,3.091,0,0,1,.593.235,1.388,1.388,0,0,1,.452.348.738.738,0,0,1,.16.481.91.91,0,0,1-.48.753,2.254,2.254,0,0,1-1.271.321,2.105,2.105,0,0,1-1.253-.292,2.262,2.262,0,0,1-.65-.838,2.42,2.42,0,0,0-.414-.546.853.853,0,0,0-.584-.17.893.893,0,0,0-.669.283.919.919,0,0,0-.273.659,1.654,1.654,0,0,0,.217.782,2.456,2.456,0,0,0,.678.763,3.64,3.64,0,0,0,1.158.574,5.931,5.931,0,0,0,1.639.235,5.767,5.767,0,0,0,2.072-.339,2.982,2.982,0,0,0,1.356-.961,2.306,2.306,0,0,0,.471-1.431,2.161,2.161,0,0,0-.443-1.375,3.009,3.009,0,0,0-1.2-.894,10.118,10.118,0,0,0-1.865-.575,11.2,11.2,0,0,1-1.309-.311,2.011,2.011,0,0,1-.8-.452.992.992,0,0,1-.3-.744,1.143,1.143,0,0,1,.565-.97,2.59,2.59,0,0,1,1.488-.386,2.538,2.538,0,0,1,1.074.188,1.634,1.634,0,0,1,.622.49,3.477,3.477,0,0,1,.414.753,1.568,1.568,0,0,0,.4.594.866.866,0,0,0,.574.2,1,1,0,0,0,.706-.254.828.828,0,0,0,.273-.631,2.234,2.234,0,0,0-.443-1.253,3.321,3.321,0,0,0-1.158-1.046,5.375,5.375,0,0,0-2.524-.527,5.764,5.764,0,0,0-2.213.386,3.161,3.161,0,0,0-1.422,1.083A2.738,2.738,0,0,0,883.106,928.329Z"
-                                                    transform="translate(-878.999 -922)" fill="currentColor"></path>
-                                            </svg>
-                                            <span class="visually-hidden">Skype</span>
-                                        </a>
-                                    </li>
-                                    <li class="blog__social--media__list">
-                                        <a class="blog__social--media__link" target="_blank" href="https://www.youtube.com">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16.49" height="11.582"
-                                                viewBox="0 0 16.49 11.582">
-                                                <path data-name="Path 321"
-                                                    d="M967.759,1365.592q0,1.377-.019,1.717-.076,1.114-.151,1.622a3.981,3.981,0,0,1-.245.925,1.847,1.847,0,0,1-.453.717,2.171,2.171,0,0,1-1.151.6q-3.585.265-7.641.189-2.377-.038-3.387-.085a11.337,11.337,0,0,1-1.5-.142,2.206,2.206,0,0,1-1.113-.585,2.562,2.562,0,0,1-.528-1.037,3.523,3.523,0,0,1-.141-.585c-.032-.2-.06-.5-.085-.906a38.894,38.894,0,0,1,0-4.867l.113-.925a4.382,4.382,0,0,1,.208-.906,2.069,2.069,0,0,1,.491-.755,2.409,2.409,0,0,1,1.113-.566,19.2,19.2,0,0,1,2.292-.151q1.82-.056,3.953-.056t3.952.066q1.821.067,2.311.142a2.3,2.3,0,0,1,.726.283,1.865,1.865,0,0,1,.557.49,3.425,3.425,0,0,1,.434,1.019,5.72,5.72,0,0,1,.189,1.075q0,.095.057,1C967.752,1364.1,967.759,1364.677,967.759,1365.592Zm-7.6.925q1.49-.754,2.113-1.094l-4.434-2.339v4.66Q958.609,1367.311,960.156,1366.517Z"
-                                                    transform="translate(-951.269 -1359.8)" fill="currentColor"></path>
-                                            </svg>
-                                            <span class="visually-hidden">Youtube</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        {{-- <div class="related__post--area mb-50">
-                            <div class="section__heading text-center mb-20">
-                                <h2 class="section__heading--maintitle h3">Related Articles</h2>
-                            </div>
-                            <div class="row row-cols-md-2 row-cols-sm-2 row-cols-1 mb--n28">
-                                <div class="col mb-28">
-                                    <div class="related__post--items">
-                                        <div class="related__post--thumbnail border-radius-10 mb-20">
-                                            <a class="display-block" href="blog-details.html"><img
-                                                    class="related__post--img display-block border-radius-10"
-                                                    src="assets/img/blog/related-post1.webp" alt="related-post"></a>
-                                        </div>
-                                        <div class="related__post--text">
-                                            <h3 class="related__post--title mb-5"><a class="related__post--title__link"
-                                                    href="blog-details.html">Post With Gallery</a></h3>
-                                            <span class="related__post--deta">September 17, 2022</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col mb-28">
-                                    <div class="related__post--items">
-                                        <div class="related__post--thumbnail border-radius-10 mb-20">
-                                            <a class="display-block" href="blog-details.html"><img
-                                                    class="related__post--img display-block border-radius-10"
-                                                    src="assets/img/blog/related-post2.webp" alt="related-post"></a>
-                                        </div>
-                                        <div class="related__post--text">
-                                            <h3 class="related__post--title mb-5"><a class="related__post--title__link"
-                                                    href="blog-details.html">Post With Vedio</a></h3>
-                                            <span class="related__post--deta">September 17, 2022</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment__box">
-                            <div class="reviews__comment--area2 mb-50">
-                                <h3 class="reviews__comment--reply__title mb-25">Recent Comment</h3>
-                                <div class="reviews__comment--inner">
-                                    <div class="reviews__comment--list d-flex">
-                                        <div class="reviews__comment--thumbnail">
-                                            <img src="assets/img/other/comment-thumb1.webp" alt="comment-thumbnail">
-                                        </div>
-                                        <div class="reviews__comment--content ">
-                                            <h4 class="reviews__comment--content__title2">Jakes on</h4>
-                                            <span class="reviews__comment--content__date2">January 11, 2022</span>
-                                            <p class="reviews__comment--content__desc">Lorem ipsum, dolor sit amet
-                                                consectetur adipisicing elit. Eos ex repellat officiis neque. Veniam, rem
-                                                nesciunt. Assumenda distinctio, autem error repellat eveniet ratione dolor
-                                                facilis accusantium amet pariatur, non eius!</p>
-                                            <button class="comment__reply--btn primary__btn" type="submit">Reply</button>
-                                        </div>
-                                    </div>
-                                    <div class="reviews__comment--list margin__left d-flex">
-                                        <div class="reviews__comment--thumbnail">
-                                            <img src="assets/img/other/comment-thumb2.webp" alt="comment-thumbnail">
-                                        </div>
-                                        <div class="reviews__comment--content">
-                                            <h4 class="reviews__comment--content__title2">Jakes on</h4>
-                                            <span class="reviews__comment--content__date2">January 11, 2022</span>
-                                            <p class="reviews__comment--content__desc">Lorem ipsum, dolor sit amet
-                                                consectetur adipisicing elit. Eos ex repellat officiis neque. Veniam, rem
-                                                nesciunt. Assumenda distinctio, autem error repellat eveniet ratione dolor
-                                                facilis accusantium amet pariatur, non eius!</p>
-                                            <button class="comment__reply--btn primary__btn" type="submit">Reply</button>
-                                        </div>
-                                    </div>
-                                    <div class="reviews__comment--list d-flex">
-                                        <div class="reviews__comment--thumbnail">
-                                            <img src="assets/img/other/comment-thumb3.webp" alt="comment-thumbnail">
-                                        </div>
-                                        <div class="reviews__comment--content">
-                                            <h4 class="reviews__comment--content__title2">Jakes on</h4>
-                                            <span class="reviews__comment--content__date2">January 11, 2022</span>
-                                            <p class="reviews__comment--content__desc">Lorem ipsum, dolor sit amet
-                                                consectetur adipisicing elit. Eos ex repellat officiis neque. Veniam, rem
-                                                nesciunt. Assumenda distinctio, autem error repellat eveniet ratione dolor
-                                                facilis accusantium amet pariatur, non eius!</p>
-                                            <button class="comment__reply--btn primary__btn" type="submit">Reply</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="reviews__comment--reply__area">
-                                <form action="#">
-                                    <h3 class="reviews__comment--reply__title mb-20">Leave A Comment</h3>
-                                    <div class="row">
-                                        <div class="col-lg-4 col-md-6 mb-20">
-                                            <label>
-                                                <input class="reviews__comment--reply__input" placeholder="Your Name...."
-                                                    type="text">
-                                            </label>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 mb-20">
-                                            <label>
-                                                <input class="reviews__comment--reply__input" placeholder="Your Email...."
-                                                    type="email">
-                                            </label>
-                                        </div>
-                                        <div class="col-lg-4 col-md-6 mb-20">
-                                            <label>
-                                                <input class="reviews__comment--reply__input"
-                                                    placeholder="Your Website...." type="text">
-                                            </label>
-                                        </div>
-                                        <div class="col-12 mb-15">
-                                            <textarea class="reviews__comment--reply__textarea" placeholder="Your Comments...."></textarea>
-                                        </div>
 
-                                    </div>
-                                    <button class="primary__btn text-white" data-hover="Submit"
-                                        type="submit">SUBMIT</button>
-                                </form>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog__sidebar--widget left widget__area">
-                        {{-- <div class="single__widget widget__bg">
-                            <h2 class="widget__title position__relative h3">Search</h2>
-                            <form class="widget__search--form" action="#">
-                                <label>
-                                    <input class="widget__search--form__input" placeholder="Search by" type="text">
-                                </label>
-                                <button class="widget__search--form__btn" type="submit">
-                                    Search
-                                </button>
-                            </form>
-                        </div> --}}
-                        {{-- <div class="single__widget widget__bg">
-                            <h2 class="widget__title position__relative h3">Categories</h2>
-                            <ul class="widget__categories--menu">
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img"
-                                            src="{{ asset('ggm/assets/img/product/small-product1.webp') }}"
-                                            alt="categories-img">
-                                        <span class="widget__categories--menu__text">Denim Jacket</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon"
-                                            xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                                transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product2.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product3.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product4.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product5.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img"
-                                            src="assets/img/product/small-product2.webp" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Oversize Cotton</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon"
-                                            xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                                transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product2.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product3.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product4.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product5.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img"
-                                            src="assets/img/product/small-product3.webp" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Dairy & chesse</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon"
-                                            xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                                transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product2.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product3.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product4.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product5.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img"
-                                            src="assets/img/product/small-product4.webp" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Shoulder Bag</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon"
-                                            xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                                transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product2.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product3.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product4.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product5.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="widget__categories--menu__list">
-                                    <label class="widget__categories--menu__label d-flex align-items-center">
-                                        <img class="widget__categories--menu__img"
-                                            src="assets/img/product/small-product5.webp" alt="categories-img">
-                                        <span class="widget__categories--menu__text">Denim Jacket</span>
-                                        <svg class="widget__categories--menu__arrowdown--icon"
-                                            xmlns="http://www.w3.org/2000/svg" width="12.355" height="8.394">
-                                            <path d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z"
-                                                transform="translate(-6 -8.59)" fill="currentColor"></path>
-                                        </svg>
-                                    </label>
-                                    <ul class="widget__categories--sub__menu">
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product2.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Jacket, Women</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product3.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Woolend Jacket</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product4.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Western denim</span>
-                                            </a>
-                                        </li>
-                                        <li class="widget__categories--sub__menu--list">
-                                            <a class="widget__categories--sub__menu--link d-flex align-items-center"
-                                                href="blog-details.html">
-                                                <img class="widget__categories--sub__menu--img"
-                                                    src="assets/img/product/small-product5.webp" alt="categories-img">
-                                                <span class="widget__categories--sub__menu--text">Mini Dresss</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div> --}}
-                        <div class="single__widget widget__bg">
-                            <h2 class="widget__title position__relative h3">Article Lainnya</h2>
-                            <div class="articl__post--inner">
+{{-- Hero --}}
+<section class="bg-zinc-900 border-b border-zinc-800 py-12 px-4">
+    <div class="mx-auto max-w-4xl">
 
-                                @forelse ($randomBlogs as $blog)
-                                    <div class="articl__post--items d-flex align-items-center">
-                                        <div class="articl__post--items__thumbnail position__relative">
-                                            <a class="articl__post--items__link display-block"
-                                                href="{{ route('blogdetail', $blog->slug) }}">
-                                                <img class="articl__post--items__img display-block"
-                                                    src="{{ asset('storage/' . $blog->image) }}" alt="product-img">
-                                            </a>
-                                        </div>
-                                        <div class="articl__post--items__content">
-                                            <h4 class="articl__post--items__content--title"><a
-                                                    href="{{ route('blogdetail', $blog->slug) }}">{{ $blog->title }}</a>
-                                            </h4>
-                                            <span class="meta__deta text__secondary">
-                                                {{ $blog->created_at->isoFormat('dddd, D MMMM Y') }}</span>
-                                        </div>
-                                    </div>
-                                @empty
-                                @endforelse
-                            </div>
-                        </div>
-                        <div class="single__widget widget__bg">
-                            <h2 class="widget__title position__relative h3">Tags</h2>
-                            <ul class="widget__tagcloud">
-                                <?php
-                                $tags = explode(',', $blog->tags);
-                                foreach ($tags as $tag) {
-                                    echo '<li class="widget__tagcloud--list"><a class="widget__tagcloud--link">' . $tag . '</a></li>';
-                                }
-                                ?>
-                                {{-- <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Wooden</a></li>
-                                <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Chair</a></li>
-                                <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Modern</a></li>
-                                <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Fabric </a></li>
-                                <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Shoulder </a></li>
-                                <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Winter</a></li>
-                                <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Accessories</a></li>
-                                <li class="widget__tagcloud--list"><a class="widget__tagcloud--link"
-                                        href="{{ route('blogdetail', $blog->slug) }}">Dress </a></li> --}}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+        {{-- Tags --}}
+        @if ($blog->tags)
+            <div class="mb-5 flex flex-wrap gap-2">
+                @foreach (array_map('trim', explode(',', $blog->tags)) as $tag)
+                    <span class="inline-flex items-center rounded-full bg-amber-500/10 border border-amber-500/20 px-3 py-1 text-xs font-semibold text-amber-400">
+                        {{ $tag }}
+                    </span>
+                @endforeach
             </div>
+        @endif
+
+        {{-- Title --}}
+        <h1 class="mb-5 text-2xl md:text-4xl font-bold leading-tight text-white">
+            {{ $blog->title }}
+        </h1>
+
+        {{-- Meta bar --}}
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2 pb-5 border-b border-zinc-800 text-sm text-zinc-400">
+            <span class="flex items-center gap-2">
+                <svg class="h-4 w-4 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5"/></svg>
+                {{ $blog->created_at->isoFormat('D MMMM Y') }}
+            </span>
+            @if ($blog->author)
+                <span class="flex items-center gap-2">
+                    <svg class="h-4 w-4 text-amber-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0"/></svg>
+                    {{ $blog->author }}
+                </span>
+            @endif
         </div>
-    </section>
-    <!-- End blog details section -->
+
+        {{-- Breadcrumb --}}
+        <nav class="mt-4 flex items-center gap-2 text-xs text-zinc-600">
+            <a href="{{ route('landing-page') }}" class="hover:text-amber-400 transition">Home</a>
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <a href="{{ route('blog') }}" class="hover:text-amber-400 transition">Blog</a>
+            <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            <span class="text-zinc-400 truncate max-w-[200px] md:max-w-xs">{{ $blog->title }}</span>
+        </nav>
+
+    </div>
+</section>
+
+{{-- Content --}}
+<section class="py-12 px-4">
+    <div class="mx-auto max-w-7xl">
+        <div class="grid gap-10 lg:grid-cols-[1fr_300px]">
+
+            {{-- Article --}}
+            <article>
+
+                {{-- Featured image --}}
+                <div class="mb-8 overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
+                    <img src="{{ asset('storage/' . $blog->image) }}"
+                         alt="{{ $blog->title }}"
+                         class="w-full h-auto block cursor-zoom-in"
+                         onclick="openLightbox(this.src, this.alt)"
+                         onerror="this.parentElement.style.display='none'">
+                </div>
+
+                {{-- Description lead --}}
+                @if ($blog->description)
+                    <div class="mb-8 rounded-xl border-l-4 border-amber-500 bg-amber-500/5 px-5 py-4">
+                        <p class="text-base font-medium leading-relaxed text-zinc-200">{{ $blog->description }}</p>
+                    </div>
+                @endif
+
+                {{-- Body --}}
+                <div class="blog-content">
+                    {!! $blog->content !!}
+                </div>
+
+                {{-- Tags footer --}}
+                @if ($blog->tags)
+                    <div class="mt-10 flex flex-wrap items-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 p-5">
+                        <span class="text-xs font-semibold text-zinc-500 mr-1">Tags:</span>
+                        @foreach (array_map('trim', explode(',', $blog->tags)) as $tag)
+                            <span class="rounded-full bg-zinc-800 border border-zinc-700 px-3 py-1 text-xs text-zinc-300 hover:border-amber-500/50 hover:text-amber-400 transition cursor-default">
+                                {{ $tag }}
+                            </span>
+                        @endforeach
+                    </div>
+                @endif
+
+                {{-- CTA WA --}}
+                <div class="mt-8 rounded-2xl border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-amber-500/5 p-7">
+                    <div class="flex items-start gap-4">
+                        <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-amber-500/20">
+                            <svg class="h-6 w-6 text-amber-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-bold text-white text-lg mb-1">Tertarik upgrade audio mobilmu?</p>
+                            <p class="text-sm text-zinc-400 mb-4">Konsultasi gratis dengan tim Jenz Audio. Kami bantu dari pemilihan produk sampai instalasi profesional.</p>
+                            <a href="https://wa.me/6281617000097?text=Halo%20Jenz%20Audio%2C%20saya%20baca%20artikel%20{{ urlencode($blog->title) }}%20dan%20ingin%20konsultasi"
+                               target="_blank"
+                               class="inline-flex items-center gap-2 rounded-xl bg-amber-500 px-5 py-2.5 text-sm font-bold text-zinc-900 hover:bg-amber-400 transition">
+                                Konsultasi Sekarang — Gratis
+                                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </article>
+
+            {{-- Sidebar --}}
+            <aside class="space-y-6 lg:sticky lg:top-24 lg:self-start">
+
+                {{-- Related posts --}}
+                @if ($randomBlogs->count())
+                    <div class="rounded-2xl border border-zinc-800 bg-zinc-900 overflow-hidden">
+                        <div class="px-5 py-4 border-b border-zinc-800 flex items-center gap-2">
+                            <svg class="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>
+                            <h3 class="text-sm font-bold text-white">Artikel Lainnya</h3>
+                        </div>
+                        <div class="divide-y divide-zinc-800">
+                            @foreach ($randomBlogs as $relatedBlog)
+                                <a href="{{ route('blogdetail', $relatedBlog->slug) }}"
+                                   class="group flex gap-4 items-start p-4 hover:bg-zinc-800/50 transition">
+                                    <div class="h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-zinc-800">
+                                        <img src="{{ asset('storage/' . $relatedBlog->image) }}"
+                                             alt="{{ $relatedBlog->title }}"
+                                             class="h-full w-full object-cover transition group-hover:scale-105"
+                                             onerror="this.parentElement.style.background='#3f3f46'">
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-zinc-200 line-clamp-2 group-hover:text-amber-400 transition leading-snug">
+                                            {{ $relatedBlog->title }}
+                                        </p>
+                                        <p class="mt-1.5 text-xs text-zinc-500">
+                                            {{ $relatedBlog->created_at->isoFormat('D MMM Y') }}
+                                        </p>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                {{-- Tags --}}
+                @if ($blog->tags)
+                    <div class="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+                        <div class="flex items-center gap-2 mb-4">
+                            <svg class="h-4 w-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z"/></svg>
+                            <h3 class="text-sm font-bold text-white">Tags</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            @foreach (array_map('trim', explode(',', $blog->tags)) as $tag)
+                                <span class="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs text-zinc-300 hover:border-amber-500/50 hover:text-amber-400 transition cursor-default">
+                                    {{ $tag }}
+                                </span>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+
+                {{-- Sticky CTA --}}
+                <div class="rounded-2xl border border-amber-500/20 bg-zinc-900 p-5 text-center">
+                    <div class="mb-4 flex justify-center">
+                        <div class="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/10 border border-amber-500/20">
+                            <svg class="h-7 w-7 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 9l10.5-3m0 6.553v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 11-.99-3.467l2.31-.66a2.25 2.25 0 001.632-2.163zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 01-1.632 2.163l-1.32.377a1.803 1.803 0 01-.99-3.467l2.31-.66A2.25 2.25 0 009 15.553z"/></svg>
+                        </div>
+                    </div>
+                    <p class="font-bold text-white mb-1">Upgrade Audio Mobilmu</p>
+                    <p class="text-xs text-zinc-500 mb-4 leading-relaxed">Konsultasi gratis dengan teknisi berpengalaman</p>
+                    <a href="https://wa.me/6281617000097?text=Halo%20Jenz%20Audio%2C%20saya%20ingin%20konsultasi"
+                       target="_blank"
+                       class="block w-full rounded-xl bg-amber-500 py-2.5 text-sm font-bold text-zinc-900 hover:bg-amber-400 transition">
+                        Chat Sekarang
+                    </a>
+                </div>
+
+            </aside>
+        </div>
+    </div>
+</section>
+
+<style>
+    .blog-content{font-size:15px;line-height:1.85;color:#d4d4d8}
+    .blog-content h2{color:#fff;font-size:1.35rem;font-weight:700;margin:2.5rem 0 .75rem;padding-bottom:.5rem;border-bottom:1px solid #27272a}
+    .blog-content h3{color:#e4e4e7;font-size:1.1rem;font-weight:700;margin:1.75rem 0 .5rem}
+    .blog-content p{margin-bottom:1.25rem}
+    .blog-content ul,.blog-content ol{margin:0 0 1.25rem 1.5rem;padding:0}
+    .blog-content li{margin-bottom:.5rem;padding-left:.25rem}
+    .blog-content ul li::marker{color:#f59e0b}
+    .blog-content img{border-radius:12px;margin:1.5rem 0;max-width:100%;height:auto}
+    .blog-content a{color:#f59e0b;text-decoration:underline;text-underline-offset:3px}
+    .blog-content blockquote{border-left:4px solid #f59e0b;padding:.875rem 1.25rem;background:#18181b;border-radius:0 10px 10px 0;margin:1.75rem 0;color:#a1a1aa;font-style:italic}
+    .blog-content strong,.blog-content b{color:#fff;font-weight:700}
+    .blog-content code{background:#27272a;padding:2px 6px;border-radius:5px;font-size:.85em;color:#fbbf24;font-family:monospace}
+    .blog-content pre{background:#18181b;border:1px solid #27272a;border-radius:10px;padding:1rem;overflow-x:auto;margin:1.25rem 0}
+    .blog-content table{width:100%;border-collapse:collapse;margin:1.5rem 0}
+    .blog-content th,.blog-content td{border:1px solid #27272a;padding:.625rem 1rem;text-align:left}
+    .blog-content th{background:#18181b;color:#fff;font-weight:600}
+</style>
+
+{{-- Lightbox modal --}}
+<div id="jenz-lightbox"
+     onclick="closeLightbox(event)"
+     style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.93);cursor:zoom-out;align-items:center;justify-content:center;padding:24px">
+    <button onclick="closeLightbox()" title="Tutup"
+            style="position:absolute;top:16px;right:20px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:20px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1;transition:background .2s">✕</button>
+    <img id="jenz-lightbox-img" src="" alt=""
+         onclick="event.stopPropagation()"
+         style="max-width:90vw;max-height:88vh;object-fit:contain;border-radius:12px;box-shadow:0 30px 100px rgba(0,0,0,0.8);cursor:default">
+</div>
+
+<script>
+function openLightbox(src, alt) {
+    const lb = document.getElementById('jenz-lightbox');
+    document.getElementById('jenz-lightbox-img').src = src;
+    document.getElementById('jenz-lightbox-img').alt = alt || '';
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+    if (e && e.target === document.getElementById('jenz-lightbox-img')) return;
+    document.getElementById('jenz-lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+});
+</script>
+
 @endsection

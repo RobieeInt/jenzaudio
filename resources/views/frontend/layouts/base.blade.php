@@ -2,13 +2,13 @@
 <html class="no-js" lang="en">
 
 <head>
-    <title>Jenz Audio</title>
+    <title>@yield('title', 'Jenz Audio — Spesialis Audio Mobil')</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="author" content="ThemeZaa">
+    <meta name="author" content="Jenz Audio">
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description"
-        content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 52+ ready demos.">
+    <meta name="description" content="@yield('meta_description', 'Jenz Audio adalah spesialis audio mobil yang siap bantu kamu wujudkan kualitas suara impian di kendaraan kesayangan.')">
+    @stack('head')
     <!-- favicon icon -->
     <link rel="shortcut icon" href="{{ asset('redesign/images/favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('redesign/images/apple-touch-icon-57x57.png') }}">

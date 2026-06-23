@@ -58,10 +58,11 @@
             <div>
                 <h4 class="mb-4 text-lg font-semibold text-white">Link Cepat</h4>
                 <ul class="space-y-3">
-                    <li><a href="#about" class="text-sm text-zinc-400 hover:text-amber-500">Tentang Kami</a></li>
-                    <li><a href="#services" class="text-sm text-zinc-400 hover:text-amber-500">Layanan</a></li>
-                    <li><a href="#portfolio" class="text-sm text-zinc-400 hover:text-amber-500">Portfolio</a></li>
-                    <li><a href="#pricing" class="text-sm text-zinc-400 hover:text-amber-500">Harga</a></li>
+                    <li><a href="/#about"    onclick="jenzNavTo(event,'#about')"    class="text-sm text-zinc-400 hover:text-amber-500 transition">Tentang Kami</a></li>
+                    <li><a href="/#services" onclick="jenzNavTo(event,'#services')" class="text-sm text-zinc-400 hover:text-amber-500 transition">Layanan</a></li>
+                    <li><a href="/#portfolio" onclick="jenzNavTo(event,'#portfolio')" class="text-sm text-zinc-400 hover:text-amber-500 transition">Portfolio</a></li>
+                    <li><a href="/#pricing"  onclick="jenzNavTo(event,'#pricing')"  class="text-sm text-zinc-400 hover:text-amber-500 transition">Harga</a></li>
+                    <li><a href="{{ route('blog') }}" class="text-sm text-zinc-400 hover:text-amber-500 transition">Blog</a></li>
                 </ul>
             </div>
 
@@ -69,11 +70,10 @@
             <div>
                 <h4 class="mb-4 text-lg font-semibold text-white">Layanan</h4>
                 <ul class="space-y-3">
-                    <li><a href="#services" class="text-sm text-zinc-400 hover:text-amber-500">Audio Mobil</a></li>
-                    <li><a href="#services" class="text-sm text-zinc-400 hover:text-amber-500">Head Unit</a></li>
-                    <li><a href="#services" class="text-sm text-zinc-400 hover:text-amber-500">Peredam Suara</a></li>
-                    <li><a href="#services" class="text-sm text-zinc-400 hover:text-amber-500">Aksesori Interior</a>
-                    </li>
+                    <li><a href="/#services" onclick="jenzNavTo(event,'#services')" class="text-sm text-zinc-400 hover:text-amber-500 transition">Audio Mobil</a></li>
+                    <li><a href="/#services" onclick="jenzNavTo(event,'#services')" class="text-sm text-zinc-400 hover:text-amber-500 transition">Head Unit</a></li>
+                    <li><a href="/#services" onclick="jenzNavTo(event,'#services')" class="text-sm text-zinc-400 hover:text-amber-500 transition">Peredam Suara</a></li>
+                    <li><a href="/#services" onclick="jenzNavTo(event,'#services')" class="text-sm text-zinc-400 hover:text-amber-500 transition">Aksesori Interior</a></li>
                 </ul>
             </div>
 
