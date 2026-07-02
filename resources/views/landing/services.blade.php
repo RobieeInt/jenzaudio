@@ -66,7 +66,7 @@
             'icon' => 'Music',
             'title' => 'Paket Audio Mobil',
             'description' => 'Sistem audio premium untuk pengalaman mendengarkan musik luar biasa.',
-            'image' => asset('redesign/images/tokopedia.png'),
+            'image' => asset('redesign/images/jenzaudioword.webp'),
             'features' => ['Speaker Premium', 'Subwoofer', 'Amplifier'],
         ],
         [
@@ -74,7 +74,7 @@
             'icon' => 'Smartphone',
             'title' => 'Head Unit & Entertainment',
             'description' => 'Upgrade head unit modern lengkap dengan Android Auto & CarPlay.',
-            'image' => asset('redesign/images/tokopedia.png'),
+            'image' => asset('redesign/images/jenzaudioword.webp'),
             'features' => ['Android Auto', 'CarPlay', 'Bluetooth'],
         ],
         [
@@ -82,7 +82,7 @@
             'icon' => 'Volume2',
             'title' => 'Peredam Suara',
             'description' => 'Kurangi noise dan tingkatkan kualitas audio di kabin.',
-            'image' => asset('redesign/images/tokopedia.png'),
+            'image' => asset('redesign/images/jenzaudioword.webp'),
             'features' => ['Material Premium', 'Pemasangan Rapi', 'Hasil Maksimal'],
         ],
         [
@@ -90,7 +90,7 @@
             'icon' => 'Armchair',
             'title' => 'Sarung Jok & Karpet',
             'description' => 'Custom jok dan karpet dengan berbagai pilihan material.',
-            'image' => asset('redesign/images/tokopedia.png'),
+            'image' => asset('redesign/images/jenzaudioword.webp'),
             'features' => ['Bahan Berkualitas', 'Desain Custom', 'Tahan Lama'],
         ],
     ];

@@ -3,10 +3,12 @@
     <template x-for="(img, index) in images" :key="index">
         <div class="absolute inset-0 transition-opacity duration-1000"
             :class="index === i ? 'opacity-100' : 'opacity-0'">
-            <div class="absolute inset-0 bg-cover bg-center"
+            <div class="absolute inset-0"
+                :class="isMobile && index === 0 ? 'bg-contain' : 'bg-cover bg-center'"
                 :style="{
                     backgroundImage: 'url(' + img + ')',
-                    transform: 'scale(1.1)'
+                    transform: isMobile && index === 0 ? 'scale(1)' : 'scale(1.1)',
+                    backgroundPosition: isMobile && index === 0 ? 'center 20%' : ''
                 }">
             </div>
             <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/70 to-zinc-900/90"></div>
@@ -18,7 +20,7 @@
         <div class="max-w-5xl text-center">
             <div class="transform transition-all duration-1000"
                 :class="visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-                <h1 class="mb-6 text-6xl font-bold text-white md:text-7xl lg:text-8xl">
+                <h1 class="mb-6 hidden text-6xl font-bold text-white md:block md:text-7xl lg:text-8xl">
                     {{ $hero['title'] ?? 'Jenz Audio' }}
                 </h1>
 
@@ -68,9 +70,15 @@
 
             i: 0,
             visible: false,
+            isMobile: false,
 
             init() {
                 this.visible = true;
+                this.isMobile = window.innerWidth < 768;
+
+                if (this.isMobile) {
+                    this.images[0] = '{{ asset("redesign/images/jenzaudioword.webp") }}';
+                }
 
                 // Auto slide setiap 5 detik
                 setInterval(() => {
