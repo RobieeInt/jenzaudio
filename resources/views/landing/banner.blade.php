@@ -149,6 +149,9 @@
 
             {{-- Slider --}}
             <div class="jenz-slider-wrap">
+                  <div class="jenz-slide active">
+                    <img src="{{ asset('banner/package.webp') }}" alt="Paket Toyota Fortuner">
+                </div>
                 <div class="jenz-slide active">
                     <img src="{{ asset('banner/fortunerjenz.webp') }}" alt="Paket Toyota Fortuner">
                 </div>
@@ -187,6 +190,7 @@
     var SESSION_KEY = 'jenzBannerDismissed';
 
     var slides = [
+        { text: 'Halo Jenz Audio, saya tertarik dengan paket Headunit' },
         { text: 'Halo Jenz Audio, saya tertarik dengan paket Toyota Fortuner' },
         { text: 'Halo Jenz Audio, saya tertarik dengan paket Mitsubishi Pajero' },
         { text: 'Halo Jenz Audio, saya tertarik dengan paket Toyota Zenix' }
