@@ -1,106 +1,77 @@
-<section id="about" class="bg-zinc-900 py-20 px-4" x-data="aboutSection()" x-ref="section" x-init="init()">
-    <div class="mx-auto max-w-6xl">
-        {{-- Heading + deskripsi --}}
-        <div class="transform transition-all duration-1000"
-            :class="isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            <h2 class="mb-4 text-center text-4xl font-bold text-white md:text-5xl">
-                {{ $about['title'] ?? 'Tentang Jenz Audio' }}
-            </h2>
-            <div class="mx-auto mb-6 h-1 w-24 bg-amber-500"></div>
-            <p class="mx-auto mb-16 max-w-3xl text-center text-lg leading-relaxed text-zinc-300">
-                {{ $about['description'] ?? 'Spesialis upgrade audio mobil, dari daily driving sampai setup kontes.' }}
-            </p>
-        </div>
-
-        {{-- Stats --}}
-        <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
-            <template x-for="(stat, index) in stats" :key="index">
-                <div class="transform text-center transition-all duration-700"
-                    :class="isVisible ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-10 opacity-0 scale-90'"
-                    :style="{ 'transition-delay': (index * 100) + 'ms' }">
-                    <div class="rounded-lg bg-zinc-800 p-6 transition-all hover:bg-zinc-700 hover:scale-105">
-                        <div class="mb-2 text-4xl font-bold text-amber-500">
-                            <span x-text="displayNumber(index)"></span>
-                        </div>
-                        <div class="text-sm font-medium text-zinc-400" x-text="stat.label"></div>
-                    </div>
-                </div>
-            </template>
-        </div>
-    </div>
-</section>
-
 @php
-    $stats = $about['stats'] ?? [
-        ['number' => '150+', 'label' => 'Proyek Audio'],
-        ['number' => '10+', 'label' => 'Tahun Pengalaman'],
-        ['number' => '98%', 'label' => 'Kepuasan Pelanggan'],
-        ['number' => '24 Jam', 'label' => 'Dukungan Konsultasi'],
+    $jenz = config('jenz');
+    $tahunPengalaman = now()->year - $jenz['since'];
+
+    //angka yang bisa dibuktikan, jangan diisi klaim karangan
+    $stats = [
+        ['angka' => $tahunPengalaman . '+', 'label' => 'Tahun melayani', 'ket' => 'Sejak ' . $jenz['since']],
+        ['angka' => number_format($jenz['google']['rating'], 1, ',', '.'), 'label' => 'Rating Google', 'ket' => 'Dari 5,0'],
+        ['angka' => $jenz['google']['reviews'] . '+', 'label' => 'Ulasan pelanggan', 'ket' => 'Terverifikasi Google'],
+        ['angka' => '1 Hari', 'label' => 'Mulai dari', 'ket' => 'Waktu pengerjaan'],
     ];
 @endphp
 
-<script>
-    function aboutSection() {
-        return {
-            stats: @json($stats),
+<section id="about" class="bg-zinc-900 px-4 py-16 md:py-24" x-data="{ seen: false }" x-intersect.once="seen = true">
+    <div class="mx-auto max-w-6xl">
 
-            isVisible: false,
-            animated: [],
+        <div class="grid items-center gap-12 lg:grid-cols-2">
 
-            init() {
-                this.animated = this.stats.map(() => 0);
+            {{-- Cerita --}}
+            <div class="transform transition-all duration-700"
+                :class="seen ? 'translate-x-0 opacity-100' : '-translate-x-6 opacity-0'">
+                <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-amber-500">
+                    Tentang kami
+                </p>
+                <h2 class="mb-5 text-3xl font-bold text-white md:text-4xl">
+                    Bengkel audio yang mau repot menjelaskan
+                </h2>
 
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        if (entries[0].isIntersecting) {
-                            this.isVisible = true;
-                            this.animateStats();
-                            observer.disconnect();
-                        }
-                    }, {
-                        threshold: 0.2
-                    }
-                );
+                <div class="space-y-4 text-base leading-relaxed text-zinc-300">
+                    <p>
+                        Jenz Audio berdiri di Gading Serpong sejak {{ $jenz['since'] }}. Kami spesialis
+                        upgrade audio mobil &mdash; head unit, speaker, subwoofer, peredam, sampai
+                        dashcam dan kamera parkir.
+                    </p>
+                    <p>
+                        Yang paling sering disebut pelanggan di ulasan mereka bukan cuma hasil suaranya,
+                        tapi karena semua dijelasin dulu sebelum dikerjakan. Mau setup minimalis atau
+                        habis-habisan, kami sesuaikan sama budget Anda.
+                    </p>
+                </div>
 
-                if (this.$refs.section) {
-                    observer.observe(this.$refs.section);
-                }
-            },
+                {{-- Poin pembeda --}}
+                <ul class="mt-7 space-y-3">
+                    @foreach ([
+                        'Dicek dan dijelaskan dulu, baru dikerjakan',
+                        'Instalasi rapi tanpa potong kabel bodi',
+                        'Bisa ditungguin, ruang tunggu nyaman',
+                        'Garansi pemasangan & tuning ulang',
+                    ] as $poin)
+                        <li class="flex items-start gap-3 text-sm text-zinc-300">
+                            <svg class="mt-0.5 h-5 w-5 shrink-0 text-amber-500" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                                <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            {{ $poin }}
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
 
-            animateStats() {
-                this.stats.forEach((stat, index) => {
-                    const raw = String(stat.number || '').replace(/[^0-9]/g, '');
-                    const target = parseInt(raw || '0', 10);
-                    const duration = 2000;
-                    const steps = 60;
-                    const increment = target / steps;
-                    let current = 0;
-
-                    if (!target) return;
-
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            current = target;
-                            clearInterval(timer);
-                        }
-                        this.animated.splice(index, 1, Math.floor(current));
-                    }, duration / steps);
-                });
-            },
-
-            displayNumber(index) {
-                if (!this.isVisible) return '0';
-
-                const original = String(this.stats[index]?.number || '');
-                const value = this.animated[index] ?? 0;
-
-                if (original.includes('+')) return value + '+';
-                if (original.includes('%')) return value + '%';
-                if (/[a-zA-Z]/.test(original)) return original; // misal "24/7"
-
-                return value;
-            }
-        }
-    }
-</script>
+            {{-- Stats --}}
+            <div class="grid grid-cols-2 gap-4">
+                @foreach ($stats as $index => $stat)
+                    <div class="transform rounded-2xl border border-zinc-800 bg-zinc-950 p-6 text-center transition-all duration-500"
+                        :class="seen ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-6 scale-95 opacity-0'"
+                        style="transition-delay: {{ $index * 100 }}ms">
+                        <div class="mb-1 text-3xl font-bold text-amber-500 md:text-4xl">
+                            {{ $stat['angka'] }}
+                        </div>
+                        <div class="text-sm font-medium text-white">{{ $stat['label'] }}</div>
+                        <div class="mt-1 text-xs text-zinc-500">{{ $stat['ket'] }}</div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+</section>

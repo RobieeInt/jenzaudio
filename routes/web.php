@@ -5,6 +5,8 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\CarBrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\InstagramController;
 use App\Http\Controllers\Admin\CategoriesController;
@@ -31,6 +33,9 @@ use App\Http\Controllers\Admin\TestimonialController;
 Route::get('/', [LandingController::class, 'index'])->name('landing-page');
 Route::get('/productdetail/{slug}', [LandingController::class, 'productdetail'])->name('productDetail');
 
+Route::get('/paket', [LandingController::class, 'paket'])->name('paket');
+Route::get('/paket/{slug}', [LandingController::class, 'paketdetail'])->name('paketdetail');
+
 Route::get('/event', [LandingController::class, 'event'])->name('event');
 Route::get('/blog', [LandingController::class, 'blog'])->name('blog');
 Route::get('/blogdetail/{slug}', [LandingController::class, 'blogdetail'])->name('blogdetail');
@@ -53,6 +58,29 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin.auth'], function () {
     //dropdown
     Route::group(['prefix' => 'dropdown'], function () {
         Route::get('/get-category', [CategoriesController::class, 'getCategory'])->name('admin.dropdown.get-category');
+        Route::get('/get-car-brand', [CarBrandController::class, 'getCarBrand'])->name('admin.dropdown.get-car-brand');
+    });
+    //route merk mobil
+    Route::group(['prefix' => 'car-brand'], function () {
+        Route::get('/', [CarBrandController::class, 'index'])->name('admin.carbrand');
+        Route::get('/create', [CarBrandController::class, 'create'])->name('admin.carbrand.create');
+        Route::post('/store', [CarBrandController::class, 'store'])->name('admin.carbrand.store');
+        Route::get('/edit/{id}', [CarBrandController::class, 'edit'])->name('admin.carbrand.edit');
+        Route::put('/update/{id}', [CarBrandController::class, 'update'])->name('admin.carbrand.update');
+        Route::get('/destroy/{id}', [CarBrandController::class, 'destroy'])->name('admin.carbrand.destroy');
+    });
+    //route paket
+    Route::group(['prefix' => 'package'], function () {
+        Route::get('/', [PackageController::class, 'index'])->name('admin.package');
+        Route::get('/create', [PackageController::class, 'create'])->name('admin.package.create');
+        Route::post('/store', [PackageController::class, 'store'])->name('admin.package.store');
+        Route::get('/edit/{id}', [PackageController::class, 'edit'])->name('admin.package.edit');
+        Route::put('/update/{id}', [PackageController::class, 'update'])->name('admin.package.update');
+        Route::get('/destroy/{id}', [PackageController::class, 'destroy'])->name('admin.package.destroy');
+        //upload image
+        Route::post('/upload-image', [PackageController::class, 'uploadImage'])->name('admin.package.upload.image');
+        Route::get('/galleries/delete/{id}', [PackageController::class, 'deleteImage'])->name('admin.package.galleries.delete');
+        Route::get('/galleries/set-default/{id}', [PackageController::class, 'setDefault'])->name('admin.package.galleries.set_default');
     });
     //route categories
     Route::group(['prefix' => 'categories'], function () {

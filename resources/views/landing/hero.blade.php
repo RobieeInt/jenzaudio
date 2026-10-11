@@ -1,96 +1,141 @@
-<section id="hero" x-data="heroSection()" x-init="init()" class="relative h-screen w-full overflow-hidden">
-    {{-- Background slides --}}
+@php
+    $jenz = config('jenz');
+    $tahunPengalaman = now()->year - $jenz['since'];
+    $waHero = 'https://wa.me/' . $jenz['whatsapp'] . '?text=' . urlencode('Halo, saya mau konsultasi audio mobil. Mobil saya ');
+
+    //slide background hero, diatur di config/jenz.php. Kosong = pakai background gradien
+    $heroImages = collect($hero['images'] ?? $jenz['hero_images'])
+        ->map(fn ($path) => str_starts_with($path, 'http') ? $path : asset($path))
+        ->values()
+        ->all();
+@endphp
+
+<section id="hero" x-data="heroSection()" x-init="init()"
+    class="relative flex min-h-[100svh] w-full flex-col justify-center overflow-hidden pb-14 pt-28">
+
+    {{-- Background dasar: selalu ada, jadi teks ga pernah ketiban gambar ramai --}}
+    <div class="absolute inset-0 bg-zinc-950" aria-hidden="true">
+        {{-- grid halus --}}
+        <div class="absolute inset-0 opacity-[0.18]"
+            style="background-image:linear-gradient(to right,#3f3f46 1px,transparent 1px),linear-gradient(to bottom,#3f3f46 1px,transparent 1px);background-size:56px 56px">
+        </div>
+        {{-- glow amber --}}
+        <div class="absolute left-1/2 top-1/3 h-[32rem] w-[32rem] -translate-x-1/2 -translate-y-1/3 rounded-full bg-amber-500/12 blur-[120px]">
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-zinc-950 to-transparent"></div>
+    </div>
+
+    {{-- Foto background, cuma kalau diisi di config --}}
     <template x-for="(img, index) in images" :key="index">
-        <div class="absolute inset-0 transition-opacity duration-1000"
-            :class="index === i ? 'opacity-100' : 'opacity-0'">
-            <div class="absolute inset-0"
-                :class="isMobile && index === 0 ? 'bg-contain' : 'bg-cover bg-center'"
-                :style="{
-                    backgroundImage: 'url(' + img + ')',
-                    transform: isMobile && index === 0 ? 'scale(1)' : 'scale(1.1)',
-                    backgroundPosition: isMobile && index === 0 ? 'center 20%' : ''
-                }">
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-b from-zinc-900/80 via-zinc-900/70 to-zinc-900/90"></div>
+        <div class="absolute inset-0 transition-opacity duration-[1200ms] ease-in-out"
+            :class="index === i ? 'opacity-100' : 'opacity-0'" aria-hidden="true">
+            <div class="absolute inset-0 scale-105 bg-cover bg-center"
+                :style="{ backgroundImage: 'url(' + img + ')' }"></div>
+            {{-- overlay tebal biar judul tetap kebaca --}}
+            <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/90 via-zinc-950/80 to-zinc-950"></div>
         </div>
     </template>
 
     {{-- Content --}}
-    <div class="relative z-10 flex h-full items-center justify-center px-4">
-        <div class="max-w-5xl text-center">
-            <div class="transform transition-all duration-1000"
-                :class="visible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-                <h1 class="mb-6 hidden text-6xl font-bold text-white md:block md:text-7xl lg:text-8xl">
-                    {{ $hero['title'] ?? 'Jenz Audio' }}
-                </h1>
+    <div class="relative z-10 mx-auto w-full max-w-5xl px-4 text-center">
+        <div class="transform transition-all duration-1000"
+            :class="visible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'">
 
-                <p class="mb-4 text-2xl font-semibold text-amber-400 md:text-3xl">
-                    {{ $hero['subtitle'] ?? 'Upgrade Audio Mobil Profesional' }}
-                </p>
-
-                <p class="mb-10 text-lg text-zinc-300 md:text-xl">
-                    {{ $hero['description'] ?? 'Custom audio, instalasi, tuning, dan paket lengkap buat semua jenis mobil.' }}
-                </p>
-
-                <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                    <a href="https://api.whatsapp.com/send/?phone=6281617000097&text=Halo%2C+saya+mau+tanya+dong&type=phone_number&app_absent=0"
-                        target="_blank"
-                        class="group bg-amber-500 px-8 py-6 text-lg font-semibold text-zinc-900 transition-all hover:bg-amber-400 hover:scale-105 flex items-center">
-                        Konsultasi Gratis
-                        <svg class="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" fill="none"
-                            stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path d="M9 18l6-6-6-6" />
+            {{-- Badge rating Google, bukti sosial paling atas --}}
+            <a href="{{ $jenz['google']['url'] }}" target="_blank" rel="noopener"
+                class="mb-6 inline-flex items-center gap-2 rounded-full border border-amber-500/40 bg-amber-500/10 px-4 py-2 text-xs font-semibold text-amber-400 transition hover:border-amber-500 hover:bg-amber-500/20 sm:text-sm">
+                <span class="flex" aria-hidden="true">
+                    @for ($s = 0; $s < 5; $s++)
+                        <svg class="h-3.5 w-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l2.9 5.9L21 9.3l-4.5 4.4L17.8 21 12 18.2 6.2 21l1.3-7.3L3 9.3l6.1-1.4L12 2z" />
                         </svg>
-                    </a>
+                    @endfor
+                </span>
+                {{ number_format($jenz['google']['rating'], 1, ',', '.') }} dari
+                {{ $jenz['google']['reviews'] }} ulasan Google
+            </a>
 
-                    <button @click="scrollTo('#services')"
-                        class="border-2 border-zinc-400 bg-transparent px-8 py-6 text-lg font-semibold text-white transition-all hover:bg-white hover:text-zinc-900">
-                        Lihat Layanan
-                    </button>
-                </div>
+            {{-- H1: satu-satunya H1 di halaman, tampil juga di HP --}}
+            <h1 class="mb-5 text-3xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                Audio Mobil Jernih,
+                <span class="block text-amber-500">Pasang Rapi, Harga Jelas</span>
+            </h1>
+
+            <p class="mx-auto mb-8 max-w-2xl text-base text-zinc-300 sm:text-lg md:text-xl">
+                Bengkel audio mobil di Gading Serpong sejak {{ $jenz['since'] }}. Konsultasi dulu gratis
+                &mdash; kami bantu pilih paket yang pas sama mobil dan budget Anda.
+            </p>
+
+            {{-- CTA --}}
+            <div class="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+                <a href="{{ $waHero }}" target="_blank" rel="noopener"
+                    onclick="return jenzTrackWa(this.href);"
+                    class="group flex items-center justify-center rounded-xl bg-amber-500 px-7 py-4 text-base font-bold text-zinc-900 shadow-lg shadow-amber-500/25 transition-all hover:scale-[1.03] hover:bg-amber-400">
+                    <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M12 2a10 10 0 00-8.6 15.1L2 22l4.9-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20z" />
+                    </svg>
+                    Konsultasi Gratis via WhatsApp
+                </a>
+
+                <a href="{{ route('paket') }}"
+                    class="flex items-center justify-center rounded-xl border-2 border-zinc-600 px-7 py-4 text-base font-semibold text-white transition-all hover:border-amber-500 hover:text-amber-500">
+                    Lihat Paket &amp; Harga
+                </a>
             </div>
+
+            {{-- Poin cepat, biar awam langsung nangkep --}}
+            <ul class="mx-auto mt-8 flex max-w-3xl flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-zinc-400 sm:text-sm">
+                <li class="flex items-center gap-1.5">
+                    <svg class="h-4 w-4 shrink-0 text-amber-500" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Harga transparan, no biaya tersembunyi
+                </li>
+                <li class="flex items-center gap-1.5">
+                    <svg class="h-4 w-4 shrink-0 text-amber-500" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Garansi pemasangan
+                </li>
+                <li class="flex items-center gap-1.5">
+                    <svg class="h-4 w-4 shrink-0 text-amber-500" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    {{ $tahunPengalaman }} tahun pengalaman
+                </li>
+            </ul>
         </div>
     </div>
 
-    {{-- Scroll indicator --}}
-    <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce">
-        <div class="flex h-12 w-8 items-start justify-center rounded-full border-2 border-zinc-400 p-2">
+    {{-- Indikator scroll --}}
+    <div class="absolute bottom-5 left-1/2 z-10 hidden -translate-x-1/2 animate-bounce sm:block" aria-hidden="true">
+        <div class="flex h-11 w-7 items-start justify-center rounded-full border-2 border-zinc-500 p-2">
             <div class="h-2 w-1 animate-pulse rounded-full bg-amber-400"></div>
         </div>
     </div>
 </section>
 
-{{-- Alpine JS logic --}}
 <script>
     function heroSection() {
         return {
-            // ambil dari controller kalau mau dinamis
-            images: @json($hero['images'] ?? [asset('redesign/images/mobil.jpeg'), asset('redesign/images/package1.webp')]),
-
+            images: @json($heroImages),
             i: 0,
             visible: false,
-            isMobile: false,
 
             init() {
                 this.visible = true;
-                this.isMobile = window.innerWidth < 768;
 
-                if (this.isMobile) {
-                    this.images[0] = '{{ asset("redesign/images/jenzaudioword.webp") }}';
-                }
+                if (this.images.length < 2) return;
 
-                // Auto slide setiap 5 detik
+                // ganti slide tiap 6 detik
                 setInterval(() => {
                     this.i = (this.i + 1) % this.images.length;
-                }, 100);
+                }, 6000);
             },
-
-            scrollTo(target) {
-                document.querySelector(target)?.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
         };
     }
 </script>

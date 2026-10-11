@@ -1,13 +1,15 @@
-<section id="services" class="bg-zinc-950 py-20 px-4" x-data="servicesSection()" x-ref="section" x-init="init()">
+<section id="services" class="bg-zinc-950 px-4 py-16 md:py-24" x-data="servicesSection()" x-ref="section" x-init="init()">
     <div class="mx-auto max-w-7xl">
 
         {{-- Heading --}}
         <div class="mb-16 transform text-center transition-all duration-1000"
             :class="isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            <h2 class="mb-4 text-4xl font-bold text-white md:text-5xl">Layanan Kami</h2>
-            <div class="mx-auto mb-6 h-1 w-24 bg-amber-500"></div>
-            <p class="text-lg text-zinc-400">
-                Solusi lengkap untuk semua kebutuhan audio dan aksesori mobil Anda
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-amber-500">
+                Yang kami kerjakan
+            </p>
+            <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">Layanan Kami</h2>
+            <p class="mx-auto max-w-2xl text-base text-zinc-400 md:text-lg">
+                Solusi lengkap untuk semua kebutuhan audio dan aksesori mobil Anda.
             </p>
         </div>
 

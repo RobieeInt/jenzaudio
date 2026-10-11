@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Contact;
+use App\Models\Package;
+use App\Models\CarBrand;
 use App\Models\Product;
 use App\Models\Instagram;
 use App\Models\ProductCategories;
@@ -19,8 +21,8 @@ class LandingController extends Controller
         $productsPopular = Product::with(['galleries', 'category'])->where('status', '1')->where('popular', '1')->orderBy('star', 'desc')->take(10)->get();
         //instagram
         $instagrams = Instagram::orderBy('id', 'desc')->take(10)->get();
-        //$testimoni
-        $testimonials = Testimoni::orderBy('id', 'desc')->take(10)->get();
+        //ulasan pelanggan, urut sesuai seeder biar yang paling informatif tampil duluan
+        $testimonials = Testimoni::orderBy('id', 'asc')->take(12)->get();
         //$blogs
         $blogs = Blog::orderBy('created_at','desc')->take(6)->get();
         //contact
@@ -36,8 +38,12 @@ class LandingController extends Controller
                     ->take(10)
                     ->get();
 
+        //paket audio per merk mobil
+        $packages = Package::with(['galleries', 'carBrand'])->active()->get();
+        $carBrands = CarBrand::active()->get();
+
         // dd($productsPopular);
-        return view('index2', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category','categoryfooter'));
+        return view('index2', compact('products','productsPopular','instagrams','testimonials','blogs','contact','category','categoryfooter','packages','carBrands'));
     }
 
     //quickview
@@ -115,6 +121,54 @@ class LandingController extends Controller
         return view('frontend.page.event', compact('events','contact', 'categoryfooter'));
     }
 
+
+    //paket: list semua paket, bisa difilter per merk mobil lewat ?merk=toyota
+    public function paket(Request $request) {
+        $carBrands = CarBrand::active()->get();
+
+        $activeBrand = $request->merk
+            ? $carBrands->firstWhere('slug', $request->merk)
+            : null;
+
+        $packages = Package::with(['galleries', 'carBrand'])
+            ->active()
+            ->when($activeBrand, fn ($query) => $query->where('car_brand_id', $activeBrand->id))
+            ->paginate(12)
+            ->withQueryString();
+
+        $contact = Contact::orderBy('id', 'desc')->first();
+        $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
+
+        return view('frontend.page.paket', compact('packages', 'carBrands', 'activeBrand', 'contact', 'categoryfooter'));
+    }
+
+    //paketdetail
+    public function paketdetail($slug) {
+        $package = Package::with(['galleries', 'carBrand'])
+            ->where('slug', $slug)
+            ->where('status', 1)
+            ->firstOrFail();
+
+        //paket lain buat rekomendasi, prioritas merk yang sama
+        $otherPackages = Package::with(['galleries', 'carBrand'])
+            ->where('status', 1)
+            ->where('id', '!=', $package->id)
+            ->orderByRaw('CASE WHEN car_brand_id <=> ? THEN 0 ELSE 1 END', [$package->car_brand_id])
+            ->orderBy('sort_order', 'asc')
+            ->take(3)
+            ->get();
+
+        $contact = Contact::orderBy('id', 'desc')->first();
+        $categoryfooter = ProductCategories::where('status', 1)
+            ->orderBy('id', 'desc')
+            ->take(10)
+            ->get();
+
+        return view('frontend.page.paketdetail', compact('package', 'otherPackages', 'contact', 'categoryfooter'));
+    }
 
     public function categoryDetail($slug) {
         // Ambil data kategori berdasarkan slug

@@ -1,14 +1,16 @@
-<section id="video" class="bg-zinc-950 py-20 px-4" x-data="videoSection()" x-ref="section" x-init="init()">
+<section id="video" class="bg-zinc-950 px-4 py-16 md:py-24" x-data="videoSection()" x-ref="section" x-init="init()">
     <div class="mx-auto max-w-7xl">
         {{-- Heading --}}
         <div class="mb-16 transform text-center transition-all duration-1000"
             :class="isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            <h2 class="mb-4 text-4xl font-bold text-white md:text-5xl">
-                Kenapa Jenz Audio?
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-amber-500">
+                Lihat langsung
+            </p>
+            <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">
+                Bengkel &amp; Proses Pengerjaan Kami
             </h2>
-            <div class="mx-auto mb-6 h-1 w-24 bg-amber-500"></div>
-            <p class="text-lg text-zinc-400">
-                Lihat mengapa ratusan pelanggan mempercayakan mobil mereka pada kami
+            <p class="mx-auto max-w-2xl text-base text-zinc-400 md:text-lg">
+                Biar nggak penasaran: ini tempatnya, dan beginilah mobil ditangani.
             </p>
         </div>
 
@@ -20,11 +22,10 @@
                 <div class="relative aspect-video">
                     <div
                         class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900">
-                        <video x-ref="video" class="h-full w-full object-cover"
-                            poster="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1920"
-                            @ended="onEnd">
-                            {{-- ganti src ke file lu sendiri --}}
-                            <source src="{{ asset('redesign/video/location.mp4') }}" type="video/mp4" />
+                        {{-- #t=1 bikin browser nampilin frame detik ke-1 sebagai poster, ga perlu file gambar --}}
+                        <video x-ref="video" class="h-full w-full object-cover" preload="metadata"
+                            playsinline @ended="onEnd">
+                            <source src="{{ asset('redesign/video/location.mp4') }}#t=1" type="video/mp4" />
                             Browser Anda tidak mendukung video tag.
                         </video>
                     </div>
@@ -43,23 +44,6 @@
                     </div>
                 </div>
 
-                {{-- Info bawah video --}}
-                <div class="border-t border-zinc-800 bg-zinc-900/50 p-6">
-                    <div class="grid gap-6 md:grid-cols-3">
-                        <div class="text-center">
-                            <div class="mb-2 text-3xl font-bold text-amber-500">5+</div>
-                            <div class="text-sm text-zinc-400">Tahun Pengalaman</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="mb-2 text-3xl font-bold text-amber-500">500+</div>
-                            <div class="text-sm text-zinc-400">Mobil Ditangani</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="mb-2 text-3xl font-bold text-amber-500">100%</div>
-                            <div class="text-sm text-zinc-400">Kepuasan Pelanggan</div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             {{-- Dekorasi glow --}}

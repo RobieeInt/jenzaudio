@@ -1,14 +1,16 @@
-<section id="products" class="bg-zinc-900 py-20 px-4" x-data="productsSection()" x-ref="section" x-init="init()">
+<section id="products" class="bg-zinc-900 px-4 py-16 md:py-24" x-data="productsSection()" x-ref="section" x-init="init()">
     <div class="mx-auto max-w-7xl">
         {{-- Heading --}}
         <div class="mb-16 transform text-center transition-all duration-1000"
             :class="isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            <h2 class="mb-4 text-4xl font-bold text-white md:text-5xl">
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-amber-500">
+                Produk
+            </p>
+            <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">
                 Produk Kami
             </h2>
-            <div class="mx-auto mb-6 h-1 w-24 bg-amber-500"></div>
-            <p class="text-lg text-zinc-400">
-                Produk berkualitas dari brand ternama untuk audio mobil Anda
+            <p class="mx-auto max-w-2xl text-base text-zinc-400 md:text-lg">
+                Produk berkualitas dari brand ternama untuk audio mobil Anda.
             </p>
         </div>
 

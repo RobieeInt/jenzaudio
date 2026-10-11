@@ -27,6 +27,11 @@
                     <h5><i class="icon fas fa-check"></i>
                         {{ session()->get('success-delete') }}</h5>
                 </div>
+            @elseif (session()->has('success-default'))
+                <div class="alert alert-success">
+                    <h5><i class="icon fas fa-check"></i>
+                        {{ session()->get('success-default') }}</h5>
+                </div>
             @endif
 
             <div class="card card-primary">
@@ -101,36 +106,123 @@
                             </select>
                         </div>
 
-                        @foreach ($data->galleries as $galleries)
-                            {{-- {{ dd($galleries) }} --}}
-                            @if ($galleries->is_default === 0)
-                                <img src="{{ asset('/storage/' . $galleries['image']) }}" alt
-                                    style="width: 100px; height: 100px">
-                                <a href="{{ route('admin.galleries.delete', $galleries->id) }}"
-                                    class="btn btn-danger btn-sm">Delete</a>
-                                <a href="{{ route('admin.galleries.set_default', $galleries->id) }}"
-                                    class="btn btn-primary btn-sm">Set as Default</a>
-                            @else
-                                <img src="{{ asset('/storage/' . $galleries['image']) }}" alt
-                                    style="width: 100px; height: 100px">
-                                <a href="{{ route('admin.galleries.delete', $galleries->id) }}"
-                                    class="btn btn-danger btn-sm">Delete</a>
-                            @endif
-                        @endforeach
-
                     </div>
                     <!-- /.card-body -->
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="{{ route('admin.product') }}" class="btn btn-default">Kembali</a>
                     </div>
                 </form>
+            </div>
+
+            {{-- Foto produk --}}
+            <div class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Foto Produk
+                    </h3>
+                </div>
+                <div class="card-body">
+                    @if ($data->galleries->count())
+                        <div class="row mb-4">
+                            @foreach ($data->galleries as $gallery)
+                                <div class="col-md-3 col-6 mb-3">
+                                    <div class="card mb-0">
+                                        <img src="{{ asset('/storage/' . $gallery->image) }}" class="card-img-top"
+                                            alt="{{ $data->name }}" style="height: 140px; object-fit: cover">
+                                        <div class="card-body p-2 text-center">
+                                            @if ($gallery->is_default == 1)
+                                                <span class="badge badge-success mb-2 d-block">Foto Utama</span>
+                                            @else
+                                                <a href="{{ route('admin.galleries.set_default', $gallery->id) }}"
+                                                    class="btn btn-primary btn-sm btn-block mb-1">Jadikan Utama</a>
+                                            @endif
+                                            <a href="{{ route('admin.galleries.delete', $gallery->id) }}"
+                                                class="btn btn-danger btn-sm btn-block">Hapus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="alert alert-warning">
+                            <i class="icon fas fa-image"></i>
+                            Belum ada foto. Drag foto ke bawah ini atau klik <strong>Add files</strong>.
+                        </div>
+                    @endif
+
+                    <div id="actions" class="row">
+                        <div class="col-lg-6">
+                            <div class="btn-group w-100">
+                                <span class="btn btn-success col fileinput-button">
+                                    <i class="fas fa-plus"></i>
+                                    <span>Add files</span>
+                                </span>
+                                <button type="button" class="btn btn-primary col start">
+                                    <i class="fas fa-upload"></i>
+                                    <span>Start upload</span>
+                                </button>
+                                <button type="reset" class="btn btn-warning col cancel">
+                                    <i class="fas fa-times-circle"></i>
+                                    <span>Cancel upload</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center">
+                            <div class="fileupload-process w-100">
+                                <div id="total-progress" class="progress progress-striped active" role="progressbar"
+                                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                    <div class="progress-bar progress-bar-success" style="width:0%;"
+                                        data-dz-uploadprogress></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table table-striped files" id="previews">
+                        <div id="template" class="row mt-2">
+                            <div class="col-auto">
+                                <span class="preview"><img src="data:," alt="" data-dz-thumbnail /></span>
+                            </div>
+                            <div class="col d-flex align-items-center">
+                                <p class="mb-0">
+                                    <span class="lead" data-dz-name></span>
+                                    (<span data-dz-size></span>)
+                                </p>
+                                <strong class="error text-danger" data-dz-errormessage></strong>
+                            </div>
+                            <div class="col-4 d-flex align-items-center">
+                                <div class="progress progress-striped active w-100" role="progressbar"
+                                    aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                                    <div class="progress-bar progress-bar-success" style="width:0%;"
+                                        data-dz-uploadprogress></div>
+                                </div>
+                            </div>
+                            <div class="col-auto d-flex align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary start">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Start</span>
+                                    </button>
+                                    <button type="button" data-dz-remove class="btn btn-warning cancel">
+                                        <i class="fas fa-times-circle"></i>
+                                        <span>Cancel</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    Drag foto atau klik Add files buat nambahin foto. Foto pertama otomatis jadi foto utama.
+                </div>
             </div>
         </div>
     </div>
 @endsection
 
 @section('js')
+    <script src="{{ asset('adminlte/plugins/dropzone/min/dropzone.min.js') }}"></script>
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace('description', {
@@ -139,33 +231,70 @@
     </script>
     <script>
         $(function() {
-            $('.select2').select2()
-
             //Initialize Select2 Elements
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
             })
 
-            // fetchDropdownList('/admin/dropdown/get-category', {
-            //     id: '{{ $data->category_id }}',
-            //     name: '{{ $data->category->name }}'
-            // }, '#selectCategory');
-
-            //fetchdropdown and select by category_id
+            //fetchdropdown dan select sesuai category_id
             fetchDropdownList('/admin/dropdown/get-category', {
                 id: '{{ $data->category_id }}'
             }, '#selectCategory');
 
-            //fetch to admin/dropdown/get-category
-            // $.ajax({
-            //     url: '/admin/dropdown/get-category',
-            //     type: 'GET',
-            //     dataType: 'json',
-            //     success: function(data) {
-            //         // console.log(data);
-            //         $('#selectCategory').html(data);
-            //     }
-            // });
+            // DropzoneJS
+            Dropzone.autoDiscover = false
+
+            //ambil template preview lalu copot dari DOM
+            var previewNode = document.querySelector("#template")
+            previewNode.id = ""
+            var previewTemplate = previewNode.parentNode.innerHTML
+            previewNode.parentNode.removeChild(previewNode)
+
+            var myDropzone = new Dropzone(document.body, {
+                url: "{{ route('admin.product.upload.image') }}",
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                params: {
+                    product_id: "{{ $data->id }}"
+                },
+                thumbnailWidth: 80,
+                thumbnailHeight: 80,
+                parallelUploads: 20,
+                previewTemplate: previewTemplate,
+                autoQueue: false, // file ga langsung ke-queue sebelum diklik start
+                previewsContainer: "#previews",
+                clickable: ".fileinput-button"
+            })
+
+            myDropzone.on("addedfile", function(file) {
+                file.previewElement.querySelector(".start").onclick = function() {
+                    myDropzone.enqueueFile(file)
+                }
+            })
+
+            myDropzone.on("totaluploadprogress", function(progress) {
+                document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+            })
+
+            myDropzone.on("sending", function(file) {
+                document.querySelector("#total-progress").style.opacity = "1"
+                file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+            })
+
+            myDropzone.on("queuecomplete", function(progress) {
+                document.querySelector("#total-progress").style.opacity = "0"
+                myDropzone.removeAllFiles();
+                //refresh biar foto baru langsung keliatan
+                window.location.reload();
+            })
+
+            document.querySelector("#actions .start").onclick = function() {
+                myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+            }
+            document.querySelector("#actions .cancel").onclick = function() {
+                myDropzone.removeAllFiles(true)
+            }
         });
     </script>
 @endsection

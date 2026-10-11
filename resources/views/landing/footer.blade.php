@@ -78,37 +78,62 @@
             </div>
 
             {{-- Contact --}}
+            @php
+                $jenzFooter = config('jenz');
+                $rutaFooter = 'https://www.google.com/maps/dir/?api=1&destination='
+                    . $jenzFooter['lat'] . ',' . $jenzFooter['lng'] . '&travelmode=driving';
+            @endphp
+
             <div>
                 <h4 class="mb-4 text-lg font-semibold text-white">Kontak</h4>
                 <ul class="space-y-3">
-                    <li class="flex items-start text-sm text-zinc-400">
-                        <svg class="mr-2 mt-0.5 h-5 w-5 text-amber-500" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" stroke-width="2">
-                            <path
-                                d="M12 2a7 7 0 00-7 7c0 4.4 5 9.4 6.4 10.8a1 1 0 001.2 0C14 18.4 19 13.4 19 9a7 7 0 00-7-7z" />
-                            <circle cx="12" cy="9" r="2.5" />
-                        </svg>
-                        <span>Ruko Bavaria Grande No 11 Gading serpong Tangerang, Kelapa Dua, Tangerang Regency, Banten
-                            15831</span>
+                    {{-- alamat bisa diklik, langsung buka rute di Google Maps --}}
+                    <li>
+                        <a href="{{ $rutaFooter }}" target="_blank" rel="noopener"
+                            class="group flex items-start text-sm text-zinc-400 transition hover:text-amber-500">
+                            <svg class="mr-2 mt-0.5 h-5 w-5 shrink-0 text-amber-500" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                                <path
+                                    d="M12 2a7 7 0 00-7 7c0 4.4 5 9.4 6.4 10.8a1 1 0 001.2 0C14 18.4 19 13.4 19 9a7 7 0 00-7-7z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <span>
+                                {{ $jenzFooter['address'] }}
+                                <span class="mt-1 block font-semibold text-amber-500 group-hover:underline">
+                                    Lihat rute &rsaquo;
+                                </span>
+                            </span>
+                        </a>
                     </li>
 
-                    <li class="flex items-center text-sm text-zinc-400">
-                        <svg class="mr-2 h-5 w-5 text-amber-500" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" stroke-width="2">
-                            <path
-                                d="M3 5a2 2 0 012-2h2.2a1 1 0 01.96.73l1.1 4.08a1 1 0 01-.27.97l-1.6 1.6a12 12 0 005.4 5.4l1.6-1.6a1 1 0 01.97-.27l4.08 1.1a1 1 0 01.73.96V19a2 2 0 01-2 2h-1A16 16 0 013 6V5z" />
-                        </svg>
-                        <span>+62 816‑1700‑0097</span>
+                    <li>
+                        <a href="https://wa.me/{{ $jenzFooter['whatsapp'] }}" target="_blank" rel="noopener"
+                            onclick="return jenzTrackWa(this.href);"
+                            class="flex items-center text-sm text-zinc-400 transition hover:text-amber-500">
+                            <svg class="mr-2 h-5 w-5 shrink-0 text-amber-500" viewBox="0 0 24 24"
+                                fill="currentColor" aria-hidden="true">
+                                <path
+                                    d="M12 2a10 10 0 00-8.6 15.1L2 22l4.9-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20z" />
+                            </svg>
+                            {{ $jenzFooter['phone_display'] }}
+                        </a>
                     </li>
 
-                    <li class="flex items-center text-sm text-zinc-400">
-                        <svg class="mr-2 h-5 w-5 text-amber-500" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" stroke-width="2">
-                            <rect x="3" y="5" width="18" height="14" rx="2" />
-                            <path d="M3 7l9 6 9-6" />
-                        </svg>
-                        <span>info@jenzaudio.com</span>
-                    </li>
+                    {{-- jam buka --}}
+                    @foreach ($jenzFooter['hours'] as $hari => $jam)
+                        <li class="flex items-center text-sm text-zinc-400">
+                            @if ($loop->first)
+                                <svg class="mr-2 h-5 w-5 shrink-0 text-amber-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="9" />
+                                    <path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            @else
+                                <span class="mr-2 h-5 w-5 shrink-0" aria-hidden="true"></span>
+                            @endif
+                            {{ $hari }}: {{ $jam }}
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>

@@ -1,215 +1,195 @@
-<section id="contact" class="bg-zinc-900 py-20 px-4 overflow-hidden" x-data="contactSection()" x-ref="section" x-init="init()">
+@php
+    $jenz = config('jenz');
+
+    //nomor WA: utamain dari DB kalau diisi admin, kalau ga ada pakai config
+    $waPhone = preg_replace('/[^0-9]/', '', $contact->whatsapp ?? '') ?: $jenz['whatsapp'];
+    if (strlen($waPhone) < 9) {
+        $waPhone = $jenz['whatsapp'];
+    }
+
+    $lat = $jenz['lat'];
+    $lng = $jenz['lng'];
+
+    //tombol rute: di HP langsung buka aplikasi Google Maps dan mulai navigasi
+    $rutaUrl = 'https://www.google.com/maps/dir/?api=1&destination=' . $lat . ',' . $lng
+        . '&travelmode=driving';
+
+    //peta embed, ga butuh API key
+    $embedUrl = 'https://maps.google.com/maps?q=' . $lat . ',' . $lng . '&z=16&hl=id&output=embed';
+
+    $waPesan = 'Halo, saya mau tanya soal audio mobil';
+@endphp
+
+<section id="contact" class="overflow-hidden bg-zinc-900 px-4 py-16 md:py-24" x-data="contactSection()"
+    x-intersect.once="seen = true">
     <div class="mx-auto max-w-7xl">
+
         {{-- Heading --}}
-        <div class="mb-16 transform text-center transition-all duration-1000"
-            :class="isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            <h2 class="mb-4 text-4xl font-bold text-white md:text-5xl">
-                Hubungi Kami
+        <div class="mb-12 transform text-center transition-all duration-700"
+            :class="seen ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'">
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest text-amber-500">
+                Mampir yuk
+            </p>
+            <h2 class="mb-4 text-3xl font-bold text-white md:text-4xl">
+                Lokasi &amp; Kontak
             </h2>
-            <div class="mx-auto mb-6 h-1 w-24 bg-amber-500"></div>
-            <p class="text-lg text-zinc-400">
-                Siap untuk upgrade mobil Anda? Hubungi kami sekarang!
+            <p class="mx-auto max-w-2xl text-base text-zinc-400 md:text-lg">
+                Gading Serpong, Tangerang. Konsultasi gratis, nggak harus langsung pasang.
             </p>
         </div>
 
-        <div class="grid gap-8 lg:grid-cols-2">
-            {{-- Contact Info Cards --}}
-            <div class="space-y-6">
-                <template x-for="(info, index) in contactInfo" :key="info.title">
-                    <div class="border border-zinc-800 bg-zinc-950 rounded-xl transform transition-all duration-500 hover:scale-105 hover:border-amber-500"
-                        :class="isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'"
-                        :style="{ 'transition-delay': (index * 100) + 'ms' }">
-                        <div class="flex items-center p-6">
-                            <div
-                                class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-lg bg-amber-500/10">
-                                <span x-html="iconFor(info.icon)" class="text-amber-500"></span>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="mb-1 font-semibold text-white" x-text="info.title"></h3>
-                                <p class="text-zinc-400" x-text="info.content"></p>
-                            </div>
-                        </div>
+        <div class="grid gap-6 lg:grid-cols-5">
+
+            {{-- Peta + tombol rute --}}
+            <div class="transform transition-all duration-700 lg:col-span-3"
+                :class="seen ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'">
+
+                <div class="overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950">
+                    {{-- Peta --}}
+                    <div class="relative aspect-[4/3] w-full sm:aspect-[16/10]">
+                        <iframe src="{{ $embedUrl }}" title="Lokasi Jenz Audio di Google Maps" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+                            class="absolute inset-0 h-full w-full border-0"></iframe>
                     </div>
-                </template>
+
+                    {{-- Alamat + tombol --}}
+                    <div class="border-t border-zinc-800 p-5 sm:p-6">
+                        <div class="mb-5 flex items-start gap-3">
+                            <svg class="mt-0.5 h-5 w-5 shrink-0 text-amber-500" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path
+                                    d="M12 2a7 7 0 00-7 7c0 4.4 5 9.4 6.4 10.8a1 1 0 001.2 0C14 18.4 19 13.4 19 9a7 7 0 00-7-7z" />
+                                <circle cx="12" cy="9" r="2.5" />
+                            </svg>
+                            <p class="text-sm leading-relaxed text-zinc-300">
+                                {{ $jenz['address'] }}
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col gap-3 sm:flex-row">
+                            {{-- Tombol utama: langsung navigasi --}}
+                            <a href="{{ $rutaUrl }}" target="_blank" rel="noopener"
+                                class="flex flex-1 items-center justify-center rounded-xl bg-amber-500 px-6 py-3.5 text-sm font-bold text-zinc-950 shadow-lg shadow-amber-500/20 transition hover:scale-[1.02] hover:bg-amber-400">
+                                <svg class="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                                </svg>
+                                Rute ke Toko
+                            </a>
+
+                            {{-- Sekunder: lihat halaman toko + ulasan --}}
+                            <a href="{{ $jenz['maps_url'] }}" target="_blank" rel="noopener"
+                                class="flex flex-1 items-center justify-center rounded-xl border border-zinc-700 px-6 py-3.5 text-sm font-semibold text-zinc-300 transition hover:border-amber-500 hover:text-amber-500">
+                                <svg class="mr-2 h-4 w-4 text-amber-500" viewBox="0 0 24 24" fill="currentColor"
+                                    aria-hidden="true">
+                                    <path d="M12 2l2.9 5.9L21 9.3l-4.5 4.4L17.8 21 12 18.2 6.2 21l1.3-7.3L3 9.3l6.1-1.4L12 2z" />
+                                </svg>
+                                Lihat di Google Maps
+                            </a>
+                        </div>
+
+                        <p class="mt-4 text-center text-xs text-zinc-500 sm:text-left">
+                            Tombol rute langsung buka aplikasi Google Maps di HP Anda.
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            {{-- Contact Form --}}
-            <div class="border border-zinc-800 bg-zinc-950 rounded-xl transform transition-all duration-1000"
-                :class="isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'">
-                <div class="p-8">
-                    <form @submit.prevent="submitForm" class="space-y-6" novalidate>
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-zinc-300">
-                                Nama Lengkap
-                            </label>
-                            <input type="text" x-model="form.name" required placeholder="Masukkan nama Anda"
-                                class="w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white placeholder:text-zinc-500 focus:border-amber-500 focus:outline-none">
-                        </div>
+            {{-- Info kontak --}}
+            <div class="space-y-4 lg:col-span-2">
 
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-zinc-300">
-                                Nomor Telepon
-                            </label>
-                            <input type="text" x-model="form.phone" required placeholder="08xx-xxxx-xxxx"
-                                class="w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white placeholder:text-zinc-500 focus:border-amber-500 focus:outline-none">
-                        </div>
+                {{-- WhatsApp, paling menonjol --}}
+                <a href="https://wa.me/{{ $waPhone }}?text={{ urlencode($waPesan) }}" target="_blank" rel="noopener"
+                    onclick="return jenzTrackWa(this.href);"
+                    class="group flex transform items-center gap-4 rounded-xl border border-amber-500/40 bg-amber-500/10 p-5 transition-all duration-500 hover:border-amber-500 hover:bg-amber-500/20"
+                    :class="seen ? 'translate-x-0 opacity-100' : 'translate-x-6 opacity-0'">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-amber-500 text-zinc-900">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M12 2a10 10 0 00-8.6 15.1L2 22l4.9-1.4A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1112 20z" />
+                        </svg>
+                    </span>
+                    <span class="min-w-0">
+                        <span class="block font-semibold text-white">WhatsApp</span>
+                        <span class="block truncate text-sm text-amber-400">{{ $jenz['phone_display'] }}</span>
+                        <span class="block text-xs text-zinc-400">Paling cepat dibalas</span>
+                    </span>
+                </a>
 
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-zinc-300">
-                                Email
-                            </label>
-                            <input type="email" x-model="form.email" required placeholder="email@example.com"
-                                class="w-full rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white placeholder:text-zinc-500 focus:border-amber-500 focus:outline-none">
-                        </div>
+                {{-- Telepon --}}
+                <a href="tel:+{{ $jenz['whatsapp'] }}"
+                    class="flex transform items-center gap-4 rounded-xl border border-zinc-800 bg-zinc-950 p-5 transition-all duration-500 hover:border-amber-500"
+                    :class="seen ? 'translate-x-0 opacity-100' : 'translate-x-6 opacity-0'"
+                    style="transition-delay: 80ms">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
+                        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            aria-hidden="true">
+                            <path
+                                d="M3 5a2 2 0 012-2h2.2a1 1 0 01.96.73l1.1 4.08a1 1 0 01-.27.97l-1.6 1.6a12 12 0 005.4 5.4l1.6-1.6a1 1 0 01.97-.27l4.08 1.1a1 1 0 01.73.96V19a2 2 0 01-2 2h-1A16 16 0 013 6V5z" />
+                        </svg>
+                    </span>
+                    <span class="min-w-0">
+                        <span class="block font-semibold text-white">Telepon</span>
+                        <span class="block truncate text-sm text-zinc-400">{{ $jenz['phone_display'] }}</span>
+                    </span>
+                </a>
 
-                        <div>
-                            <label class="mb-2 block text-sm font-medium text-zinc-300">
-                                Pesan
-                            </label>
-                            <textarea rows="4" x-model="form.message" required placeholder="Ceritakan kebutuhan Anda..."
-                                class="w-full resize-none rounded-md border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white placeholder:text-zinc-500 focus:border-amber-500 focus:outline-none"></textarea>
-                        </div>
-
-                        <button type="submit"
-                            class="flex w-full items-center justify-center rounded-md bg-amber-500 py-3 text-base font-semibold text-zinc-900 transition-all hover:bg-amber-400 hover:scale-105"
-                            :disabled="loading" :class="loading ? 'opacity-75 cursor-not-allowed' : ''">
-                            <span x-text="loading ? 'Mengirim...' : 'Kirim Pesan'"></span>
-                            <svg class="ml-2 h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M22 2L11 13" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke-linecap="round" stroke-linejoin="round" />
+                {{-- Jam buka --}}
+                <div class="transform rounded-xl border border-zinc-800 bg-zinc-950 p-5 transition-all duration-500"
+                    :class="seen ? 'translate-x-0 opacity-100' : 'translate-x-6 opacity-0'"
+                    style="transition-delay: 160ms">
+                    <div class="mb-3 flex items-center gap-4">
+                        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-amber-500/10 text-amber-500">
+                            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" aria-hidden="true">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </button>
+                        </span>
+                        <span class="font-semibold text-white">Jam Buka</span>
+                    </div>
 
-                        <p x-show="successMessage" x-text="successMessage" class="text-sm text-emerald-400"></p>
-                    </form>
+                    <dl class="space-y-1.5 text-sm">
+                        @foreach ($jenz['hours'] as $hari => $jam)
+                            <div class="flex items-center justify-between gap-3">
+                                <dt class="text-zinc-400">{{ $hari }}</dt>
+                                <dd class="{{ strtolower($jam) === 'tutup' ? 'text-zinc-600' : 'font-medium text-white' }}">
+                                    {{ $jam }}
+                                </dd>
+                            </div>
+                        @endforeach
+                    </dl>
+                </div>
+
+                {{-- Sosial --}}
+                <div class="transform rounded-xl border border-zinc-800 bg-zinc-950 p-5 transition-all duration-500"
+                    :class="seen ? 'translate-x-0 opacity-100' : 'translate-x-6 opacity-0'"
+                    style="transition-delay: 240ms">
+                    <p class="mb-3 text-sm font-semibold text-white">Lihat hasil kerja terbaru</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{{ $jenz['social']['instagram'] }}" target="_blank" rel="noopener"
+                            class="rounded-lg border border-zinc-700 px-4 py-2 text-xs font-medium text-zinc-300 transition hover:border-amber-500 hover:text-amber-500">
+                            Instagram
+                        </a>
+                        <a href="{{ $jenz['social']['tiktok'] }}" target="_blank" rel="noopener"
+                            class="rounded-lg border border-zinc-700 px-4 py-2 text-xs font-medium text-zinc-300 transition hover:border-amber-500 hover:text-amber-500">
+                            TikTok
+                        </a>
+                        <a href="{{ $jenz['social']['youtube'] }}" target="_blank" rel="noopener"
+                            class="rounded-lg border border-zinc-700 px-4 py-2 text-xs font-medium text-zinc-300 transition hover:border-amber-500 hover:text-amber-500">
+                            YouTube
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-@php
-    // kontak utama dari DB kalau ada
-    $waPhone = preg_replace('/[^0-9]/', '', $contact->phone ?? '6281617000097');
-
-    $contactInfo = [
-        [
-            'icon' => 'MapPin',
-            'title' => 'Alamat',
-            'content' => $contact->address ?? 'Jl. Audio Specialist No. 123, Jakarta Selatan',
-        ],
-        [
-            'icon' => 'Phone',
-            'title' => 'Telepon',
-            'content' => $contact->phone_display ?? '+62 816-1700-0097',
-        ],
-        [
-            'icon' => 'Mail',
-            'title' => 'Email',
-            'content' => $contact->email ?? 'info@jenzaudio.com',
-        ],
-        [
-            'icon' => 'Clock',
-            'title' => 'Jam Operasional',
-            'content' => $contact->operational_hours ?? 'Setiap Hari: 09.00 - 18.00 WIB',
-        ],
-    ];
-@endphp
-
 <script>
     function contactSection() {
         return {
-            isVisible: false,
-            loading: false,
-            successMessage: '',
-            waPhone: @json($waPhone),
-            contactInfo: @json($contactInfo),
-
-            form: {
-                name: '',
-                phone: '',
-                email: '',
-                message: '',
-            },
-
-            init() {
-                const observer = new IntersectionObserver(
-                    ([entry]) => {
-                        if (entry.isIntersecting) {
-                            this.isVisible = true;
-                            observer.disconnect();
-                        }
-                    }, {
-                        threshold: 0.1
-                    }
-                );
-
-                if (this.$refs.section) {
-                    observer.observe(this.$refs.section);
-                }
-            },
-
-            iconFor(name) {
-                const icons = {
-                    MapPin: `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-width="2" d="M12 2a7 7 0 00-7 7c0 4.4 5 9.4 6.4 10.8a1 1 0 001.2 0C14 18.4 19 13.4 19 9a7 7 0 00-7-7z"/>
-                        <circle cx="12" cy="9" r="2.5" />
-                    </svg>
-                `,
-                    Phone: `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-width="2" d="M3 5a2 2 0 012-2h2.2a1 1 0 01.96.73l1.1 4.08a1 1 0 01-.27.97l-1.6 1.6a12 12 0 005.4 5.4l1.6-1.6a1 1 0 01.97-.27l4.08 1.1a1 1 0 01.73.96V19a2 2 0 01-2 2h-1A16 16 0 013 6V5z"/>
-                    </svg>
-                `,
-                    Mail: `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <rect x="3" y="5" width="18" height="14" rx="2" />
-                        <path d="M3 7l9 6 9-6" />
-                    </svg>
-                `,
-                    Clock: `
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <circle cx="12" cy="12" r="9" />
-                        <path d="M12 7v5l3 3" />
-                    </svg>
-                `,
-                };
-
-                return icons[name] || '';
-            },
-
-            submitForm() {
-                if (!this.form.name || !this.form.phone || !this.form.email || !this.form.message) {
-                    this.successMessage = 'Mohon lengkapi semua data sebelum mengirim.';
-                    return;
-                }
-
-                this.loading = true;
-                this.successMessage = '';
-
-                const text =
-                    'Halo Jenz Audio, saya ' + this.form.name +
-                    ' (' + this.form.phone + ', ' + this.form.email + ').%0A%0A' +
-                    'Saya ingin konsultasi mengenai:%0A' +
-                    this.form.message;
-
-                const url = 'https://wa.me/' + this.waPhone + '?text=' + text;
-
-                // buka WA
-                window.open(url, '_blank');
-
-                // reset form
-                this.form = {
-                    name: '',
-                    phone: '',
-                    email: '',
-                    message: ''
-                };
-                this.loading = false;
-                this.successMessage = 'Terima kasih, kamu akan diarahkan ke WhatsApp untuk melanjutkan percakapan.';
-            },
+            seen: false,
         }
     }
 </script>

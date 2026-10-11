@@ -182,14 +182,20 @@
     <div class="min-h-screen bg-zinc-950">
 
         @include('landing.navbar')
+
+        {{-- Urutan section disusun buat alur orang awam:
+             kenalan > masalah dia > caranya gimana > harganya berapa >
+             buktinya mana > detail > lokasi --}}
         @include('landing.hero')
-        @include('landing.about')
-        @include('landing.video')
+        @include('landing.problem')
+        @include('landing.steps')
+        @include('landing.pricing')
         @include('landing.services')
         @include('landing.products')
         @include('landing.portfolio')
-        @include('landing.pricing')
         @include('landing.testimonials')
+        @include('landing.video')
+        @include('landing.about')
         @include('landing.faq')
         @include('landing.contact')
         @include('landing.footer')
