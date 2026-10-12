@@ -96,9 +96,7 @@
             {{-- Belum ada foto: arahin ke Instagram biar section ga kosong melompong --}}
             <div class="rounded-2xl border border-zinc-800 bg-zinc-950 px-6 py-14 text-center">
                 <p class="mb-2 text-lg text-zinc-300">Foto hasil kerja terbaru ada di Instagram kami.</p>
-                <p class="mb-6 text-sm text-zinc-500">
-                    Admin: upload foto lewat menu Paket Audio &rsaquo; Paket &rsaquo; Edit, nanti otomatis tampil di sini.
-                </p>
+
                 <a href="{{ $jenz['social']['instagram'] }}" target="_blank" rel="noopener"
                     class="inline-flex items-center justify-center rounded-xl bg-amber-500 px-7 py-3.5 text-sm font-bold text-zinc-950 transition hover:bg-amber-400">
                     Lihat di Instagram
