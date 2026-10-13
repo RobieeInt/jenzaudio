@@ -38,8 +38,8 @@ return [
     'maps_url' => 'https://www.google.com/maps/place/Jenz+Audio/@-6.2437428,106.6208292,17z/data=!4m8!3m7!1s0x2e69fd9d82e5625f:0x95003ae34584f9e!8m2!3d-6.2437428!4d106.6208292!16s%2Fg%2F11gyyskf99',
 
     'hours' => [
-        'Senin - Sabtu' => '09.00 - 18.00 WIB',
-        'Minggu' => 'Tutup',
+        'Senin - Minggu' => '09.00 - 18.00 WIB',
+        // 'Minggu' => 'Tutup',
     ],
 
     /*
