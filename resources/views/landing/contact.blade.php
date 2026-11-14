@@ -14,8 +14,20 @@
     $rutaUrl = 'https://www.google.com/maps/dir/?api=1&destination=' . $lat . ',' . $lng
         . '&travelmode=driving';
 
-    //peta embed, ga butuh API key
-    $embedUrl = 'https://maps.google.com/maps?q=' . $lat . ',' . $lng . '&z=16&hl=id&output=embed';
+    /*
+    | Peta embed, ga butuh API key.
+    | Query-nya pakai nama + alamat, bukan koordinat mentah, biar pin-nya muncul
+    | berlabel "Jenz Audio" lengkap sama kartu info, bukan titik merah polos.
+    | 'll' ngunci pencariannya di sekitar koordinat toko, jadi Google ga nyasar
+    | ke tempat lain yang namanya mirip.
+    */
+    $embedUrl = 'https://maps.google.com/maps?' . http_build_query([
+        'q' => $jenz['name'] . ', ' . $jenz['address'],
+        'll' => $lat . ',' . $lng,
+        'z' => 17,
+        'hl' => 'id',
+        'output' => 'embed',
+    ]);
 
     $waPesan = 'Halo, saya mau tanya soal audio mobil';
 @endphp
