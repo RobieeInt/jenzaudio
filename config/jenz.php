@@ -31,11 +31,11 @@ return [
     | 'lat' & 'lng' dipakai buat peta dan tombol rute, jadi cukup ubah di sini
     | kalau suatu saat tokonya pindah.
     */
-    'lat' => -6.2437428,
-    'lng' => 106.6208292,
+    'lat' => -6.2436602,
+    'lng' => 106.6207703,
 
     //link halaman toko di Google Maps (buat lihat foto & ulasan)
-    'maps_url' => 'https://www.google.com/maps/place/Jenz+Audio/@-6.2437428,106.6208292,17z/data=!4m8!3m7!1s0x2e69fd9d82e5625f:0x95003ae34584f9e!8m2!3d-6.2437428!4d106.6208292!16s%2Fg%2F11gyyskf99',
+    'maps_url' => 'https://www.google.com/maps/place/Jenz+Audio/@-6.2436602,106.6207703,17z/data=!4m8!3m7!1s0x2e69fd9d82e5625f:0x95003ae34584f9e!8m2!3d-6.2436602!4d106.6207703!16s%2Fg%2F11gyyskf99',
 
     'hours' => [
         'Senin - Minggu' => '09.00 - 18.00 WIB',
@@ -49,7 +49,7 @@ return [
     'google' => [
         'rating' => 4.9,
         'reviews' => 314,
-        'url' => 'https://www.google.com/maps/place/Jenz+Audio/@-6.2437428,106.6208292,17z/data=!4m8!3m7!1s0x2e69fd9d82e5625f:0x95003ae34584f9e!8m2!3d-6.2437428!4d106.6208292!9m1!1b1!16s%2Fg%2F11gyyskf99',
+        'url' => 'https://www.google.com/maps/place/Jenz+Audio/@-6.2436602,106.6207703,17z/data=!4m8!3m7!1s0x2e69fd9d82e5625f:0x95003ae34584f9e!8m2!3d-6.2436602!4d106.6207703!9m1!1b1!16s%2Fg%2F11gyyskf99',
     ],
 
     /*
